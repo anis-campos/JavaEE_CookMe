@@ -9,8 +9,6 @@ import java.util.List;
 
 import model.UserModel;
 
-import org.apache.catalina.mbeans.UserMBean;
-
 public class DB {
 	private final String DB_HOST = "db-tp-cpe.fr";
 	private final String DB_PORT = "3306";
