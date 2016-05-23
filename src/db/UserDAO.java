@@ -1,6 +1,5 @@
 package db;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,23 +8,10 @@ import java.util.List;
 
 import model.UserModel;
 
-public class DB {
-	private final String DB_HOST = "dasilvacamposanis.fr";
-	private final String DB_PORT = "8080";
-	private final String DB_NAME = "JAVA_ASI";
-	private final String DB_USER = "java";
-	private final String DB_PWD = "TpJavaAsi2016";
-	private Connection connection;
+public class UserDAO extends DAO{
  
-	public DB(){
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = java.sql.DriverManager.getConnection("jdbc:mysql://"+DB_HOST+":"+DB_PORT+"/"+DB_NAME, DB_USER,DB_PWD);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+	public UserDAO(){
+		super();
 	}
 
 	public List<UserModel> getData(){
@@ -64,7 +50,7 @@ public class DB {
 	}
 	
 	public static void main(String[] args){
-		DB db = new DB();
+		UserDAO db = new UserDAO();
 	}
  
  

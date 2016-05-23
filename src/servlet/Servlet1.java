@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.DB;
+import db.UserDAO;
 
 @WebServlet("/Servlet1")
 public class Servlet1 extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
-	private DB db;
+	private UserDAO db;
 	
 	public Servlet1(){
 		super();
-		db = new DB();
+		db = new UserDAO();
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
