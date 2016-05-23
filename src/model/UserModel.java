@@ -8,8 +8,9 @@ public class UserModel {
     private String pwd;
 
     private int id;
+    private String email;
 
-    public UserModel(int id,String lastname, String surname, int age, String login, String pwd) {
+    public UserModel(int id, String lastname, String surname, int age, String login, String pwd) {
         this.id = id;
         this.firstname = lastname;
         this.surname = surname;
@@ -19,11 +20,11 @@ public class UserModel {
     }
 
 
-    public String getLastname() {
+    public String getFirstname() {
         return firstname;
     }
 
-    public void setLastname(String lastname) {
+    public void setFirstname(String lastname) {
         this.firstname = lastname;
     }
 
@@ -66,4 +67,11 @@ public class UserModel {
     }
 
 
+    public int getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }
