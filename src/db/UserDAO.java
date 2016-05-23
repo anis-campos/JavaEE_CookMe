@@ -96,14 +96,12 @@ public class UserDAO extends DAO<UserModel>{
 			while(rs.next()){
 				list.add(toObject(rs));
 			}
+			return list;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
-		
-		return null;
-		
-		
 	}
 	
     @Override
@@ -111,8 +109,8 @@ public class UserDAO extends DAO<UserModel>{
         return new UserModel(
                 rs.getInt("id"),
                 rs.getString("lastname"),
-                rs.getString("surname"),
+                rs.getString("firstname"),
                 Integer.parseInt(rs.getString("age")),
-                rs.getString("login"), rs.getString("pwd"));
+                rs.getString("login"), rs.getString("password"));
     }
 }

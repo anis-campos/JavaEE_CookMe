@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,7 +27,21 @@ public class Servlet1 extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws
 			ServletException, IOException { 
-		List<UserModel> listUserModel = db.getAll();		
+		String preRetour = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Servlet1</title></head><body>[<br>";
+		String postRetour = "]</body>";
+		String retour = "";
+		List<UserModel> listUserModel = db.getAll();	
+		if(listUserModel != null){
+			for(UserModel um : listUserModel){
+				retour += um + "<br>";
+			}
+		}
+		
+		PrintWriter wr = response.getWriter();
+		wr.println(preRetour);
+		wr.println(retour);
+		wr.println(postRetour);
+		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse
