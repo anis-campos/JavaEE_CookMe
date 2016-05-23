@@ -31,7 +31,7 @@ public class Servlet2 extends HttpServlet{
                 Integer.valueOf(request.getParameter("age")),
                 request.getParameter("login"),
                 request.getParameter("pwd"));
-        userDao.addUser(user);
+        userDao.create(user);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

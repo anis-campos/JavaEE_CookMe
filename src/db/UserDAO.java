@@ -11,46 +11,7 @@ import model.UserModel;
 
 public class UserDAO extends DAO<UserModel> {
 
-    public UserDAO() {
-        super();
-    }
-
-    public List<UserModel> getData() {
-        List<UserModel> userList = new ArrayList<UserModel>();
-        Statement query;
-
-        try {
-            query = connection.createStatement();
-            ResultSet rs = query.executeQuery("select * from user");
-            while (rs.next()) {
-                UserModel u = toObject(rs);
-                userList.add(u);
-            }
-            return userList;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-    }
-
-    public void addUser(UserModel user) {
-        Statement query;
-        try {
-            query = connection.createStatement();
-
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
-        UserDAO db = new UserDAO();
-    }
-
-
+    
     @Override
     public UserModel find(int id) {
         PreparedStatement query = null;
@@ -74,13 +35,12 @@ public class UserDAO extends DAO<UserModel> {
     public UserModel create(UserModel obj) {
         PreparedStatement query;
         try {
-            query = this.connection.prepareStatement("INSERT INTO users set firstname = ?,lastname = ?, age = ?, login = ?, password = ?, email = ? where u.id = ? ");
+            query = this.connection.prepareStatement("INSERT INTO (firstname ,lastname , age , login , password , email ) users VALUES(?,?,?,?,?)");
             query.setString(1,obj.getFirstname());
             query.setString(2,obj.getLastname());
             query.setInt(3,obj.getAge());
             query.setString(4,obj.getLogin());
             query.setString(5,obj.getEmail());
-            query.setInt(6,obj.getId());
             query.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
