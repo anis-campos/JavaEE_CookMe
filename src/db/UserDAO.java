@@ -8,7 +8,7 @@ import java.util.List;
 
 import model.UserModel;
 
-public class UserDAO extends DAO{
+public class UserDAO extends DAO<UserModel>{
  
 	public UserDAO(){
 		super();
@@ -52,6 +52,25 @@ public class UserDAO extends DAO{
 	public static void main(String[] args){
 		UserDAO db = new UserDAO();
 	}
- 
- 
+
+
+	@Override
+	public UserModel find(String identifiant) {
+		return null;
+	}
+
+	@Override
+	public UserModel create(UserModel obj) {
+		return null;
+	}
+
+	@Override
+	public UserModel update(UserModel obj) {
+		return null;
+	}
+
+	@Override
+	public void delete(UserModel obj) {
+
+	}
 }
