@@ -1,65 +1,69 @@
 package model;
 
 public class UserModel {
-	private  String	firstname;
-	private String	surname;
-	private int	age;
-	private String login;
-	private	String pwd;
-	
-	public UserModel(String lastname,String surname, int age,String login,String pwd) {
-		this.firstname = lastname;
-		this.surname = surname;
-		this.age = age;	
-		this.login= login;
-		this.pwd= pwd;
-	}
+    private String firstname;
+    private String surname;
+    private int age;
+    private String login;
+    private String pwd;
 
-	public String getLastname() {
-		return firstname;
-	}
+    private int id;
 
-	public void setLastname(String lastname) {
-		this.firstname = lastname;
-	}
+    public UserModel(int id,String lastname, String surname, int age, String login, String pwd) {
+        this.id = id;
+        this.firstname = lastname;
+        this.surname = surname;
+        this.age = age;
+        this.login = login;
+        this.pwd = pwd;
+    }
 
-	public String getSurname() {
-		return surname;
-	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+    public String getLastname() {
+        return firstname;
+    }
 
-	public int getAge() {
-		return age;
-	}
+    public void setLastname(String lastname) {
+        this.firstname = lastname;
+    }
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+    public String getSurname() {
+        return surname;
+    }
 
-	public String getLogin() {
-		return login;
-	}
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
+    public int getAge() {
+        return age;
+    }
 
-	public String getPwd() {
-		return pwd;
-	}
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
+    public String getLogin() {
+        return login;
+    }
 
-	@Override
-	public String toString() {
-		return "UserModel [lastname=" + firstname + ", surname=" + surname
-				+ ", age=" + age + ", login=" + login + ", pwd=" + pwd + "]";
-	}
-	
-	
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    @Override
+    public String toString() {
+        return "UserModel [lastname=" + firstname + ", surname=" + surname
+                + ", age=" + age + ", login=" + login + ", pwd=" + pwd + "]";
+    }
+
+
 }
