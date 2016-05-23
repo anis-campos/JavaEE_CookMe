@@ -1,0 +1,49 @@
+A quoi sert l’organisation en Paquage d’un projet ?
+--> Pour séparer les différentes classes du projet.
+
+A quoi sert les propriétés des attributs suivant :
+    - private : disponible seulement dans la classe qui l'a créé.
+    - static : partagée par toutes les instances et par les méthodes static.
+    - final : ne peut pas être dérivée
+
+Pourquoi est-il préférable de déclarer les constantes de chaines de caractères avec les attributs précédents?
+--> pour pouvoir utiliser les attributs quand nous le voulons sans pouvoir les modifier dans le code. Il est préférable d'utiliser un fichier de configuration XML.
+
+Pourquoi est-il utile de surcharger la méthode toString() ?
+--> Pour afficher le contenu de l'objet dans la console par exemple et pas lire seulement le nom de l'objet ainsi que son adresse.
+
+Pourquoi l’objet DB.java est-il créer dans le constructeur de la servlet ?
+--> Cele pourrait être interessant de créer qu'une seule DAO pour tous les utilisateurs de l'applciation grâce au servletConext.
+
+
+A quoi sert la ligne de code suivante : @WebServlet("/Servlet1") existe –il une description alternative ?
+--> Elle permet de faire appel au servlet à partir de l'URL.
+
+Que se passe-t-il si vous effectuer plusieurs appel du Get sur l'URL /Servlet1 ?
+Proposer une amélioration.
+--> on réalise une nouvelle requête en base de données pour récupérer les données.
+
+Tester l’ajout d’un utilisateur en http GET
+
+Comment feriez-vous un test en http POST ?
+
+Quelles sont les contraintes liées aux JavaBean ? A quoi servent-elles ?
+
+Quelle est l’utilité de la méthode init() et la classe Servlet3 ?
+
+Que permet d’effectuer la ligne suivante ?
+    UserModelBean user=(UserModelBean)request.getSession().getAttribute("myUser");
+
+A quoi sert la ligne de code suivante ?
+    <form action="confirm.jsp" method="post">
+
+Que fait la ligne de code suivant :
+    <jsp:useBean id="myUser" scope="session" class="step2.model.UserModelBean" />
+
+Comment le fichier .jsp permet-il de récupérer les propriétés entrées dans form.html précédemment ?
+
+Que se passera – t - il lors d’un clic sur le bouton GO ?
+
+Comment la page JSP fait-elle pour afficher les propriétés de l’utilisateur ?
+
+Que se serait-il passé si le scope du bean «myUser » avait été request dans confirmation.jsp ?
