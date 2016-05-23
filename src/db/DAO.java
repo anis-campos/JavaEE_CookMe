@@ -1,6 +1,7 @@
 package db;
 
 import java.sql.Connection;
+import java.util.List;
 
 public abstract class DAO<T> {
 
@@ -31,5 +32,11 @@ public abstract class DAO<T> {
 	 * @param obj
 	 */
 	public abstract void delete(T obj);
+	
+	/**
+	 * Permet d'obtenir l'ensemble des données de la table
+	 * @return une liste d'objet T
+	 */
+	public abstract List<T> getAll();
 
 }

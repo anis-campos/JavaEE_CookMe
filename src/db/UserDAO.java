@@ -73,4 +73,24 @@ public class UserDAO extends DAO<UserModel>{
 	public void delete(UserModel obj) {
 
 	}
+
+	@Override
+	public List<UserModel> getAll() {
+		Statement query = null;
+		List<UserModel> list = new ArrayList<UserModel>();
+		try {
+			query = this.connection.createStatement();
+			query.execute("SELECT * from users;");
+			ResultSet rs = query.getResultSet();
+			while(rs.next()){
+				list.add(toObject(rs));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
 }
