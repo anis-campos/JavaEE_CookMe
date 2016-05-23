@@ -1,4 +1,4 @@
-package db;
+package step1.db;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.UserModel;
+import step1.model.UserModel;
 
 public class UserDAO extends DAO<UserModel> {
 

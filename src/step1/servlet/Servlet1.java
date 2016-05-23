@@ -1,4 +1,4 @@
-package servlet;
+package step1.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.UserModel;
-import db.UserDAO;
+import step1.model.UserModel;
+import step1.db.UserDAO;
 
 @WebServlet("/Servlet1")
 public class Servlet1 extends HttpServlet{

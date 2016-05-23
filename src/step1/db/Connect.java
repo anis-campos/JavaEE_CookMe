@@ -1,4 +1,4 @@
-package db;
+package step1.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;

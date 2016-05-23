@@ -1,7 +1,7 @@
-package servlet;
+package step1.servlet;
 
-import db.UserDAO;
-import model.UserModel;
+import step1.db.UserDAO;
+import step1.model.UserModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +31,7 @@ public class Servlet2 extends HttpServlet{
                 Integer.valueOf(request.getParameter("age")),
                 request.getParameter("login"),
                 request.getParameter("pwd"));
-        userDao.addUser(user);
+        userDao.create(user);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

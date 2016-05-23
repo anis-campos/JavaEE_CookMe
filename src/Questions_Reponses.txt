@@ -13,7 +13,7 @@ Pourquoi est-il utile de surcharger la méthode toString() ?
 --> Pour afficher le contenu de l'objet dans la console par exemple et pas lire seulement le nom de l'objet ainsi que son adresse.
 
 Pourquoi l’objet DB.java est-il créer dans le constructeur de la servlet ?
---> Cele pourrait être interessant de créer qu'une seule DAO pour tous les utilisateurs de l'applciation grâce au servletConext.
+--> Cela pourrait être interessant de créer qu'une seule DAO pour tous les utilisateurs de l'applciation grâce au servletConext.
 
 
 A quoi sert la ligne de code suivante : @WebServlet("/Servlet1") existe –il une description alternative ?
@@ -21,15 +21,18 @@ A quoi sert la ligne de code suivante : @WebServlet("/Servlet1") existe –il un
 
 Que se passe-t-il si vous effectuer plusieurs appel du Get sur l'URL /Servlet1 ?
 Proposer une amélioration.
---> on réalise une nouvelle requête en base de données pour récupérer les données.
+--> La connexion est créée qu'une fois et est ensuite fermée. Le mieux c'est d'ouvrir et fermer la connexion à chaque requête en base.
 
 Tester l’ajout d’un utilisateur en http GET
-
+--> via l'URL
 Comment feriez-vous un test en http POST ?
+--> avec un formulaire
 
 Quelles sont les contraintes liées aux JavaBean ? A quoi servent-elles ?
+--> il faut obligatoirement les getters/setters pour pouvoir les utiliser via les JSP.
 
 Quelle est l’utilité de la méthode init() et la classe Servlet3 ?
+-->
 
 Que permet d’effectuer la ligne suivante ?
     UserModelBean user=(UserModelBean)request.getSession().getAttribute("myUser");

@@ -1,4 +1,4 @@
-package model;
+package step1.model;
 
 public class UserModel {
     private String firstname;
