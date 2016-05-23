@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class UserModelBean implements Serializable {
     private String lastName;
-    private String surname;
+    private String firstname;
     private int age;
     private String login;
     private String pwd;
@@ -20,12 +20,12 @@ public class UserModelBean implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public int getAge() {
@@ -56,7 +56,7 @@ public class UserModelBean implements Serializable {
     public String toString() {
         return "UserModelBean{" +
                 "lastName='" + lastName + '\'' +
-                ", surname='" + surname + '\'' +
+                ", firstname='" + firstname + '\'' +
                 ", age=" + age +
                 ", login='" + login + '\'' +
                 ", pwd='" + pwd + '\'' +
