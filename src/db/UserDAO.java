@@ -76,7 +76,7 @@ public class UserDAO extends DAO<UserModel> {
         try {
             query = this.connection.prepareStatement("INSERT INTO users set firstname = ?,lastname = ?, age = ?, login = ?, password = ?, email = ? where u.id = ? ");
             query.setString(1,obj.getFirstname());
-            query.setString(2,obj.getSurname());
+            query.setString(2,obj.getLastname());
             query.setInt(3,obj.getAge());
             query.setString(4,obj.getLogin());
             query.setString(5,obj.getEmail());
@@ -94,7 +94,7 @@ public class UserDAO extends DAO<UserModel> {
         try {
             query = this.connection.prepareStatement("UPDATE users set firstname = ?,lastname = ?, age = ?, login = ?, password = ?, email = ? where u.id = ? ");
             query.setString(1,obj.getFirstname());
-            query.setString(2,obj.getSurname());
+            query.setString(2,obj.getLastname());
             query.setInt(3,obj.getAge());
             query.setString(4,obj.getLogin());
             query.setString(5,obj.getEmail());

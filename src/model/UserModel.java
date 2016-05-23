@@ -2,7 +2,7 @@ package model;
 
 public class UserModel {
     private String firstname;
-    private String surname;
+    private String lastname;
     private int age;
     private String login;
     private String pwd;
@@ -10,10 +10,10 @@ public class UserModel {
     private int id;
     private String email;
 
-    public UserModel(int id, String lastname, String surname, int age, String login, String pwd) {
+    public UserModel(int id, String firstname, String lastname, int age, String login, String pwd) {
         this.id = id;
-        this.firstname = lastname;
-        this.surname = surname;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.age = age;
         this.login = login;
         this.pwd = pwd;
@@ -28,12 +28,12 @@ public class UserModel {
         this.firstname = lastname;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public int getAge() {
@@ -62,7 +62,7 @@ public class UserModel {
 
     @Override
     public String toString() {
-        return "UserModel [lastname=" + firstname + ", surname=" + surname
+        return "UserModel [lastname=" + firstname + ", lastname=" + lastname
                 + ", age=" + age + ", login=" + login + ", pwd=" + pwd + "]";
     }
 
