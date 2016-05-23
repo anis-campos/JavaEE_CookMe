@@ -25,6 +25,7 @@ public class Servlet2 extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException{
         UserModel user = new UserModel(
+                Integer.valueOf(request.getParameter("id")),
                 request.getParameter("lastname"),
                 request.getParameter("surname"),
                 Integer.valueOf(request.getParameter("age")),
