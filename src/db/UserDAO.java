@@ -1,5 +1,6 @@
 package db;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,11 +23,7 @@ public class UserDAO extends DAO<UserModel>{
 			query = connection.createStatement();
 			ResultSet rs =  query.executeQuery("select * from user");
 			while(rs.next()){
-				UserModel u = new UserModel(
-						rs.getString("lastname"),
-						rs.getString("surname"), 
-						Integer.parseInt(rs.getString("age")), 
-						rs.getString("login"), rs.getString("pwd"));
+				UserModel u = toObject(rs);
 				userList.add(u);
 			}
 			return userList;
@@ -55,8 +52,20 @@ public class UserDAO extends DAO<UserModel>{
 
 
 	@Override
-	public UserModel find(String identifiant) {
-		return null;
+	public UserModel find(int id) {
+		PreparedStatement query = null;
+		try {
+			query = this.connection.prepareStatement("select * from users u where u.id = ? ");
+			query.setInt(1,id);
+            ResultSet resultSet = query.executeQuery();
+            if(resultSet.first()){
+                return toObject(resultSet);
+            }
+
+        } catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
@@ -73,4 +82,14 @@ public class UserDAO extends DAO<UserModel>{
 	public void delete(UserModel obj) {
 
 	}
+
+    @Override
+    protected UserModel toObject(ResultSet rs) throws SQLException {
+        return new UserModel(
+                rs.getInt("id"),
+                rs.getString("lastname"),
+                rs.getString("surname"),
+                Integer.parseInt(rs.getString("age")),
+                rs.getString("login"), rs.getString("pwd"));
+    }
 }

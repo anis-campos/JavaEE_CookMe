@@ -1,6 +1,8 @@
 package db;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public abstract class DAO<T> {
 
@@ -8,10 +10,10 @@ public abstract class DAO<T> {
 
 	/**
 	 * Permet de récupérer un objet via son ID
-	 * @param identifiant
+	 * @param id
 	 * @return
 	 */
-	public abstract T find(String identifiant);
+	public abstract T find(int id);
 
 	/**
 	 * Permet de créer une entrée dans la base de données
@@ -31,5 +33,7 @@ public abstract class DAO<T> {
 	 * @param obj
 	 */
 	public abstract void delete(T obj);
+
+	protected abstract T toObject(ResultSet result) throws SQLException;
 
 }
