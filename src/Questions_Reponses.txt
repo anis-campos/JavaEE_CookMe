@@ -15,7 +15,6 @@ Pourquoi est-il utile de surcharger la méthode toString() ?
 Pourquoi l’objet DB.java est-il créer dans le constructeur de la servlet ?
 --> Cele pourrait être interessant de créer qu'une seule DAO pour tous les utilisateurs de l'applciation grâce au servletConext.
 
-
 A quoi sert la ligne de code suivante : @WebServlet("/Servlet1") existe –il une description alternative ?
 --> Elle permet de faire appel au servlet à partir de l'URL.
 
@@ -24,8 +23,8 @@ Proposer une amélioration.
 --> on réalise une nouvelle requête en base de données pour récupérer les données.
 
 Tester l’ajout d’un utilisateur en http GET
-
 Comment feriez-vous un test en http POST ?
+--> Il faut faire un formulaire.
 
 Quelles sont les contraintes liées aux JavaBean ? A quoi servent-elles ?
 
