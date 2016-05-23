@@ -5,3 +5,5 @@ out/
 lib/
 .settings/
 *.iml
+*.eml
+.classpath
