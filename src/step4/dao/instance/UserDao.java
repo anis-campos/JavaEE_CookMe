@@ -77,5 +77,23 @@ public class UserDao {
     }
 
     public UserModelBean checkUser(String login, String pwd) {
+    	try {
+            // create connection
+            connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
+            //TODO A l’image de DB.java créer une réquète permettant d’ajout l’utilisateur à la base de données, ATTENTION, utiliser cette fois–ci les PrepareStatement
+            PreparedStatement query = connection.prepareStatement("SELECT * FROM users WHERE login = ? AND password = ?");
+            query.setString(1,login);
+            query.setString(2,pwd);
+            query.execute();
+            ResultSet rs = query.getResultSet();
+            if(rs.first()) {
+            	return toObject(rs);
+            }
+            
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return null;
     }
 }
