@@ -32,21 +32,32 @@ Quelles sont les contraintes liées aux JavaBean ? A quoi servent-elles ?
 --> il faut obligatoirement les getters/setters pour pouvoir les utiliser via les JSP.
 
 Quelle est l’utilité de la méthode init() et la classe Servlet3 ?
--->
+--> Son utilité est de pouvoir initialisé le DAO et l'inséré dans les attributs de l'espace de mémoire partagé entre les servlets
 
 Que permet d’effectuer la ligne suivante ?
     UserModelBean user=(UserModelBean)request.getSession().getAttribute("myUser");
+--> Permet de récupérer les informations de l'attribut "myUser" envoyés d'une jsp 
 
 A quoi sert la ligne de code suivante ?
     <form action="confirm.jsp" method="post">
+--> permet d'appeler la page confirm.jsp en requête POST lorsque le formulaire est soumis
 
 Que fait la ligne de code suivant :
     <jsp:useBean id="myUser" scope="session" class="step2.model.UserModelBean" />
+--> elle permet de définir notre attribut "myUser" dans la jsp en se basant sur une classe objet Bean existante dans le projet.
+Son scope est "session" et permet de définir sa portée pour la session utilisateur en cours
 
 Comment le fichier .jsp permet-il de récupérer les propriétés entrées dans form.html précédemment ?
+--> le fichier .jsp map les propriétés envoyés du formulaire (name <--> property) pour les récupérer depuis la requête POST
 
 Que se passera – t - il lors d’un clic sur le bouton GO ?
+--> Le bouton GO permet d'appeler la Servlet3
 
 Comment la page JSP fait-elle pour afficher les propriétés de l’utilisateur ?
+--> La ligne "<jsp:useBean id="myUser" scope="session" class="step2.model.UserModelBean"/>" permet de créer/récupérer l'attribut
+	"myUser" qui est dans la session en cours.
 
-Que se serait-il passé si le scope du bean «myUser » avait été request dans confirmation.jsp ?
+Que se serait-il passé si le scope du bean «myUser » avait été request dans confirm.jsp ?
+--> 
+
+

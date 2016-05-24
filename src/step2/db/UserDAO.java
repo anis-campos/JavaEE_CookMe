@@ -7,13 +7,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import step1.model.UserModel;
+import step2.model.UserModelBean;
 
-public class UserDAO extends DAO<UserModel> {
+public class UserDAO extends DAO<UserModelBean> {
 
-    
+
     @Override
-    public UserModel find(int id) {
+    public UserModelBean find(int id) {
         PreparedStatement query = null;
         try {
             query = this.connection.prepareStatement("select * from users u where u.id = ? ");
@@ -32,33 +32,36 @@ public class UserDAO extends DAO<UserModel> {
     }
 
     @Override
-    public UserModel create(UserModel obj) {
-        PreparedStatement query;
+    public UserModelBean create(UserModelBean obj) {
+
         try {
-            query = this.connection.prepareStatement("INSERT INTO (firstname ,lastname , age , login , password , email ) users VALUES(?,?,?,?,?)");
-            query.setString(1,obj.getFirstname());
-            query.setString(2,obj.getLastname());
-            query.setInt(3,obj.getAge());
-            query.setString(4,obj.getLogin());
-            query.setString(5,obj.getEmail());
+            PreparedStatement query = this.connection.prepareStatement("INSERT INTO (firstname ,lastname , age , login , password , email ) users VALUES(?,?,?,?,?)");
+            query.setString(1, obj.getFirstname());
+            query.setString(2, obj.getLastname());
+            query.setInt(3, obj.getAge());
+            query.setString(4, obj.getLogin());
+            query.setString(5, obj.getEmail());
+            query.setInt(6, obj.getId());
             query.executeUpdate();
+            return find(obj.getId());
         } catch (SQLException e) {
             e.printStackTrace();
+
         }
-        return find(obj.getId());
+        return null;
     }
 
     @Override
-    public UserModel update(UserModel obj) {
+    public UserModelBean update(UserModelBean obj) {
         PreparedStatement query;
         try {
             query = this.connection.prepareStatement("UPDATE users set firstname = ?,lastname = ?, age = ?, login = ?, password = ?, email = ? where u.id = ? ");
-            query.setString(1,obj.getFirstname());
-            query.setString(2,obj.getLastname());
-            query.setInt(3,obj.getAge());
-            query.setString(4,obj.getLogin());
-            query.setString(5,obj.getEmail());
-            query.setInt(6,obj.getId());
+            query.setString(1, obj.getFirstname());
+            query.setString(2, obj.getLastname());
+            query.setInt(3, obj.getAge());
+            query.setString(4, obj.getLogin());
+            query.setString(5, obj.getEmail());
+            query.setInt(6, obj.getId());
             query.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,7 +70,7 @@ public class UserDAO extends DAO<UserModel> {
     }
 
     @Override
-    public void delete(UserModel obj) {
+    public void delete(UserModelBean obj) {
         PreparedStatement query;
         try {
             query = this.connection.prepareStatement("DELETE from users u where u.id = ? ");
@@ -79,9 +82,9 @@ public class UserDAO extends DAO<UserModel> {
     }
 
     @Override
-    public List<UserModel> getAll() {
+    public List<UserModelBean> getAll() {
         Statement query = null;
-        List<UserModel> list = new ArrayList<UserModel>();
+        List<UserModelBean> list = new ArrayList<UserModelBean>();
         try {
             query = this.connection.createStatement();
             query.execute("SELECT * from users;");
@@ -89,7 +92,7 @@ public class UserDAO extends DAO<UserModel> {
             while (rs.next()) {
                 list.add(toObject(rs));
             }
-            
+
             return list;
 
         } catch (SQLException e) {
@@ -102,8 +105,8 @@ public class UserDAO extends DAO<UserModel> {
     }
 
     @Override
-    protected UserModel toObject(ResultSet rs) throws SQLException {
-        return new UserModel(
+    protected UserModelBean toObject(ResultSet rs) throws SQLException {
+        return new UserModelBean(
                 rs.getInt("id"),
                 rs.getString("firstname"),
                 rs.getString("lastname"),

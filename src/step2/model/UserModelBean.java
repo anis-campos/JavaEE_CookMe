@@ -6,18 +6,34 @@ import java.io.Serializable;
  * Created by djbranbran on 23/05/16.
  */
 public class UserModelBean implements Serializable {
-    private String lastName;
+	
+	private static final long serialVersionUID = 1L;
+	private int id;
+    private String lastname;
     private String firstname;
     private int age;
     private String login;
     private String pwd;
+    private String email;
 
-    public String getLastName() {
-        return lastName;
+    public UserModelBean() {
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public UserModelBean(int id, String firstname, String lastname, int age, String login, String pwd) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.age = age;
+        this.login = login;
+        this.pwd = pwd;
+    }
+    
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getFirstname() {
@@ -51,11 +67,27 @@ public class UserModelBean implements Serializable {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
+    
+    public int getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public void setId(Integer id){
+    	this.id = id;
+    }
 
     @Override
     public String toString() {
         return "UserModelBean{" +
-                "lastName='" + lastName + '\'' +
+                "lastname='" + lastname + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", age=" + age +
                 ", login='" + login + '\'' +
