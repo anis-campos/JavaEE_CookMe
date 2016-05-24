@@ -19,6 +19,9 @@
     <jsp:setProperty name="myUser" property="pwd"/>
 </head>
 <body>
-// TO DO Afficher l’ensemble des propriétés de l’utilisateur courant
-</body>
+<jsp:getProperty name="myUser" property="firstname"/>
+<jsp:getProperty name="myUser" property="lastname"/>
+<jsp:getProperty name="myUser" property="age"/>
+<jsp:getProperty name="myUser" property="login"/>
+<jsp:getProperty name="myUser" property="pwd"/></body>
 </html>

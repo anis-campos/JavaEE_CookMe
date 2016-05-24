@@ -7,12 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import step1.model.UserModel;
 import step2.model.UserModelBean;
 
 public class UserDAO extends DAO<UserModelBean> {
 
-    
+
     @Override
     public UserModelBean find(int id) {
         PreparedStatement query = null;
@@ -34,19 +33,22 @@ public class UserDAO extends DAO<UserModelBean> {
 
     @Override
     public UserModelBean create(UserModelBean obj) {
-        PreparedStatement query;
+
         try {
-            query = this.connection.prepareStatement("INSERT INTO (firstname ,lastname , age , login , password , email ) users VALUES(?,?,?,?,?)");
-            query.setString(1,obj.getFirstname());
-            query.setString(2,obj.getLastName());
-            query.setInt(3,obj.getAge());
-            query.setString(4,obj.getLogin());
-            query.setString(5,obj.getEmail());
+            PreparedStatement query = this.connection.prepareStatement("INSERT INTO (firstname ,lastname , age , login , password , email ) users VALUES(?,?,?,?,?)");
+            query.setString(1, obj.getFirstname());
+            query.setString(2, obj.getLastname());
+            query.setInt(3, obj.getAge());
+            query.setString(4, obj.getLogin());
+            query.setString(5, obj.getEmail());
+            query.setInt(6, obj.getId());
             query.executeUpdate();
+            return find(obj.getId());
         } catch (SQLException e) {
             e.printStackTrace();
+
         }
-        return find(obj.getId());
+        return null;
     }
 
     @Override
@@ -54,12 +56,12 @@ public class UserDAO extends DAO<UserModelBean> {
         PreparedStatement query;
         try {
             query = this.connection.prepareStatement("UPDATE users set firstname = ?,lastname = ?, age = ?, login = ?, password = ?, email = ? where u.id = ? ");
-            query.setString(1,obj.getFirstname());
-            query.setString(2,obj.getLastName());
-            query.setInt(3,obj.getAge());
-            query.setString(4,obj.getLogin());
-            query.setString(5,obj.getEmail());
-            query.setInt(6,obj.getId());
+            query.setString(1, obj.getFirstname());
+            query.setString(2, obj.getLastname());
+            query.setInt(3, obj.getAge());
+            query.setString(4, obj.getLogin());
+            query.setString(5, obj.getEmail());
+            query.setInt(6, obj.getId());
             query.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,7 +92,7 @@ public class UserDAO extends DAO<UserModelBean> {
             while (rs.next()) {
                 list.add(toObject(rs));
             }
-            
+
             return list;
 
         } catch (SQLException e) {

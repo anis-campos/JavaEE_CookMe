@@ -9,28 +9,31 @@ public class UserModelBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private int id;
-    private String lastName;
+    private String lastname;
     private String firstname;
     private int age;
     private String login;
     private String pwd;
     private String email;
 
+    public UserModelBean() {
+    }
+
     public UserModelBean(int id, String firstname, String lastname, int age, String login, String pwd) {
         this.id = id;
         this.firstname = firstname;
-        this.lastName = lastname;
+        this.lastname = lastname;
         this.age = age;
         this.login = login;
         this.pwd = pwd;
     }
     
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getFirstname() {
@@ -84,7 +87,7 @@ public class UserModelBean implements Serializable {
     @Override
     public String toString() {
         return "UserModelBean{" +
-                "lastName='" + lastName + '\'' +
+                "lastname='" + lastname + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", age=" + age +
                 ", login='" + login + '\'' +
