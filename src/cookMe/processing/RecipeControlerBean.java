@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Created by Anis on 24/05/2016.
  */
-@ManagedBean(name = "step5UserControlerBean")
+@ManagedBean
 @ApplicationScoped
 public class RecipeControlerBean {
 

@@ -3,9 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui"
->
+      xmlns:h="http://java.sun.com/jsf/html">
 <body>
 <ui:composition>
 
@@ -22,15 +20,12 @@
 
         <div id="login">
 
-            <h:form>
 
-                <b:inputText id="userlogin" placeholder="Login" value="#{loginBean.login}"></b:inputText>
+            <h:inputText id="userlogin" value="#{loginBean.login}" required="true"></h:inputText>
 
-                <b:inputSecret placeholder="Password" value="#{loginBean.pwd}"/>
+            <h:inputSecret value="#{loginBean.pwd}"/>
 
-                <h:commandButton value="OK" action="#{userControlerBean.checkUser(loginBean)}"/>
-
-            </h:form>
+            <h:commandButton value="OK" action="#{userControlerBean.checkUser(loginBean)}"/>
 
 
         </div>
