@@ -21,6 +21,10 @@ public class LoginValidator implements Validator{
     private Pattern pattern;
     private Matcher matcher;
 
+    public LoginValidator() {
+        pattern = Pattern.compile(PATTERN);
+    }
+
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
         matcher = pattern.matcher(o.toString());
