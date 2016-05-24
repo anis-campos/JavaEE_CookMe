@@ -5,34 +5,29 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
 <body>
-<ui:composition>
 
-    <div id="header">
+<div id="header">
 
-        <div id="title">
-            <ui:insert name="title">Title</ui:insert>
-        </div>
+    <div id="title">
+        <ui:insert name="title">Title</ui:insert>
+    </div>
 
-        <div id="signIn">
-            <img src="images/signin.png" alt="Sign In Image"/>
-            Become Member
-        </div>
+    <div id="signIn">
+        <img src="images/signin.png" alt="Sign In Image"/>
+        Become Member
+    </div>
 
-        <div id="login">
+    <div id="login">
 
-
+        <h:form>
             <h:inputText id="userlogin" value="#{loginBean.login}" required="true"></h:inputText>
 
             <h:inputSecret value="#{loginBean.pwd}"/>
 
             <h:commandButton value="OK" action="#{userControlerBean.checkUser(loginBean)}"/>
-
-
-        </div>
-
+        </h:form>
 
     </div>
-
-</ui:composition>
+</div>
 </body>
 </html>
