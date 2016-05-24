@@ -13,6 +13,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -50,5 +51,20 @@ public class RecipeControlerBean {
     public String searchRecipe(RecipeModel recipe){
     	recipeDao.find((SearchRecipeBean)recipe);
     	return "recipeResultList.xhtml";
+    }
+
+
+    public String displayRecipeDetail(RecipeModel recipe){
+        List<RecipeModel> list =  recipeDao.find(recipe);
+        RecipeListModelBean recipeList = new RecipeListModelBean();
+        for (RecipeModel r : list) {
+            recipeList.addRecipeList(r);
+        }
+        //récupère l'espace de mémoire de JSF
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Map<String, Object> sessionMap = externalContext.getSessionMap();
+        //place la liste de recette dans l'espace de mémoire de JSF
+        sessionMap.put("recipeList", recipeList);
+        return "recipeDetail.jsf";
     }
 }
