@@ -6,10 +6,11 @@ import step5.model.LoginBean;
 import step5.model.UserModelBean;
 import step5.model.UserSubmissionModelBean;
 
-import javax.annotation.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
 import java.util.Map;
 
 /**

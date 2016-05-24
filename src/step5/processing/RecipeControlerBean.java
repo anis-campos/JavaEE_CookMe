@@ -6,17 +6,18 @@ import step5.dao.instance.RecipesDao;
 import step5.model.RecipeListModelBean;
 import step5.model.RecipeModel;
 
-import javax.annotation.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
 import java.util.ArrayList;
 import java.util.Map;
 
 /**
  * Created by Anis on 24/05/2016.
  */
-@ManagedBean
+@ManagedBean(name = "step5UserControlerBean")
 @ApplicationScoped
 public class RecipeControlerBean {
 
@@ -37,5 +38,11 @@ public class RecipeControlerBean {
         Map<String, Object> sessionMap = externalContext.getSessionMap();
         //place la liste de recette dans l'espace de mémoire de JSF
         sessionMap.put("recipeList", recipeList);
+    }
+    
+    public String addRecipe(RecipeModel recipe){
+    	recipeDao.addRecipe(recipe);
+    	
+    	return "successfulRegister.xhtml";
     }
 }
