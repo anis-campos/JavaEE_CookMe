@@ -1,0 +1,6 @@
+#splash{
+	display:block;
+	margin:auto;
+	margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
+  	transform: translateY(-50%);
+}
