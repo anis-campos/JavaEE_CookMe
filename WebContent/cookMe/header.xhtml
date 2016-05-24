@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
-<body>
-
-<div id="header">
+<div id="header"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html">
 
     <div id="title">
         <ui:insert name="title">Title</ui:insert>
     </div>
 
     <div id="signIn">
-        <img src="images/signin.png" alt="Sign In Image"/>
-        Become Member
+        <!--@elvariable id="loggedUser" type="cookMe.model.LoginBean"-->
+        <h:form rendered="#{empty loggedUser}">
+            <h:link outcome="subscrire.jsf" value=" Become Member">
+                <h:graphicImage value="images/signin.png"/>
+            </h:link>
+        </h:form>
     </div>
 
-    <div id="login">
 
-        <h:form>
+    <div id="login">
+        <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
+        <h:form rendered="#{empty loggedUser}">
             <h:inputText id="userlogin" value="#{loginBean.login}" required="true"></h:inputText>
 
             <h:inputSecret value="#{loginBean.pwd}"/>
 
             <h:commandButton value="OK" action="#{userControlerBean.checkUser(loginBean)}"/>
         </h:form>
-
     </div>
+
+    <div id="logged">
+        <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
+        <h:form rendered="#{not empty loggedUser}">
+
+            <h:outputText value="#{loggedUser.firstname}"/>
+            <h:outputText value="#{loggedUser.lastname}"/>
+
+            <h:commandButton value="OK" action="#{userControlerBean.logOut()}"/>
+        </h:form>
+    </div>
+
 </div>
-</body>
-</html>

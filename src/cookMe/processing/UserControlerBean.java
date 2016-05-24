@@ -10,6 +10,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -31,16 +32,23 @@ public class UserControlerBean {
         UserModelBean user = this.userDao.checkUser(loginBean.getLogin(), loginBean.getPwd());
 
         if(user != null){
+
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+            HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+            String uri = request.getRequestURI();
             Map<String, Object> sessionMap = externalContext.getSessionMap();
 
             sessionMap.put("loggedUser", user);
 
-            return "userDisplay.xhtml";
+
         }
-        else{
-            return "userLogin.xhtml";
-        }
+        return "";
+    }
+
+    public void logOut() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Map<String, Object> sessionMap = externalContext.getSessionMap();
+        sessionMap.remove("loggedUser");
     }
 
     public void checkAndAddUser(UserSubmissionModelBean userSubmitted){
