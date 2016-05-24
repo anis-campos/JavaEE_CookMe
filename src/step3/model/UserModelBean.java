@@ -15,6 +15,15 @@ public class UserModelBean {
     private String pwd;
     private String email;
 
+    public UserModelBean(String firstname, String lastname, int age, String login, String password, String email) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.age = age;
+        this.login = login;
+        this.pwd=password;
+        this.email=email;
+    }
+
     @Override
     public String toString() {
         return "UserModelBean{" +
