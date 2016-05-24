@@ -6,6 +6,8 @@ import java.io.Serializable;
  * Created by djbranbran on 23/05/16.
  */
 public class UserModelBean implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private int id;
     private String lastName;
     private String firstname;
