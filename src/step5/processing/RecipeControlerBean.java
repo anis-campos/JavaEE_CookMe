@@ -5,6 +5,7 @@ import step5.dao.fabric.DaoFabric;
 import step5.dao.instance.RecipesDao;
 import step5.model.RecipeListModelBean;
 import step5.model.RecipeModel;
+import step5.model.SearchRecipeBean;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -44,5 +45,10 @@ public class RecipeControlerBean {
     	recipeDao.addRecipe(recipe);
     	
     	return "successfulRegister.xhtml";
+    }
+    
+    public String searchRecipe(RecipeModel recipe){
+    	recipeDao.find((SearchRecipeBean)recipe);
+    	return "recipeResultList.xhtml";
     }
 }

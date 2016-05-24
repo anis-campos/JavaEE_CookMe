@@ -2,9 +2,11 @@ package step5.dao.instance;
 
 
 import step5.model.RecipeModel;
+import step5.model.SearchRecipeBean;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by djbranbran on 24/05/16.
@@ -70,4 +72,23 @@ public class RecipesDao {
                 Integer.parseInt(rs.getString("duration")),
                 rs.getString("type"));
     }
+
+	public List<RecipeModel> find(RecipeModel recipe) {
+		Statement query;
+		String sql = (SearchRecipeBean)recipe.getSQLSearchQuery();
+		List<RecipeModel> listRecipe = new ArrayList<RecipeModel>();
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
+            query = this.connection.createStatement();
+            query.execute(sql);
+            ResultSet rs = query.getResultSet();
+            while (rs.next()) {
+            	listRecipe.add(toObject(rs));
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		return listRecipe;	
+	}
 }
