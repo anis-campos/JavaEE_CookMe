@@ -1,9 +1,17 @@
 package step4.model;
 
+import java.io.Serializable;
+
+import javax.annotation.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 /**
  * Created by djbranbran on 24/05/16.
  */
-public class UserModelBean {
+
+@ManagedBean
+@SessionScoped
+public class UserModelBean implements Serializable{
     private String lastname;
     private String firstname;
     private int age;
@@ -11,6 +19,10 @@ public class UserModelBean {
     private String pwd;
     private String email;
 
+    public UserModelBean(){
+    	
+    }
+    
     public UserModelBean(String firstname, String lastname, int age, String login, String password, String email) {
         this.firstname = firstname;
         this.lastname = lastname;
