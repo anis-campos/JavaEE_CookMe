@@ -6,9 +6,52 @@
 </head>
 <body>
 <form action="confirm.jsp" method="post">
-    <h5> Put your lastname <input type="text" name="lastname"/></h5>
-    <h5> Put your surname <input type="text" name="surname"/></h5>
+    <!-- Form Name -->
+    <legend>Form Name</legend>
 
+    <!-- Text input-->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="firstname">Fistname</label>
+        <div class="col-md-4">
+            <input id="firstname" name="firstname" type="text" placeholder="put your firstname here" class="form-control input-md" required="">
+            <span class="help-block">help</span>
+        </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="lastname">Lastname</label>
+        <div class="col-md-4">
+            <input id="lastname" name="lastname" type="text" placeholder="put your lastname here" class="form-control input-md" required="">
+
+        </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="age">Lastname</label>
+        <div class="col-md-4">
+            <input id="age" name="age" type="text" placeholder="put your age here" class="form-control input-md" >
+        </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="login">Login</label>
+        <div class="col-md-4">
+            <input id="login" name="login" type="text" placeholder="put your login here" class="form-control input-md" >
+        </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="pwd">Password</label>
+        <div class="col-md-4">
+            <input id="pwd" name="pwd" type="password" placeholder="put your password here" class="form-control input-md" >
+        </div>
+    </div>
+
+    </fieldset>
 </form>
 </body>
 </html>

@@ -12,7 +12,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Step2: Confirmation</title>
     <jsp:useBean id="myUser" scope="session" class="step2.model.UserModelBean" />
-    <jsp:setProperty name="myUser" property="surname" />
+    <jsp:setProperty name="myUser" property="firstname" />
     <jsp:setProperty name="myUser" property="lastname"/>
     <jsp:setProperty name="myUser" property="age"/>
     <jsp:setProperty name="myUser" property="login"/>
