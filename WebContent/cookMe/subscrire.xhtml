@@ -70,13 +70,13 @@
                     <td><h:inputSecret id="pwd1"
                                  value="#{userSubmissionModelBean.pwd1}"
                                  required="true">
-                        <f:validator validatorId="validators.pwd"/>
+                        <f:validator validatorId="validators.pwd1"/>
                     </h:inputSecret></td>
                     <td><h:message for="pwd1" showDetail="true" style="color:red"/></td>
                 </tr>
                 <tr>
                     <td><h:commandButton value="GO"
-                                 action="#{UserControlerBean.addUser(userSubmissionModelBean)}"></h:commandButton></td>
+                                 action="#{userControlerBean.checkAndAddUser(userSubmissionModelBean)}"></h:commandButton></td>
                 </tr>
             </table>
         </h:form>

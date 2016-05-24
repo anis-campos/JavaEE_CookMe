@@ -29,12 +29,13 @@ public class UserDao {
             // create connection
             connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
             //TODO A l’image de DB.java créer une réquète permettant d’ajout l’utilisateur à la base de données, ATTENTION, utiliser cette fois–ci les PrepareStatement
-            PreparedStatement query = connection.prepareStatement("INSERT INTO (firstname ,lastname , age , login , password , email ) users VALUES(?,?,?,?,?)");
+            PreparedStatement query = connection.prepareStatement("INSERT INTO users(firstname ,lastname , age , login , password , email ) VALUES(?,?,?,?,?,?)");
             query.setString(1,user.getFirstname());
             query.setString(2,user.getLastname());
             query.setInt(3,user.getAge());
             query.setString(4,user.getLogin());
-            query.setString(5,user.getEmail());
+            query.setString(5,user.getPwd());
+            query.setString(6,user.getEmail());
             query.executeUpdate();
             connection.close();
         } catch (SQLException e) {
