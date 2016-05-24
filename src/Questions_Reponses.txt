@@ -50,3 +50,7 @@ Que se passera – t - il lors d’un clic sur le bouton GO ?
 Comment la page JSP fait-elle pour afficher les propriétés de l’utilisateur ?
 
 Que se serait-il passé si le scope du bean «myUser » avait été request dans confirmation.jsp ?
+
+3.6.1. A quoi sert la ligne de code suivante ?
+ <form action="confirm.jsp" method="post">
+ --> Envoyer le formulaire à la jsp
