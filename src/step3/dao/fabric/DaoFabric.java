@@ -1,6 +1,7 @@
 package step3.dao.fabric;
 
 import step3.dao.instance.RecipesDao;
+import step3.dao.instance.UserDao;
 
 import java.sql.SQLException;
 
