@@ -7,7 +7,10 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import step3.dao.fabric.DaoFabric;
+import step4.dao.fabric.DaoFabric;
+import step4.dao.instance.UserDao;
+import step4.model.LoginBean;
+import step4.model.UserModelBean;
 import step4.model.UserSubmissionModelBean;
 
 /**

@@ -75,4 +75,7 @@ public class UserDao {
                 rs.getString("password"),
                 rs.getString("email"));
     }
+
+    public UserModelBean checkUser(String login, String pwd) {
+    }
 }
