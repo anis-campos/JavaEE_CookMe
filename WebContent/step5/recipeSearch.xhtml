@@ -7,22 +7,52 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <body>
-<h1>Add Recipe</h1>
+<h1>Rechercher des recettes</h1>
 <h:form>
     <table border="0">
         <tr>
-            <td>Title</td>
+            <td>Title : </td>
             <td><h:inputText id="recipeTitle" value="#{searchRecipeBean.title}"
                              required="true">
             </h:inputText></td>
         </tr>
 
-        //TODO réaliser les formulaires de saisie pour l’ensemble des paramètres
+        <tr>
+            <td>Type : </td>
+            <td><h:inputText id="recipeType" value="#{searchRecipeBean.type}"
+                             required="true">
+            </h:inputText></td>
+        </tr>
+        <tr>
+            <td>Description :</td>
+            <td><h:inputText id="recipeDescription" value="#{searchRecipeBean.description}"
+                             required="true">
+            </h:inputText></td>
+        </tr>
+        <tr>
+            <td>Expertise : </td>
+            <td><h:inputText id="recipeExpertise" value="#{searchRecipeBean.expertise}"
+                             required="true">
+            </h:inputText></td>
+        </tr>
+        <tr>
+            <td>Duration : </td>
+            <td><h:inputText id="recipeDuration" value="#{searchRecipeBean.duration}"
+                             required="true">
+            </h:inputText></td>
+        </tr>
+        <tr>
+            <td>Nombre de personnes : </td>
+            <td><h:inputText id="recipeNbPeople" value="#{searchRecipeBean.nbpeople}"
+                             required="true">
+            </h:inputText></td>
+        </tr>
 
         <tr>
             <td></td>
             <td>
-                //TODO A l’aide de h:commandButton demander l’execution de la recherché à votre application
+                <h:commandButton value="Rechercher"
+                                 action="#{step5UserControlerBean.searchRecipe(searchRecipeBean)}"></h:commandButton>
             </td>
         </tr>
     </table>
