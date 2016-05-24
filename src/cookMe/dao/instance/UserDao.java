@@ -1,7 +1,7 @@
 package cookMe.dao.instance;
 
 
-import step5.model.UserModelBean;
+import cookMe.model.UserModelBean;
 
 import java.sql.*;
 import java.util.ArrayList;
