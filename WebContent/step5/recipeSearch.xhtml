@@ -5,7 +5,27 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+
+<body>
+<h1>Add Recipe</h1>
+<h:form>
+    <table border="0">
+        <tr>
+            <td>Title</td>
+            <td><h:inputText id="recipeTitle" value="#{searchRecipeBean.title}"
+                             required="true">
+            </h:inputText></td>
+        </tr>
+
+        //TODO réaliser les formulaires de saisie pour l’ensemble des paramètres
+
+        <tr>
+            <td></td>
+            <td>
+                //TODO A l’aide de h:commandButton demander l’execution de la recherché à votre application
+            </td>
+        </tr>
+    </table>
+</h:form>
+</body>
 </html>
