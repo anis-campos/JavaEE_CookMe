@@ -1,8 +1,8 @@
 package cookMe.dao.instance;
 
 
-import step5.model.RecipeModel;
-import step5.model.SearchRecipeBean;
+import cookMe.model.RecipeModel;
+import cookMe.model.SearchRecipeBean;
 
 import java.sql.*;
 import java.util.ArrayList;
