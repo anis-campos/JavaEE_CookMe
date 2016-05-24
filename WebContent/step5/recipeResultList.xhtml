@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <body>
 <h1>Search Recipts</h1>
 <h:form>
@@ -17,11 +18,15 @@
             <th>Duration</th>
             <th>NbPeople</th>
         </tr>
-        //TODO utiliser un outil de JSF permettant d’afficher le contenu d’une liste
-        à chaque itération nous recipe sera la cette courant
-        Afficher l’ensemble des éléments recipe dans le tableau
-        Note utiliser h:commandLink pour permettre de créer un lien vers le
-        détail de la recette courante
+        <c:forEach var="item" items="#{recipeList.items}">
+            <tr>
+                <td><h:outputText value="#{item.title}"/></td>
+                <td><h:outputText value="#{item.type}"/></td>
+                <td><h:outputText value="#{item.description}"/></td>
+                <td><h:outputText value="#{item.duration}"/></td>
+                <td><h:outputText value="#{item.nbpeople}"/></td>
+            </tr>
+        </c:forEach>
     </table>
 </h:form>
 </body>
