@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class PasswordValidator implements Validator{
 
 
-    private static final String PATTERN = "[a-zA-Z0-9]";
+    private static final String PATTERN = "[a-zA-Z0-9]*";
 
     private Pattern pattern;
     private Matcher matcher;

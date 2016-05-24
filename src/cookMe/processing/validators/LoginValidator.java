@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class LoginValidator implements Validator{
 
 
-    private static final String PATTERN = "[a-zA-Z0-9-._]";
+    private static final String PATTERN = "[a-zA-Z0-9-._]*";
 
     private Pattern pattern;
     private Matcher matcher;

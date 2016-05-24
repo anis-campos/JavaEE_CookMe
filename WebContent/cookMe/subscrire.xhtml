@@ -6,6 +6,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <ui:composition template="common.xhtml">
+    <ui:define name="title">Subscrire</ui:define>
+
     <ui:define name="content">
         <h:form>
             <table border="0">
@@ -56,25 +58,25 @@
                 </tr>
                 <tr>
                     <td><h:outputLabel>Password </h:outputLabel></td>
-                    <td><h:inputText id="pwd"
+                    <td><h:inputSecret id="pwd"
                                  value="#{userSubmissionModelBean.pwd}"
                                  required="true">
                         <f:validator validatorId="validators.pwd"/>
-                    </h:inputText></td>
+                    </h:inputSecret></td>
                     <td><h:message for="pwd" showDetail="true" style="color:red"/></td>
                 </tr>
                 <tr>
                     <td><h:outputLabel>Repeat password </h:outputLabel></td>
-                    <td><h:inputText id="pwd1"
+                    <td><h:inputSecret id="pwd1"
                                  value="#{userSubmissionModelBean.pwd1}"
                                  required="true">
                         <f:validator validatorId="validators.pwd"/>
-                    </h:inputText></td>
+                    </h:inputSecret></td>
                     <td><h:message for="pwd1" showDetail="true" style="color:red"/></td>
                 </tr>
                 <tr>
-                    <h:commandButton value="GO"
-                                 action="#{UserControlerBean.addUser(userSubmissionModelBean)}"></h:commandButton>
+                    <td><h:commandButton value="GO"
+                                 action="#{UserControlerBean.addUser(userSubmissionModelBean)}"></h:commandButton></td>
                 </tr>
             </table>
         </h:form>
