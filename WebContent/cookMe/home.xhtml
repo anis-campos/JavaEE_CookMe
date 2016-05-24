@@ -5,13 +5,15 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <ui:composition template="common.xhtml">
-        <ui:define name="content">
-            <br/><br/>
-            <h:link value="Emergency" outcome="page1" />
-            <h:link value="Recipes" outcome="page2" />
-            <h:link value="Shop" outcome="page3" />
-            <br/><br/>
-        </ui:define>
-    </ui:composition>
+<ui:composition template="common.xhtml">
+    <ui:define name="content">
+        <br/><br/>
+        <ul>
+            <li><h:link value="Emergency" outcome="home.jsf"/></li>
+            <li><h:link value="Recipes" outcome="home.jsf"/></li>
+            <li><h:link value="Shop" outcome="home.jsf"/></li>
+        </ul>
+        <br/><br/>
+    </ui:define>
+</ui:composition>
 </html>
