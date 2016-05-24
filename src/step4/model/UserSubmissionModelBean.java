@@ -1,6 +1,6 @@
 package step4.model;
 
-import javax.annotation.ManagedBean;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 /**

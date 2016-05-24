@@ -6,7 +6,7 @@ import step4.dao.instance.RecipesDao;
 import step4.model.RecipeListModelBean;
 import step4.model.RecipeModel;
 
-import javax.annotation.ManagedBean;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
