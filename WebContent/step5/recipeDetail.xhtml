@@ -7,6 +7,15 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <body>
 <h1>Search Recipe</h1>
-// TODO afficher l’ensemble des propriétés de la recette courantes
+	<table border="0">
+	<tr>
+        		<td>Title : <h:outputText value="#{recipe.title}"/></td>
+                <td>Type : <h:outputText value="#{recipe.type}"/></td>
+                <td>Description : <h:outputText value="#{recipe.description}"/></td>
+                <td>Expertise : <h:outputText value="#{recipe.expertise}"/></td>
+                <td>Duration : <h:outputText value="#{recipe.duration}"/></td>
+                <td>NbPeople : <h:outputText value="#{recipe.nbpeople}"/></td>
+     </tr>
+    </table>
 </body>
 </html>
