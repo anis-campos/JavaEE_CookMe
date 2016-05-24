@@ -28,3 +28,30 @@ body {
     bottom: 0px;
     right: 0px;
 }
+ul#tiles-panel {
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+}
+
+ul#tiles-panel li {
+    display: inline-block;
+    list-style: none outside none;
+    margin: 0 20px 20px 0;
+    vertical-align: top;
+}
+
+#tiles-panel a{
+    -moz-box-sizing: border-box;
+    background: none repeat scroll 0 0 #F0F1F4;
+    border-bottom: 3px solid #7B4F9D;
+    display: inline-block;
+    height: 400px;
+    text-decoration: none;
+    vertical-align: top;
+    width: 250px;
+    font-size: 3em;
+    color: black;
+
+}
