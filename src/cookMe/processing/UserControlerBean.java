@@ -15,54 +15,71 @@ import java.util.regex.Pattern;
 
 
 /**
- * Created by Anis on 24/05/2016.
+ * Created by Brandon PD d'anis on 24/05/2016.
  */
 @ManagedBean
 @ApplicationScoped
 public class UserControlerBean {
-	
-	private UserDao userDao;
-	
-	public UserControlerBean(){
-		this.userDao = DaoFabric.getInstance().createUserDao();
-	}
-	
-	public String checkUser(LoginBean loginBean){
-		UserModelBean user = this.userDao.checkUser(loginBean.getLogin(), loginBean.getPwd());
-		
-		if(user != null){
-			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-			Map<String, Object> sessionMap = externalContext.getSessionMap();
-			
-			sessionMap.put("loggedUser", user);
-			
-			return "userDisplay.xhtml";
-		}
-		else{
-			return "userLogin.xhtml";
-		}
-	}
-	
-	public void checkAndAddUser(UserSubmissionModelBean userSubmitted){
-		//Vérifier les propriétés de l'utilisateur
-		if(userSubmitted != null){
-			if(userSubmitted.getFirstname() != null
-				&& userSubmitted.getLastname() != null
-				//&& userSubmitted.getAge() != null
-				&& userSubmitted.getEmail() != null
-				&& userSubmitted.getLogin() != null
-				&& userSubmitted.getPwd() != null){
 
-                if(Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getFirstname()).matches()
-                        && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getLastname()).matches()
-                        && userSubmitted.getAge() < 100
-                        && Pattern.compile("[a-zA-Z0-9-._]+@[a-zA-Z0-9-._].[a-z]+").matcher(userSubmitted.getEmail()).matches()
-                        && Pattern.compile("[a-zA-Z0-9-._]").matcher(userSubmitted.getLogin()).matches()
-                        && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getFirstname()).matches()){
+    private UserDao userDao;
 
-                }
-			}
-		}
-		this.userDao.addUser(userSubmitted);
-	}
+    public UserControlerBean(){
+        this.userDao = DaoFabric.getInstance().createUserDao();
+    }
+
+    public String checkUser(LoginBean loginBean){
+        UserModelBean user = this.userDao.checkUser(loginBean.getLogin(), loginBean.getPwd());
+
+        if(user != null){
+            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+            Map<String, Object> sessionMap = externalContext.getSessionMap();
+
+            sessionMap.put("loggedUser", user);
+
+            return "userDisplay.xhtml";
+        }
+        else{
+            return "userLogin.xhtml";
+        }
+    }
+
+    public void checkAndAddUser(UserSubmissionModelBean userSubmitted){
+        //Vérifier les propriétés de l'utilisateur
+        if(userSubmitted != null){
+            boolean ok = true;
+            if(userSubmitted.getFirstname() != null && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getFirstname()).matches()){
+
+            }else{
+                ok = false;
+            }
+            if(userSubmitted.getLastname() != null && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getLastname()).matches()){
+
+            }else{
+                ok = false;
+            }
+            if(userSubmitted.getAge() > 0 && userSubmitted.getAge() < 100){
+
+            }else{
+                ok = false;
+            }
+            if(userSubmitted.getEmail() != null && Pattern.compile("[a-zA-Z0-9-._]+@[a-zA-Z0-9-._].[a-z]+").matcher(userSubmitted.getEmail()).matches()){
+
+            }else{
+                ok = false;
+            }
+            if(userSubmitted.getLogin() != null && Pattern.compile("[a-zA-Z0-9-._]").matcher(userSubmitted.getLogin()).matches()){
+
+            }else{
+                ok = false;
+            }
+            if(userSubmitted.getPwd() != null && userSubmitted.getPwd1() != null && userSubmitted.getPwd().equals(userSubmitted.getPwd1())){
+
+            }else{
+                ok = false;
+            }
+            this.userDao.addUser(userSubmitted);
+        }
+
+
+    }
 }
