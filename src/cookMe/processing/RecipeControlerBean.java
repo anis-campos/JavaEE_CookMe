@@ -49,7 +49,8 @@ public class RecipeControlerBean {
     
     public String searchRecipe(RecipeModel recipe){
     	recipeDao.find((SearchRecipeBean)recipe);
-    	return "recipeResultList.xhtml";
+
+        return "recipeResultList.xhtml";
     }
 
 

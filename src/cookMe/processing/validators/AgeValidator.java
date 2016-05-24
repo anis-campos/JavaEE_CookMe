@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 @FacesValidator(value ="validators.age")
 public class AgeValidator implements Validator{
 
+
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
         try {
