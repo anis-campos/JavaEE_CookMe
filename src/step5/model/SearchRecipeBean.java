@@ -27,11 +27,11 @@ public class SearchRecipeBean extends RecipeModel {
         String sql = " SELECT * FROM recipe r WHERE 1=1 ";
 
         if (getDescription() != ALL_VALUES_STRING)
-            sql += " AND description = " + getDescription();
+            sql += " AND description = '" + getDescription() +"'";
         if (getTitle() != ALL_VALUES_STRING)
-            sql += " AND title = " + getTitle();
+            sql += " AND title = '" + getTitle() + "'";
         if (getType() != ALL_VALUES_STRING)
-            sql += " AND type = " + getType();
+            sql += " AND type = '" + getType() +"'";
         if (getExpertise() != ALL_VALUES_INT)
             sql += " AND expertise = " + getExpertise();
         if (getNbpeople() != ALL_VALUES_INT)
