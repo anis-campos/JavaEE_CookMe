@@ -23,5 +23,6 @@
 <jsp:getProperty name="myUser" property="lastname"/>
 <jsp:getProperty name="myUser" property="age"/>
 <jsp:getProperty name="myUser" property="login"/>
-<jsp:getProperty name="myUser" property="pwd"/></body>
+<jsp:getProperty name="myUser" property="pwd"/>
+</body>
 </html>
