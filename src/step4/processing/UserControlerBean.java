@@ -16,7 +16,7 @@ import step4.model.UserSubmissionModelBean;
 /**
  * Created by Anis on 24/05/2016.
  */
-@ManagedBean
+@ManagedBean(name = "login4")
 @ApplicationScoped
 public class UserControlerBean {
 	
@@ -35,10 +35,10 @@ public class UserControlerBean {
 			
 			sessionMap.put("loggedUser", user);
 			
-			return "userDisplay.xhtml";
+			return "userDisplay.jsf";
 		}
 		else{
-			return "userLogin.xhtml";
+			return "userLogin.jsf";
 		}
 	}
 	

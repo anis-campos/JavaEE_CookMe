@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * Created by Anis on 24/05/2016.
  */
-@ManagedBean
+@ManagedBean(name = "login5")
 @ApplicationScoped
 public class UserControlerBean {
 	
