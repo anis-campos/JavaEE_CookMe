@@ -2,10 +2,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+>
 <body>
 <ui:composition>
-    <h1>Default Header</h1>
+
+    <div id="header">
+
+        <div id="title">
+            <ui:insert name="title">Title</ui:insert>
+        </div>
+
+        <div id="signIn">
+            <img src="images/signin.png" alt="Sign In Image"/>
+            Become Member
+        </div>
+
+        <div id="login">
+
+            <h:form>
+
+                <b:inputText id="userlogin" placeholder="Login" value="#{loginBean.login}"></b:inputText>
+
+                <b:inputSecret placeholder="Password" value="#{loginBean.pwd}"/>
+
+                <h:commandButton value="OK" action="#{userControlerBean.checkUser(loginBean)}"/>
+
+            </h:form>
+
+
+        </div>
+
+
+    </div>
+
 </ui:composition>
 </body>
 </html>

@@ -53,5 +53,31 @@ ul#tiles-panel li {
     width: 250px;
     font-size: 3em;
     color: black;
+}
 
+
+#header{
+    display: inline-block;
+}
+
+#title, #signIn,#login{
+    display: inline-block;
+}
+
+
+#header #title{
+
+    background: none repeat scroll 0 0 #F0F1F4;
+    height: 100px;
+    width: 250px;
+
+    vertical-align: middle;
+    font-size: 3em;
+    color: black;
+
+}
+
+#header #signIn img{
+    width: 32px;
+    height: 32px;
 }
