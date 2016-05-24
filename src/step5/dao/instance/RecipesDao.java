@@ -75,7 +75,7 @@ public class RecipesDao {
 
 	public List<RecipeModel> find(RecipeModel recipe) {
 		Statement query;
-		String sql = (SearchRecipeBean)recipe.getSQLSearchQuery();
+		String sql = ((SearchRecipeBean)recipe).getSQLSearchQuery();
 		List<RecipeModel> listRecipe = new ArrayList<RecipeModel>();
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
