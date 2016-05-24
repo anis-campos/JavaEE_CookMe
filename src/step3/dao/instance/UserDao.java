@@ -70,7 +70,6 @@ public class UserDao {
                 rs.getString("lastname"),
                 Integer.parseInt(rs.getString("age")),
                 rs.getString("login"),
-                rs.getString("password"),
-                rs.getString("email"));
+                rs.getString("password"));
     }
 }

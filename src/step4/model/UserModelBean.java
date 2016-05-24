@@ -1,14 +1,9 @@
-package step3.model;
-
-import java.io.Serializable;
+package step4.model;
 
 /**
- * Created by djbranbran on 23/05/16.
+ * Created by djbranbran on 24/05/16.
  */
-public class UserModelBean implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	private int id;
+public class UserModelBean {
     private String lastname;
     private String firstname;
     private int age;
@@ -16,17 +11,27 @@ public class UserModelBean implements Serializable {
     private String pwd;
     private String email;
 
-    public UserModelBean() {
-    }
-
-    public UserModelBean(String firstname, String lastname, int age, String login, String pwd) {
+    public UserModelBean(String firstname, String lastname, int age, String login, String password, String email) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.age = age;
         this.login = login;
-        this.pwd = pwd;
+        this.pwd=password;
+        this.email=email;
     }
-    
+
+    @Override
+    public String toString() {
+        return "UserModelBean{" +
+                "lastname='" + lastname + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", age=" + age +
+                ", login='" + login + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public String getLastname() {
         return lastname;
     }
@@ -66,31 +71,12 @@ public class UserModelBean implements Serializable {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
-    
-    public int getId() {
-        return id;
-    }
 
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
-    }
-    
-    public void setId(Integer id){
-    	this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "UserModelBean{" +
-                "lastname='" + lastname + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", age=" + age +
-                ", login='" + login + '\'' +
-                ", pwd='" + pwd + '\'' +
-                '}';
     }
 }
