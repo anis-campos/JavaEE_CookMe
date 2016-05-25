@@ -1,7 +1,7 @@
 package cookMe.dao.instance;
 
 
-import cookMe.model.RecipeModel;
+import cookMe.model.RecipeModelBean;
 import cookMe.model.SearchRecipeBean;
 
 import java.sql.*;
@@ -27,7 +27,7 @@ public class RecipesDao {
         dB_PWD = DB_PWD;
     }
 
-    public void addRecipe(RecipeModel recipe) {
+    public void addRecipe(RecipeModelBean recipe) {
         try {
             // create connection
             connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
@@ -44,8 +44,8 @@ public class RecipesDao {
             e.printStackTrace();
         }
     }
-    public ArrayList<RecipeModel> getAllRecipes(){
-        ArrayList<RecipeModel> list = new ArrayList<RecipeModel>();
+    public ArrayList<RecipeModelBean> getAllRecipes(){
+        ArrayList<RecipeModelBean> list = new ArrayList<RecipeModelBean>();
         Statement query;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
@@ -63,20 +63,21 @@ public class RecipesDao {
         }
     }
 
-    protected RecipeModel toObject(ResultSet rs) throws SQLException {
-        return new RecipeModel(
+    protected RecipeModelBean toObject(ResultSet rs) throws SQLException {
+        return new RecipeModelBean(
                 rs.getString("title"),
                 rs.getString("description"),
                 Integer.parseInt(rs.getString("expertise")),
                 Integer.parseInt(rs.getString("nbpeople")),
                 Integer.parseInt(rs.getString("duration")),
-                rs.getString("type"));
+                rs.getString("type"),
+                rs.getString("image"));
     }
 
-	public List<RecipeModel> find(RecipeModel recipe) {
+	public List<RecipeModelBean> find(RecipeModelBean recipe) {
 		Statement query;
 		String sql = ((SearchRecipeBean)recipe).getSQLSearchQuery();
-		List<RecipeModel> listRecipe = new ArrayList<RecipeModel>();
+		List<RecipeModelBean> listRecipe = new ArrayList<RecipeModelBean>();
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
             query = this.connection.createStatement();
