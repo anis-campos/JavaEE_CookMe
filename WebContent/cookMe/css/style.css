@@ -133,4 +133,11 @@ ul#tiles-panel li {
     width: 32px;
     height: 32px;
 }
+#search .panelGrid{
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 600px;
+    vertical-align: middle;
+    width: 600px;
 
+}
