@@ -3,9 +3,11 @@ package cookMe.processing;
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.UserDao;
 import cookMe.model.LoginBean;
+import cookMe.model.SearchCommentBean;
 import cookMe.model.UserModelBean;
 import cookMe.model.UserSubmissionModelBean;
 
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
@@ -45,7 +47,6 @@ public class UserControlerBean {
         return "";
     }
 
-
     public String checkUserAdmin(LoginBean loginBean) {
         UserModelBean user = this.userDao.checkUser(loginBean.getLogin(), loginBean.getPwd());
 
@@ -57,22 +58,25 @@ public class UserControlerBean {
             String uri = request.getRequestURI();
             Map<String, Object> sessionMap = externalContext.getSessionMap();
 
-            sessionMap.put("loggedUser", user);
-
+            if (user.getType() == UserModelBean.UserType.admin) {
+                sessionMap.put("loggedUser", user);
+                return "adminMenu.jsf";
+            }
 
         }
-        return "";
+return "";
     }
 
-    public boolean isAdmin() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        Map<String, Object> sessionMap = externalContext.getSessionMap();
+    public void toMenu(){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        NavigationHandler nh = fc.getApplication().getNavigationHandler();
+        nh.handleNavigation(fc, null, "adminMenu.jsf?faces-redirect=true");
 
-        UserModelBean loggedUser = (UserModelBean) sessionMap.get("loggedUser");
-
-        return loggedUser.getType() == UserModelBean.UserType.admin;
     }
 
+    public boolean isAdmin(UserModelBean loggedUser) {
+        return loggedUser != null && loggedUser.getType() == UserModelBean.UserType.admin;
+    }
 
     public void logOut() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -114,7 +118,9 @@ public class UserControlerBean {
             } else {
                 ok = false;
             }
-            this.userDao.addUser(userSubmitted);
+
+            if (ok)
+                this.userDao.addUser(userSubmitted);
         }
 
 

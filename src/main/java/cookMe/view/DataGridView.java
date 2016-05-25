@@ -11,7 +11,7 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class DataGridView<L,T,S> implements Serializable {
+public class DataGridView<L,T> implements Serializable {
 
     private L listData;
 

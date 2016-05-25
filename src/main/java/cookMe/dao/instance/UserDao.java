@@ -45,19 +45,22 @@ public class UserDao {
         }
     }
 
-    public  UserModelBean findByLogin( String login) {
+    public UserModelBean findByLogin(String login) {
         //return value
-        Statement query;
+
         UserModelBean user = null;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
             //TODO A l’image de DB.java créer une réquète permettant de récupérer
             //l’ensemble des utilisateurs contenu dans la base et de les placer dans une liste
-            query = this.connection.createStatement();
-            query.execute("SELECT * from users;");
-            ResultSet rs = query.getResultSet();
+            PreparedStatement query = this.connection.prepareStatement("SELECT * from users u WHERE u.login = ?;");
+            query.setString(1, login);
 
-            user = toObject(rs);
+            ResultSet rs = query.executeQuery();
+            ;
+
+            if (rs.first())
+                user = toObject(rs);
 
             connection.close();
 

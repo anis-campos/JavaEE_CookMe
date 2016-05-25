@@ -15,8 +15,8 @@ import java.util.List;
 /**
  * Created by Anis on 25/05/2016.
  */
-@FacesValidator("loginAdminMask")
-public class loginAdminValidator implements Validator {
+@FacesValidator("loginAdminValidator")
+public class LoginAdminValidator implements Validator {
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
 

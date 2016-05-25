@@ -1,16 +1,21 @@
 package cookMe.processing;
 
+import cookMe.model.UserModelBean;
+
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Created by Anis on 24/05/2016.
  */
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"*.xhtml"})
+@WebFilter(filterName = "AuthFilter", urlPatterns = {"*.jsf"})
 public class AuthFilter implements Filter {
 
     public AuthFilter() {
@@ -25,23 +30,21 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
 
-            // check whether session variable is set
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;
-            HttpSession ses = req.getSession(false);
-            //  allow user to proccede if url is login.xhtml or user logged in or user is accessing any page in //public folder
-            /*String reqURI = req.getRequestURI();
-            if (reqURI.indexOf("/login.xhtml") >= 0 || (ses != null && ses.getAttribute("username") != null)
-                    || reqURI.indexOf("/public/") >= 0 || reqURI.contains("javax.faces.resource"))
+            HttpSession session = req.getSession();
+            UserModelBean loggedUser = (UserModelBean) session.getAttribute("loggedUser");
+            String reqURI = req.getRequestURI();
+
+            if (reqURI.contains("admin") && !reqURI.contains("adminLogin")) {
+                if (loggedUser == null || loggedUser.getType() != UserModelBean.UserType.admin)
+                    res.sendRedirect("adminLogin.jsf");
+            } else
                 chain.doFilter(request, response);
-            else   // user didn't log in but asking for a page that is not allowed so take user to login page
-                res.sendRedirect(req.getContextPath() + "/login.xhtml");  // Anonymous user. Redirect to login page*/
-            System.out.println(req.getRequestURI());
-            chain.doFilter(request, response);
         } catch (Throwable t) {
-            System.out.println(t.getMessage());
+            System.out.println(t);
         }
-    } //doFilter
+    }
 
     @Override
     public void destroy() {

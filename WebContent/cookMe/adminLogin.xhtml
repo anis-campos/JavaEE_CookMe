@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 <ui:composition template="common.xhtml">
 
@@ -16,27 +17,22 @@
 
             <h:panelGrid id="grid" columns="3" cellpadding="5">
                 <p:outputLabel for="login" value="Login : "/>
-                <p:inputMask id="login" required="true" value="#{loginBean.login}" mask="loginAdminMask"/>
+                <p:inputText id="login" required="true" value="#{loginBean.login}" >
+                    <f:validator validatorId="loginAdminValidator"/>
+                </p:inputText>
                 <p:message for="login"/>
 
                 <p:outputLabel for="password" value="Password : "/>
                 <p:password id="password" value="#{loginBean.pwd}" required="true"/>
                 <p:message for="password"/>
             </h:panelGrid>
-            <p:commandButton id="submitButton" value="GO" update="grid" actionListener="#{userControlerBean.checkUserAdmin(loginBean)}"/>
+            <p:commandButton id="submitButton" value="GO"  action="#{userControlerBean.checkUserAdmin(loginBean)}"/>
         </h:form>
 
-        <h:form rendered="#{not empty loggedUser and userControlerBean.isAdmin()}">
-            <ul id="tiles-panel">
-                <li><h:link outcome="admin.jsf">
-                    <h1>Manager Users</h1>
-                    <h:graphicImage value="images/users.png"></h:graphicImage>
-                </h:link></li>
-                <li><h:link outcome="admin.jsf">
-                    <h1>Manager Receipes</h1>
-                    <h:graphicImage value="images/receipe.png"></h:graphicImage>
-                </h:link></li>
-            </ul>
+        <h:form rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}">
+
+            <h:commandLink id="close" actionListener="#{userControlerBean.toMenu}"  immediate="true" />
+
         </h:form>
     </ui:define>
 </ui:composition>
