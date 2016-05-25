@@ -5,36 +5,44 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">
-<f:view>
-    <h:form id="form">
-        <!--@elvariable id="recipe" type="cookMe.model.RecipeModelBean"-->
-        <p:dataGrid var="recipe" value="#{dataGridView.listData}" columns="2" layout="grid"
-                    rows="4" paginator="true" id="recipes"
-                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                    rowsPerPageTemplate="6,12,16">
+<ui:composition template="common.xhtml">
+    <ui:define name="title">Search</ui:define>
+    <ui:define name="content">
+        <f:view>
+            <h:form id="form">
+                <!--@elvariable id="recipe" type="cookMe.model.RecipeModelBean"-->
+                <p:dataGrid var="recipe" value="#{dataGridView.listData.getRecipeList()}" columns="2" layout="grid"
+                            rows="4" paginator="true" id="recipes"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="6,12,16">
 
-            <f:facet name="header">
-                Recipe search result
-            </f:facet>
+                    <f:facet name="header">
+                        Recipe search result
+                    </f:facet>
 
-            <p:panel header="#{recipe.title}" style="text-align:center">
-                <h:panelGrid columns="1" style="width:100%">
+                    <p:panel header="#{recipe.title}" style="text-align:center">
+                        <h:panelGrid columns="1" style="width:100%">
 
-                    <h:outputText value="#{recipe.type}" />
-                    <h:outputText value="#{recipe.duration}" />
-                    <h:outputText value="#{recipe.nbpeople}" />
-                    <h:outputText value="#{recipe.expertise}" />
-                    <h:outputText value="#{recipe.description}" />
+                            <h:outputText value="#{recipe.type}"/>
+                            <h:outputText value="#{recipe.duration}"/>
+                            <h:outputText value="#{recipe.nbpeople}"/>
+                            <h:outputText value="#{recipe.expertise}"/>
+                            <h:outputText value="#{recipe.description}"/>
 
-                    <p:commandLink update=":form:recipeDetail" oncomplete="#{recipeControlerBean.displayRecipeDetail(recipe)}" title="View Detail">
-                        <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
-                        <f:setPropertyActionListener value="#{recipe}" target="#{dataGridView.selectedData}" />
-                    </p:commandLink>
-                </h:panelGrid>
-            </p:panel>
+                            <p:commandLink update=":form:recipeDetail"
+                                           oncomplete="#{recipeControlerBean.displayRecipeDetail(recipe)}"
+                                           title="View Detail">
+                                <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;"/>
+                                <f:setPropertyActionListener value="#{recipe}" target="#{dataGridView.selectedData}"/>
+                            </p:commandLink>
+                        </h:panelGrid>
+                    </p:panel>
 
-        </p:dataGrid>
-    </h:form>
-</f:view>
+                </p:dataGrid>
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>
 </html>

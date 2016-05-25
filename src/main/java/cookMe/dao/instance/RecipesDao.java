@@ -31,7 +31,7 @@ public class RecipesDao {
         try {
             // create connection
             connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
-            PreparedStatement query = connection.prepareStatement("INSERT INTO (title ,description , expertise, nbpeople, duration, type) users VALUES(?,?,?,?,?)");
+            PreparedStatement query = connection.prepareStatement("INSERT INTO recipe(title ,description , expertise, nbpeople, duration, type) VALUES(?,?,?,?,?)");
             query.setString(1,recipe.getTitle());
             query.setString(2,recipe.getDescription());
             query.setInt(3,recipe.getExpertise());
@@ -71,7 +71,8 @@ public class RecipesDao {
                 Integer.parseInt(rs.getString("nbpeople")),
                 Integer.parseInt(rs.getString("duration")),
                 rs.getString("type"),
-                rs.getString("image"));
+                rs.getString("image"),
+                rs.getInt("id"));
     }
 
 	public List<RecipeModelBean> find(RecipeModelBean recipe) {

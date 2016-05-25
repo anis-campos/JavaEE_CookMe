@@ -45,6 +45,31 @@ public class UserDao {
         }
     }
 
+    public  UserModelBean findByLogin( String login) {
+        //return value
+        Statement query;
+        UserModelBean user = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
+            //TODO A l’image de DB.java créer une réquète permettant de récupérer
+            //l’ensemble des utilisateurs contenu dans la base et de les placer dans une liste
+            query = this.connection.createStatement();
+            query.execute("SELECT * from users;");
+            ResultSet rs = query.getResultSet();
+
+            user = toObject(rs);
+
+            connection.close();
+
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+
+    }
+
     public List<UserModelBean> getAllUser() {
         //return value
         ArrayList<UserModelBean> userList = new ArrayList<UserModelBean>();
@@ -71,6 +96,7 @@ public class UserDao {
 
     protected UserModelBean toObject(ResultSet rs) throws SQLException {
         return new UserModelBean(
+                rs.getInt("id"),
                 rs.getString("firstname"),
                 rs.getString("lastname"),
                 Integer.parseInt(rs.getString("age")),
