@@ -10,32 +10,34 @@
     <ui:define name="title">Home</ui:define>
 
     <ui:define name="content">
+        <h:form>
+            <ul id="tiles-panel">
 
-        <ul id="tiles-panel">
+                <li>
+                    <h:link outcome="home.jsf">
+                        <h1>Emergency</h1>
+                        <h:graphicImage value="images/emergency.png"></h:graphicImage>
+                        <p> Find help if you need </p>
+                    </h:link>
+                </li>
+                <li>
+                    <h:commandLink action="#{searchControlerBean.searchRecipe}">
+                        <h1>Recipes</h1>
+                        <h:graphicImage value="images/receipes.png"></h:graphicImage>
+                        <p> Search receipes </p>
+                    </h:commandLink>
+                </li>
+                <li>
+                    <h:link outcome="home.jsf">
+                        <h1>Shop</h1>
+                        <h:graphicImage value="images/shop.png"></h:graphicImage>
+                        <p> find ingredients </p>
+                    </h:link>
+                </li>
 
-            <li>
-                <h:link outcome="home.jsf">
-                    <h1>Emergency</h1>
-                    <h:graphicImage value="images/emergency.png"></h:graphicImage>
-                    <p> Find help if you need </p>
-                </h:link>
-            </li>
-            <li>
-                <h:link outcome="#{searchControlerBean.searchRecipe()}">
-                    <h1>Recipes</h1>
-                    <h:graphicImage value="images/receipes.png"></h:graphicImage>
-                    <p> Search receipes </p>
-                </h:link>
-            </li>
-            <li>
-                <h:link outcome="home.jsf">
-                    <h1>Shop</h1>
-                    <h:graphicImage value="images/shop.png"></h:graphicImage>
-                    <p> find ingredients </p>
-                </h:link>
-            </li>
+            </ul>
+        </h:form>
 
-        </ul>
 
     </ui:define>
 </ui:composition>

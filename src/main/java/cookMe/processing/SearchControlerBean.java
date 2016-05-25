@@ -1,16 +1,12 @@
 package cookMe.processing;
 
-import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.RecipesDao;
 import cookMe.model.ListRecipeTypeBean;
-import cookMe.model.RecipeModelBean;
-import cookMe.model.RecipeSubmissionModelBean;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +23,10 @@ public class SearchControlerBean {
     private RecipesDao recipeDao;
 
 
-
     public SearchControlerBean() {
     }
 
-    public String searchRecipe(){
+    public String searchRecipe() {
         ListRecipeTypeBean listType = new ListRecipeTypeBean();
         listType.update();
 
