@@ -62,7 +62,7 @@
                     <p:column colspan="2">
                         <p:selectOneMenu id="cookType" value="#{recipeSubmissionModelBean.type}" style="width:125px">
                             <f:selectItem itemLabel="Select One" itemValue="" />
-                            <f:selectItems value="#{listType}" />
+                            <f:selectItems scope="request" value="#{listRecipeTypeBean.liste}" />
                         </p:selectOneMenu>
                     </p:column>
                 </p:row>
