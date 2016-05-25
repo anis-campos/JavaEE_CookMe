@@ -1,5 +1,6 @@
 package cookMe.processing;
 
+import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.RecipesDao;
 import cookMe.model.ListRecipeTypeBean;
 
@@ -18,32 +19,29 @@ import java.util.Map;
 public class SearchControlerBean {
 
 
-    private List<String> listType;
-
-    private RecipesDao recipeDao;
-
+    private ListRecipeTypeBean listRecipeTypeBean;
 
     public SearchControlerBean() {
     }
 
-    public String searchRecipe() {
-        ListRecipeTypeBean listType = new ListRecipeTypeBean();
-        listType.update();
+    public String searchRecipe(){
+        listRecipeTypeBean = new ListRecipeTypeBean();
+        listRecipeTypeBean.update();
 
         //récupère l'espace de mémoire de JSF
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         Map<String, Object> requestMap = externalContext.getRequestMap();
         //place la liste de recette dans l'espace de mémoire de JSF
-        requestMap.put("listType", listType);
+        requestMap.put("listRecipeTypeBean", listRecipeTypeBean);
         return "search.jsf";
     }
 
-    public List<String> getListType() {
-        return listType;
+    public ListRecipeTypeBean getListRecipeTypeBean() {
+        return listRecipeTypeBean;
     }
 
-    public void setListType(List<String> listType) {
-        this.listType = listType;
+    public void setListRecipeTypeBean(ListRecipeTypeBean listRecipeTypeBean) {
+        this.listRecipeTypeBean = listRecipeTypeBean;
     }
 
 }

@@ -6,6 +6,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+<ui:composition template="common.xhtml">
+<ui:define name="title">Recipe detail</ui:define>
+<ui:define name="content">
 <f:view>
     <h:form>
         <h:outputText value="#{recipeModelBean.titre}" />
@@ -17,7 +20,7 @@
         <h:graphicImage value="#{recipeModelBean.image}" />
     </h:form>
 
-    <h:form>
+   <!-- <h:form>
         <p:repeat value="#{dataListView.cars1}" var="car">
             <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
                 <p:outputPanel>
@@ -28,6 +31,8 @@
             </h:panelGrid>
             <hr />
         </p:repeat>
-    </h:form>
+    </h:form> -->
 </f:view>
+</ui:define>
+</ui:composition>
 </html>

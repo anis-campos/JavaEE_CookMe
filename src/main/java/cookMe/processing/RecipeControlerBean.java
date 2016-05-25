@@ -66,7 +66,8 @@ public class RecipeControlerBean {
 
 
     public String displayRecipeDetail(RecipeModelBean recipe){
-        List<RecipeModelBean> list =  recipeDao.find(recipe);
+        SearchRecipeBean searchRecipeBean = new SearchRecipeBean(recipe);
+        List<RecipeModelBean> list =  recipeDao.find(searchRecipeBean);
 
         if(list.size() == 1){
             RecipeModelBean recipeBean = list.get(0);

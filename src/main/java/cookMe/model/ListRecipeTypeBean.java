@@ -19,14 +19,6 @@ public class ListRecipeTypeBean{
         Fish,
         Dessert;
 
-        private String libelle;
-        public String getLibelle(){
-            return libelle;
-        }
-        public void setLibelle(String libelle){
-            this.libelle = libelle;
-        }
-
     }
 
 
@@ -48,10 +40,10 @@ public class ListRecipeTypeBean{
 
     public static List<String> getAll(){
         List<String> list = new ArrayList<String>();
-        list.add(RecipeType.Salade.getLibelle());
-        list.add(RecipeType.Meal.getLibelle());
-        list.add(RecipeType.Fish.getLibelle());
-        list.add(RecipeType.Dessert.getLibelle());
+        list.add(RecipeType.Salade.toString());
+        list.add(RecipeType.Meal.toString());
+        list.add(RecipeType.Fish.toString());
+        list.add(RecipeType.Dessert.toString());
         return list;
     }
 }

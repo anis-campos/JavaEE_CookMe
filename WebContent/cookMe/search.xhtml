@@ -10,12 +10,12 @@
     <ui:define name="title">Search</ui:define>
     <ui:define name="content">
         <h:form id="search">
-            <p:panelGrid columns="4">
-                <p:row>
-                    <p:column colspan="4">
-                        <h:outputText value="Tell what do you want !"/>
-                    </p:column>
-                </p:row>
+            <p:panelGrid  id="panelGrid">
+                <f:facet  name="header">
+                    <p:row  id="row">
+                        <p:column colspan="7"> <h:outputText value="Tell what do you want !"/></p:column>
+                    </p:row>
+                </f:facet>
                 <p:row>
                     <p:column>
                         <img src="images/time.jpg" id="time" alt="time"/>
@@ -62,14 +62,14 @@
                     <p:column colspan="2">
                         <p:selectOneMenu id="cookType" value="#{searchRecipeBean.type}" style="width:125px">
                             <f:selectItem itemLabel="Select One" itemValue="" />
-                            <f:selectItems value="#{listType}" />
+                            <f:selectItems scope="request" value="#{listRecipeTypeBean.list}" />
                         </p:selectOneMenu>
                     </p:column>
                 </p:row>
 
                 <p:row>
                     <p:column colspan="4">
-                        <p:commandButton value="Touch me" id="nonAjax" action="#{recipeControlerBean.searchRecipe(searchRecipeBean)}"/>
+                        <p:commandButton value="Touch me" action="#{recipeControlerBean.searchRecipe(searchRecipeBean)}"/>
                     </p:column>
                 </p:row>
 
