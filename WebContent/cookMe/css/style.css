@@ -8,6 +8,7 @@
 html {
     height: 100%;
 }
+
 body {
     min-height: 100%;
     margin: 0;
@@ -23,11 +24,14 @@ body {
     min-height: 70px;
 }
 
-#imageCoinDroit{
-    position:fixed;
+#imageCoinDroit {
+    position: fixed;
     bottom: 0px;
     right: 0px;
 }
+
+/* TUILES */
+/******************************/
 ul#tiles-panel {
 
     margin-left: auto;
@@ -41,7 +45,7 @@ ul#tiles-panel li {
     margin: 0 20px 20px 0;
 }
 
-#tiles-panel a{
+#tiles-panel a {
     -moz-box-sizing: border-box;
     background: none repeat scroll 0 0 #F0F1F4;
     border-bottom: 3px solid #7B4F9D;
@@ -88,20 +92,22 @@ ul#tiles-panel li {
     text-align: center;
 }
 
-#header{
+/******************************/
+
+/* Entete */
+/******************************/
+#header {
     display: inline-block;
 }
 
-#title, #signIn,#login{
-    display: inline-block;
+#title, #signIn, #login {
 }
 
-
-#header #title{
-
+#header #title {
+    display: table-cell;
     background: none repeat scroll 0 0 #F0F1F4;
     height: 100px;
-    width: 250px;
+    min-width: 250px;
 
     vertical-align: middle;
     font-size: 3em;
@@ -109,21 +115,21 @@ ul#tiles-panel li {
 
 }
 
-#header #signIn img{
+#header #signIn img {
     width: 32px;
     height: 32px;
 }
 
-#header #signIn img{
+#header #signIn img {
     width: 32px;
     height: 32px;
 }
 
-#search #center{
+#search #center {
     text-align: center;
 }
 
-#search img{
+#search img {
     width: 32px;
     height: 32px;
 }
