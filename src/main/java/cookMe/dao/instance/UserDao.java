@@ -45,7 +45,7 @@ public class UserDao {
         }
     }
 
-    public ArrayList<UserModelBean> getAllUser() {
+    public List<UserModelBean> getAllUser() {
         //return value
         ArrayList<UserModelBean> userList = new ArrayList<UserModelBean>();
         List<UserModelBean> list = new ArrayList<UserModelBean>();

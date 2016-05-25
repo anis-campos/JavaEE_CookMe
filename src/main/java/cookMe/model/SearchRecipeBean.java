@@ -8,7 +8,7 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class SearchRecipeBean extends RecipeModel {
+public class SearchRecipeBean extends RecipeModelBean {
     public static final String ALL_VALUES_STRING = "[ALL]";
     public static final int ALL_VALUES_INT = -2;
 

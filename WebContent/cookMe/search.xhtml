@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="common.xhtml">
+    <ui:define name="title">Search</ui:define>
+    <ui:define name="content">
+        <h:form id="search">
+            <p:panelGrid columns="4">
+                <p:row>
+                    <p:column colspan="4">
+                        <h:outputText value="Tell what do you want !"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <img src="images/time.jpg" id="time" alt="time"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="Preparation Duration"/>
+                    </p:column>
+                    <p:column>
+                        <img src="images/expert.png" id="expert" alt="expert"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="Cook expertise"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column colspan="2">
+                        <p:inputMask id="date" value="#{recipeSearch.duration}" mask="99:00"/>
+                    </p:column>
+                    <p:column colspan="2">
+                        <p:rating value="#{recipeSearch.expertise}"/>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column>
+                        <img src="images/people.jpg" id="people" alt="people"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="For how many people"/>
+                    </p:column>
+                    <p:column>
+                        <img src="images/cook.png" id="cook" alt="cook"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="Cook type"/>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column colspan="2">
+                        <p:inputText id="nbPeople" value="#{recipeSearch.nbpeople}" />
+                        <p:slider for="nbPeople" />
+                    </p:column>
+                    <p:column colspan="2">
+                        <p:selectOneMenu id="cookType" value="#{listType}" style="width:125px">
+                            <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItems value="#{recipeSearch.type}" />
+                        </p:selectOneMenu>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column colspan="4">
+                        <p:commandButton value="Touch me" id="nonAjax" action="#{recipeControlerBean.searchRecipe(recipeSearch)}"/>
+                    </p:column>
+                </p:row>
+
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

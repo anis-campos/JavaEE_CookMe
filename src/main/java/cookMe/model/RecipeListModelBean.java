@@ -12,17 +12,17 @@ import java.util.List;
 @SessionScoped
 public class RecipeListModelBean {
 	
-	private List<RecipeModel> recipeList;
+	private List<RecipeModelBean> recipeList;
 	
 	public RecipeListModelBean(){
-		recipeList = new ArrayList<RecipeModel>();
+		recipeList = new ArrayList<RecipeModelBean>();
 	}
 	
-	public void addRecipeList(RecipeModel recipe){
+	public void addRecipeList(RecipeModelBean recipe){
 		this.recipeList.add(recipe);
 	}
 	
-	public List<RecipeModel> getRecipeList(){
+	public List<RecipeModelBean> getRecipeList(){
 		return recipeList;
 	}
 }

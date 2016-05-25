@@ -1,8 +1,13 @@
 package cookMe.model;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 /**
  * Created by djbranbran on 24/05/16.
  */
+@ManagedBean
+@SessionScoped
 public class RecipeModelBean {
     private String title;
     private String description;
@@ -10,17 +15,19 @@ public class RecipeModelBean {
     private int nbpeople;
     private int duration;
     private String type;
+    private String image;
 
     public RecipeModelBean() {
     }
 
-    public RecipeModelBean(String title, String description, int expertise, int nbpeople, int duration, String type) {
+    public RecipeModelBean(String title, String description, int expertise, int nbpeople, int duration, String type, String image) {
         this.title = title;
         this.description = description;
         this.expertise = expertise;
         this.nbpeople = nbpeople;
         this.duration = duration;
         this.type = type;
+        this.image = image;
     }
 
     @Override
@@ -81,5 +88,11 @@ public class RecipeModelBean {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getImage(){ return image; }
+
+    public void setImage(String image){
+        this.image = image;
     }
 }
