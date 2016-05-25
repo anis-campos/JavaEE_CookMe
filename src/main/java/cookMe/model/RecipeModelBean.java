@@ -17,6 +17,9 @@ public class RecipeModelBean {
     private String type;
     private String image;
 
+
+
+
     public RecipeModelBean() {
     }
 
@@ -29,6 +32,7 @@ public class RecipeModelBean {
         this.type = type;
         this.image = image;
     }
+
 
     @Override
     public String toString() {

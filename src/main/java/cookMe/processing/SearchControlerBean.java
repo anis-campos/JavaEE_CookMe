@@ -2,6 +2,7 @@ package cookMe.processing;
 
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.RecipesDao;
+import cookMe.model.ListRecipeTypeBean;
 import cookMe.model.RecipeModelBean;
 import cookMe.model.RecipeSubmissionModelBean;
 
@@ -25,17 +26,15 @@ public class SearchControlerBean {
 
     private RecipesDao recipeDao;
 
+
+
     public SearchControlerBean() {
     }
 
     public String searchRecipe(){
-        this.recipeDao = DaoFabric.getInstance().createRecipesDao();
-        List<RecipeModelBean>list = this.recipeDao.getAllRecipes();
-        for(RecipeModelBean rmb : list){
-            if(rmb.getType() != null) {
-                this.listType.add(rmb.getType());
-            }
-        }
+        ListRecipeTypeBean listType = new ListRecipeTypeBean();
+        listType.update();
+
         //récupère l'espace de mémoire de JSF
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         Map<String, Object> requestMap = externalContext.getRequestMap();
