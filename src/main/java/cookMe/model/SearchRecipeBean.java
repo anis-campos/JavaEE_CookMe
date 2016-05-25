@@ -9,16 +9,20 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class SearchRecipeBean extends RecipeModelBean {
-    public static final String ALL_VALUES_STRING = "[ALL]";
-    public static final int ALL_VALUES_INT = -2;
+    public static final String ALL_VALUES_STRING = null;
+    public static final int ALL_VALUES_INT = 0;
 
-    public SearchRecipeBean() {
-        this.setDescription(ALL_VALUES_STRING);
-        this.setTitle(ALL_VALUES_STRING);
-        this.setType(ALL_VALUES_STRING);
-        this.setExpertise(ALL_VALUES_INT);
-        this.setNbpeople(ALL_VALUES_INT);
-        this.setDuration(ALL_VALUES_INT);
+    public SearchRecipeBean(RecipeModelBean recipeModelBean) {
+        this.setDescription(recipeModelBean.getDescription());
+        this.setTitle(recipeModelBean.getTitle());
+        this.setType(recipeModelBean.getType());
+        this.setExpertise(recipeModelBean.getExpertise());
+        this.setNbpeople(recipeModelBean.getNbpeople());
+        this.setDuration(recipeModelBean.getDuration());
+    }
+
+    public SearchRecipeBean(){
+
     }
 
 
@@ -26,11 +30,11 @@ public class SearchRecipeBean extends RecipeModelBean {
 
         String sql = " SELECT * FROM recipe r WHERE 1=1 ";
 
-        if (getDescription() != ALL_VALUES_STRING)
+        if (getDescription() != ALL_VALUES_STRING && getDescription() != "null")
             sql += " AND description = '" + getDescription() + "'";
-        if (getTitle() != ALL_VALUES_STRING)
+        if (getTitle() != ALL_VALUES_STRING && getTitle() != "null")
             sql += " AND title = '" + getTitle() + "'";
-        if (getType() != ALL_VALUES_STRING || getType() != "")
+        if (getType() != ALL_VALUES_STRING && getType() != "")
             sql += " AND type = '" + getType() + "'";
         if (getExpertise() != ALL_VALUES_INT)
             sql += " AND expertise = " + getExpertise();
