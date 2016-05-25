@@ -4,19 +4,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+>
 <ui:composition template="common.xhtml">
 
     <ui:define name="title">Home</ui:define>
+    <ui:define name="login"><!--Vide le login--></ui:define>
 
     <ui:define name="content">
-        <br/><br/>
+
         <ul id="tiles-panel">
-            <li><h:link value="Emergency" outcome="home.jsf"/></li>
-            <li><h:link value="Recipes" outcome="home.jsf"/></li>
-            <li><h:link value="Shop" outcome="home.jsf"/></li>
+
+            <li>
+                <h:link outcome="home.jsf">
+                    <h1>Emergency</h1>
+                    <h:graphicImage value="images/emergency.png"></h:graphicImage>
+                    <p> Find help if you need </p>
+                </h:link>
+            </li>
+            <li>
+                <h:link outcome="home.jsf">
+                    <h1>Recipes</h1>
+                    <h:graphicImage value="images/receipes.png"></h:graphicImage>
+                    <p> Search receipes </p>
+                </h:link>
+            </li>
+            <li>
+                <h:link outcome="home.jsf">
+                    <h1>Shop</h1>
+                    <h:graphicImage value="images/shop.png"></h:graphicImage>
+                    <p> find ingredients </p>
+                </h:link>
+            </li>
+
         </ul>
-        <br/><br/>
+
     </ui:define>
 </ui:composition>
 </html>

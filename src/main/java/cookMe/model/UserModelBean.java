@@ -17,22 +17,30 @@ public class UserModelBean implements Serializable{
     private String login;
     private String pwd;
     private String email;
+    private UserType type;
 
     public UserModelBean(){
-    	
+
     }
-    
-    public UserModelBean(String firstname, String lastname, int age, String login, String password, String email) {
-        this.firstname = firstname;
+
+
+    public UserModelBean(String lastname, String firstname, int age, String login, String pwd, String email, UserType type) {
         this.lastname = lastname;
+        this.firstname = firstname;
         this.age = age;
         this.login = login;
-        this.pwd=password;
-        this.email=email;
+        this.pwd = pwd;
+        this.email = email;
+        this.type = type;
+    }
+
+    public UserType getType() {
+        return type;
     }
 
     @Override
-    public String toString() {
+    public String
+    toString() {
         return "UserModelBean{" +
                 "lastname='" + lastname + '\'' +
                 ", firstname='" + firstname + '\'' +
@@ -40,6 +48,7 @@ public class UserModelBean implements Serializable{
                 ", login='" + login + '\'' +
                 ", pwd='" + pwd + '\'' +
                 ", email='" + email + '\'' +
+                ", type=" + type +
                 '}';
     }
 
@@ -89,5 +98,11 @@ public class UserModelBean implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public enum UserType {
+        none,
+        standard,
+        admin
     }
 }
