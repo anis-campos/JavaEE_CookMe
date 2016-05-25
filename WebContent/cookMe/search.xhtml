@@ -32,10 +32,10 @@
                 </p:row>
                 <p:row>
                     <p:column colspan="2">
-                        <p:inputMask id="date" value="#{recipeSearch.duration}" mask="99:00"/>
+                        <p:inputMask id="date" value="#{recipeSubmissionModelBean.duration}" mask="99:00"/>
                     </p:column>
                     <p:column colspan="2">
-                        <p:rating value="#{recipeSearch.expertise}"/>
+                        <p:rating value="#{recipeSubmissionModelBean.expertise}"/>
                     </p:column>
                 </p:row>
 
@@ -56,20 +56,20 @@
 
                 <p:row>
                     <p:column colspan="2">
-                        <p:inputText id="nbPeople" value="#{recipeSearch.nbpeople}" />
+                        <p:inputText id="nbPeople" value="#{recipeSubmissionModelBean.nbpeople}" />
                         <p:slider for="nbPeople" />
                     </p:column>
                     <p:column colspan="2">
-                        <p:selectOneMenu id="cookType" value="#{listType}" style="width:125px">
+                        <p:selectOneMenu id="cookType" value="#{recipeSubmissionModelBean.type}" style="width:125px">
                             <f:selectItem itemLabel="Select One" itemValue="" />
-                            <f:selectItems value="#{recipeSearch.type}" />
+                            <f:selectItems value="#{listType}" />
                         </p:selectOneMenu>
                     </p:column>
                 </p:row>
 
                 <p:row>
                     <p:column colspan="4">
-                        <p:commandButton value="Touch me" id="nonAjax" action="#{recipeControlerBean.searchRecipe(recipeSearch)}"/>
+                        <p:commandButton value="Touch me" id="nonAjax" action="#{recipeControlerBean.searchRecipe(recipeSubmissionModelBean)}"/>
                     </p:column>
                 </p:row>
 

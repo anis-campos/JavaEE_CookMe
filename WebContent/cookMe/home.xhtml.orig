@@ -8,6 +8,7 @@
 <ui:composition template="common.xhtml">
 
     <ui:define name="title">Home</ui:define>
+    <ui:define name="login"><!--Vide le login--></ui:define>
 
     <ui:define name="content">
 
@@ -21,7 +22,7 @@
                 </h:link>
             </li>
             <li>
-                <h:link outcome="#{searchControlerBean.searchRecipe()}">
+                <h:link outcome="home.jsf">
                     <h1>Recipes</h1>
                     <h:graphicImage value="images/receipes.png"></h:graphicImage>
                     <p> Search receipes </p>
