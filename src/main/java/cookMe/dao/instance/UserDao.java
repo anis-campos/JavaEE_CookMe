@@ -96,6 +96,7 @@ public class UserDao {
 
     protected UserModelBean toObject(ResultSet rs) throws SQLException {
         return new UserModelBean(
+                rs.getInt("id"),
                 rs.getString("firstname"),
                 rs.getString("lastname"),
                 Integer.parseInt(rs.getString("age")),

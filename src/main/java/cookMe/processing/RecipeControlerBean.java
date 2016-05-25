@@ -47,7 +47,7 @@ public class RecipeControlerBean {
     }
     
     public String searchRecipe(RecipeModelBean recipe){
-    	ArrayList<RecipeModelBean> list = (ArrayList<RecipeModelBean>) recipeDao.find((SearchRecipeBean)recipe);
+    	ArrayList<RecipeModelBean> list = (ArrayList<RecipeModelBean>) recipeDao.find(recipe);
         RecipeListModelBean recipeList = new RecipeListModelBean();
         for (RecipeModelBean recipeElem : list) {
             recipeList.addRecipeList(recipeElem);
