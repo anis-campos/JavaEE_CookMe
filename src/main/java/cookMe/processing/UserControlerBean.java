@@ -24,14 +24,14 @@ public class UserControlerBean {
 
     private UserDao userDao;
 
-    public UserControlerBean(){
+    public UserControlerBean() {
         this.userDao = DaoFabric.getInstance().createUserDao();
     }
 
-    public String checkUser(LoginBean loginBean){
+    public String checkUser(LoginBean loginBean) {
         UserModelBean user = this.userDao.checkUser(loginBean.getLogin(), loginBean.getPwd());
 
-        if(user != null){
+        if (user != null) {
 
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
             HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
@@ -45,44 +45,73 @@ public class UserControlerBean {
         return "";
     }
 
+
+    public String checkUserAdmin(LoginBean loginBean) {
+        UserModelBean user = this.userDao.checkUser(loginBean.getLogin(), loginBean.getPwd());
+
+
+        if (user != null && user.getType() == UserModelBean.UserType.admin) {
+
+            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+            HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+            String uri = request.getRequestURI();
+            Map<String, Object> sessionMap = externalContext.getSessionMap();
+
+            sessionMap.put("loggedUser", user);
+
+
+        }
+        return "";
+    }
+
+    public boolean isAdmin() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Map<String, Object> sessionMap = externalContext.getSessionMap();
+
+        UserModelBean loggedUser = (UserModelBean) sessionMap.get("loggedUser");
+
+        return loggedUser.getType() == UserModelBean.UserType.admin;
+    }
+
+
     public void logOut() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         Map<String, Object> sessionMap = externalContext.getSessionMap();
         sessionMap.remove("loggedUser");
     }
 
-    public void checkAndAddUser(UserSubmissionModelBean userSubmitted){
+    public void checkAndAddUser(UserSubmissionModelBean userSubmitted) {
         //Vérifier les propriétés de l'utilisateur
-        if(userSubmitted != null){
+        if (userSubmitted != null) {
             boolean ok = true;
-            if(userSubmitted.getFirstname() != null && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getFirstname()).matches()){
+            if (userSubmitted.getFirstname() != null && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getFirstname()).matches()) {
 
-            }else{
+            } else {
                 ok = false;
             }
-            if(userSubmitted.getLastname() != null && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getLastname()).matches()){
+            if (userSubmitted.getLastname() != null && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getLastname()).matches()) {
 
-            }else{
+            } else {
                 ok = false;
             }
-            if(userSubmitted.getAge() > 0 && userSubmitted.getAge() < 100){
+            if (userSubmitted.getAge() > 0 && userSubmitted.getAge() < 100) {
 
-            }else{
+            } else {
                 ok = false;
             }
-            if(userSubmitted.getEmail() != null && Pattern.compile("[a-zA-Z0-9-._]+@[a-zA-Z0-9-._].[a-z]+").matcher(userSubmitted.getEmail()).matches()){
+            if (userSubmitted.getEmail() != null && Pattern.compile("[a-zA-Z0-9-._]+@[a-zA-Z0-9-._].[a-z]+").matcher(userSubmitted.getEmail()).matches()) {
 
-            }else{
+            } else {
                 ok = false;
             }
-            if(userSubmitted.getLogin() != null && Pattern.compile("[a-zA-Z0-9-._]").matcher(userSubmitted.getLogin()).matches()){
+            if (userSubmitted.getLogin() != null && Pattern.compile("[a-zA-Z0-9-._]").matcher(userSubmitted.getLogin()).matches()) {
 
-            }else{
+            } else {
                 ok = false;
             }
-            if(userSubmitted.getPwd() != null && userSubmitted.getPwd1() != null && userSubmitted.getPwd().equals(userSubmitted.getPwd1())){
+            if (userSubmitted.getPwd() != null && userSubmitted.getPwd1() != null && userSubmitted.getPwd().equals(userSubmitted.getPwd1())) {
 
-            }else{
+            } else {
                 ok = false;
             }
             this.userDao.addUser(userSubmitted);

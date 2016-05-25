@@ -22,7 +22,7 @@
                 </h:link>
             </li>
             <li>
-                <h:link outcome="#{searchControlerBean.searchRecipe()}">
+                <h:link outcome="home.jsf">
                     <h1>Recipes</h1>
                     <h:graphicImage value="images/receipes.png"></h:graphicImage>
                     <p> Search receipes </p>

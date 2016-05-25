@@ -29,13 +29,15 @@ public class UserDao {
             // create connection
             connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
             //TODO A l’image de DB.java créer une réquète permettant d’ajout l’utilisateur à la base de données, ATTENTION, utiliser cette fois–ci les PrepareStatement
-            PreparedStatement query = connection.prepareStatement("INSERT INTO users(firstname ,lastname , age , login , password , email ) VALUES(?,?,?,?,?,?)");
-            query.setString(1,user.getFirstname());
-            query.setString(2,user.getLastname());
-            query.setInt(3,user.getAge());
-            query.setString(4,user.getLogin());
-            query.setString(5,user.getPwd());
-            query.setString(6,user.getEmail());
+            PreparedStatement query = connection.prepareStatement("INSERT INTO users(firstname ,lastname , age , login , password , email, type ) VALUES(?,?,?,?,?,?,?)");
+            query.setString(1, user.getFirstname());
+            query.setString(2, user.getLastname());
+            query.setInt(3, user.getAge());
+            query.setString(4, user.getLogin());
+            query.setString(5, user.getPwd());
+            query.setString(6, user.getEmail());
+            query.setString(6, user.getType().name());
+
             query.executeUpdate();
             connection.close();
         } catch (SQLException e) {
@@ -74,27 +76,28 @@ public class UserDao {
                 Integer.parseInt(rs.getString("age")),
                 rs.getString("login"),
                 rs.getString("password"),
-                rs.getString("email"));
+                rs.getString("email"),
+                Enum.valueOf(UserModelBean.UserType.class, rs.getString("type")));
     }
 
     public UserModelBean checkUser(String login, String pwd) {
-    	try {
+        try {
             // create connection
             connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
             //TODO A l’image de DB.java créer une réquète permettant d’ajout l’utilisateur à la base de données, ATTENTION, utiliser cette fois–ci les PrepareStatement
             PreparedStatement query = connection.prepareStatement("SELECT * FROM users WHERE login = ? AND password = ?");
-            query.setString(1,login);
-            query.setString(2,pwd);
+            query.setString(1, login);
+            query.setString(2, pwd);
             query.execute();
             ResultSet rs = query.getResultSet();
-            if(rs.first()) {
-            	return toObject(rs);
+            if (rs.first()) {
+                return toObject(rs);
             }
-            
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    	return null;
+        return null;
     }
 }

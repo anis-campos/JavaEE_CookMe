@@ -74,7 +74,7 @@ public class RecipeControlerBean {
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
             Map<String, Object> resquestMap = externalContext.getRequestMap();
             //place la liste de recette dans l'espace de mémoire de JSF
-            resquestMap.put("recipeBean", recipeBean);
+            resquestMap.put("recipeModelBean", recipeBean);
         }
 
         return "recipeDetail.jsf";
