@@ -9,7 +9,6 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class RecipeSubmissionModelBean extends RecipeModelBean {
-	private static final long serialVersionUID = 1L;
 
 	public RecipeSubmissionModelBean(){
 		

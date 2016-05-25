@@ -44,8 +44,8 @@ public class RecipesDao {
             e.printStackTrace();
         }
     }
-    public ArrayList<RecipeModelBean> getAllRecipes(){
-        ArrayList<RecipeModelBean> list = new ArrayList<RecipeModelBean>();
+    public List<RecipeModelBean> getAllRecipes(){
+        List<RecipeModelBean> list = new ArrayList<RecipeModelBean>();
         Statement query;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);

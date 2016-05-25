@@ -28,7 +28,7 @@ public class RecipeControlerBean {
     }
 
     public void loadAllRecipe() {
-        ArrayList<RecipeModelBean> list = this.recipeDao.getAllRecipes();
+        List<RecipeModelBean> list = this.recipeDao.getAllRecipes();
         RecipeListModelBean recipeList = new RecipeListModelBean();
         for (RecipeModelBean recipe : list) {
             recipeList.addRecipeList(recipe);
