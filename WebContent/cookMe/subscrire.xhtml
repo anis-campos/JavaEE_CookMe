@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<ui:composition template="common.xhtml">
+<ui:composition template="common.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
     <ui:define name="title">Subscrire</ui:define>
 
     <ui:define name="content">
@@ -14,8 +14,8 @@
                 <tr>
                     <td><h:outputLabel>Firstname </h:outputLabel></td>
                     <td><h:inputText id="firstname"
-                                 value="#{userSubmissionModelBean.firstname}"
-                                 required="true">
+                                     value="#{userSubmissionModelBean.firstname}"
+                                     required="true">
                         <f:validator validatorId="validators.username"/>
                     </h:inputText></td>
                     <td><h:message for="firstname" showDetail="true" style="color:red"/></td>
@@ -23,8 +23,8 @@
                 <tr>
                     <td><h:outputLabel>Lastname </h:outputLabel></td>
                     <td><h:inputText id="lastname"
-                                 value="#{userSubmissionModelBean.lastname}"
-                                 required="true">
+                                     value="#{userSubmissionModelBean.lastname}"
+                                     required="true">
                         <f:validator validatorId="validators.username"/>
                     </h:inputText></td>
                     <td><h:message for="lastname" showDetail="true" style="color:red"/></td>
@@ -32,17 +32,17 @@
                 <tr>
                     <td><h:outputLabel>Age </h:outputLabel></td>
                     <td><h:inputText id="age"
-                                value="#{userSubmissionModelBean.age}"
-                                required="true">
-                            <f:validator validatorId="validators.age"/>
+                                     value="#{userSubmissionModelBean.age}"
+                                     required="true">
+                        <f:validator validatorId="validators.age"/>
                     </h:inputText></td>
                     <td><h:message for="age" showDetail="true" style="color:red"/></td>
                 </tr>
                 <tr>
                     <td><h:outputLabel>Email </h:outputLabel></td>
                     <td><h:inputText id="email"
-                                 value="#{userSubmissionModelBean.email}"
-                                 required="true">
+                                     value="#{userSubmissionModelBean.email}"
+                                     required="true">
                         <f:validator validatorId="validators.email"/>
                     </h:inputText></td>
                     <td><h:message for="email" showDetail="true" style="color:red"/></td>
@@ -50,8 +50,8 @@
                 <tr>
                     <td><h:outputLabel>Login </h:outputLabel></td>
                     <td><h:inputText id="login"
-                                 value="#{userSubmissionModelBean.login}"
-                                 required="true">
+                                     value="#{userSubmissionModelBean.login}"
+                                     required="true">
                         <f:validator validatorId="validators.login"/>
                     </h:inputText></td>
                     <td><h:message for="login" showDetail="true" style="color:red"/></td>
@@ -59,8 +59,8 @@
                 <tr>
                     <td><h:outputLabel>Password </h:outputLabel></td>
                     <td><h:inputSecret id="pwd"
-                                 value="#{userSubmissionModelBean.pwd}"
-                                 required="true">
+                                       value="#{userSubmissionModelBean.pwd}"
+                                       required="true">
                         <f:validator validatorId="validators.pwd"/>
                     </h:inputSecret></td>
                     <td><h:message for="pwd" showDetail="true" style="color:red"/></td>
@@ -68,18 +68,19 @@
                 <tr>
                     <td><h:outputLabel>Repeat password </h:outputLabel></td>
                     <td><h:inputSecret id="pwd1"
-                                 value="#{userSubmissionModelBean.pwd1}"
-                                 required="true">
+                                       value="#{userSubmissionModelBean.pwd1}"
+                                       required="true">
                         <f:validator validatorId="validators.pwd1"/>
                     </h:inputSecret></td>
                     <td><h:message for="pwd1" showDetail="true" style="color:red"/></td>
                 </tr>
                 <tr>
                     <td><h:commandButton value="GO"
-                                 action="#{userControlerBean.checkAndAddUser(userSubmissionModelBean)}"></h:commandButton></td>
+                                         action="#{userControlerBean.checkAndAddUser(userSubmissionModelBean)}"/>
+                    </td>
                 </tr>
             </table>
         </h:form>
     </ui:define>
 </ui:composition>
-</html>
+

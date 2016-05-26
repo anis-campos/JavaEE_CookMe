@@ -1,69 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header id="header"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui">
+    <header id="header">
 
-    <b:row>
-        <b:column mediumScreen="3">
-            <div id="title">
-                <ui:insert name="title">Title</ui:insert>
-            </div>
-        </b:column>
+        <b:row>
+            <b:column mediumScreen="3">
+                <div id="title">
+                    <ui:insert name="title">Title</ui:insert>
+                </div>
+            </b:column>
 
-        <b:column mediumScreen="5">
+            <b:column mediumScreen="5">
 
-        </b:column>
+            </b:column>
 
 
-        <ui:insert name="login">
+            <ui:insert name="login">
 
-            <div id="loginDiv">
+                <div id="loginDiv">
 
-                <b:column mediumScreen="2">
-                    <div id="signIn">
-                        <!--@elvariable id="loggedUser" type="cookMe.model.LoginBean"-->
+                    <b:column mediumScreen="2">
+                        <div id="signIn">
+                            <!--@elvariable id="loggedUser" type="cookMe.model.LoginBean"-->
+                            <h:form rendered="#{empty loggedUser}">
+                                <h:link outcome="subscrire.jsf" value=" Become Member">
+                                    <h:graphicImage value="images/signin.png"/>
+                                </h:link>
+                            </h:form>
+                        </div>
+                    </b:column>
+
+                    <b:column mediumScreen="2">
+
+                        <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
                         <h:form rendered="#{empty loggedUser}">
-                            <h:link outcome="subscrire.jsf" value=" Become Member">
-                                <h:graphicImage value="images/signin.png"/>
-                            </h:link>
+
+                            <h:panelGrid id="grid" columns="3" cellpadding="5">
+                                <p:outputLabel for="login" value="Login : "/>
+                                <p:inputText id="login" required="true" value="#{loginBean.login}"/>
+                                <p:message for="login"/>
+
+                                <p:outputLabel for="password" value="Password : "/>
+                                <p:password id="password" value="#{loginBean.pwd}" required="true"/>
+                                <p:message for="password"/>
+                            </h:panelGrid>
+                            <p:commandButton id="submitButton" value="GO"
+                                             action="#{userControlerBean.checkUser(loginBean)}"/>
                         </h:form>
-                    </div>
-                </b:column>
+                        <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
+                        <h:form id="logged" rendered="#{not empty loggedUser}">
 
-                <b:column mediumScreen="2">
+                            <h:outputText value="#{loggedUser.firstname}"/>
+                            <h:outputText value="#{loggedUser.lastname}"/>
 
-                    <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
-                    <h:form rendered="#{empty loggedUser}">
+                            <h:commandButton value="DECO" action="#{userControlerBean.logOut()}"/>
+                        </h:form>
 
-                        <h:panelGrid id="grid" columns="3" cellpadding="5">
-                            <p:outputLabel for="login" value="Login : "/>
-                            <p:inputText id="login" required="true" value="#{loginBean.login}"/>
-                            <p:message for="login"/>
+                    </b:column>
 
-                            <p:outputLabel for="password" value="Password : "/>
-                            <p:password id="password" value="#{loginBean.pwd}" required="true"/>
-                            <p:message for="password"/>
-                        </h:panelGrid>
-                        <p:commandButton id="submitButton" value="GO"
-                                         action="#{userControlerBean.checkUser(loginBean)}"/>
-                    </h:form>
-                    <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
-                    <h:form id="logged" rendered="#{not empty loggedUser}">
+                </div>
 
-                        <h:outputText value="#{loggedUser.firstname}"/>
-                        <h:outputText value="#{loggedUser.lastname}"/>
-
-                        <h:commandButton value="DECO" action="#{userControlerBean.logOut()}"/>
-                    </h:form>
-
-                </b:column>
-
-            </div>
-
-        </ui:insert>
+            </ui:insert>
 
 
-    </b:row>
+        </b:row>
 
-</header>
+    </header>
+
+</ui:composition>
