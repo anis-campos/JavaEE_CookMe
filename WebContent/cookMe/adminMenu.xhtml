@@ -5,25 +5,23 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:b="http://bootsfaces.net/ui">
 
-        <ui:define name="title">Administration</ui:define>
-        <ui:define name="content">
+    <ui:define name="title">Administration</ui:define>
+    <ui:define name="content">
 
-            <b:row styleClass="tuile-panel">
-                <b:column mediumScreen="6">
-                    <h:link outcome="adminUsers.jsf" styleClass="tuile">
-                        <h1>Manager Users</h1>
-                        <h:graphicImage value="images/users.png"/>
-                    </h:link>
-                </b:column>
-                <b:column mediumScreen="6">
-                    <h:link outcome="adminReceipes" styleClass="tuile">
-                        <h1>Manager Receipes</h1>
-                        <h:graphicImage value="images/receipe.png"/>
-                    </h:link>
-                </b:column>
-            </b:row>
+        <b:row styleClass="tuile-panel">
+            <b:column mediumScreen="6">
+                <h:link outcome="adminUsers.jsf" styleClass="tuile">
+                    <h1>Manager Users</h1>
+                    <h:graphicImage value="images/users.png"/>
+                </h:link>
+            </b:column>
+            <b:column mediumScreen="6">
+                <h:link outcome="adminReceipes" styleClass="tuile">
+                    <h1>Manager Receipes</h1>
+                    <h:graphicImage value="images/receipe.png"/>
+                </h:link>
+            </b:column>
+        </b:row>
 
-        </ui:define>
-    </ui:composition>
-</f:view>
-</html>
+    </ui:define>
+</ui:composition>

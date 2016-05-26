@@ -16,7 +16,7 @@
 
             <h:panelGrid id="grid" columns="3" cellpadding="5">
                 <p:outputLabel for="login" value="Login : "/>
-                <p:inputText id="login" required="true" value="#{loginBean.login}" >
+                <p:inputText id="login" required="true" value="#{loginBean.login}">
                     <f:validator validatorId="loginAdminValidator"/>
                 </p:inputText>
                 <p:message for="login"/>
@@ -25,7 +25,7 @@
                 <p:password id="password" value="#{loginBean.pwd}" required="true"/>
                 <p:message for="password"/>
             </h:panelGrid>
-            <p:commandButton id="submitButton" value="GO"  action="#{userControlerBean.checkUserAdmin(loginBean)}"/>
+            <p:commandButton id="submitButton" value="GO" action="#{userControlerBean.checkUserAdmin(loginBean)}"/>
         </h:form>
 
         <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
