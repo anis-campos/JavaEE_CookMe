@@ -1,44 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div id="header"
-     xmlns="http://www.w3.org/1999/xhtml"
-     xmlns:ui="http://java.sun.com/jsf/facelets"
-     xmlns:h="http://java.sun.com/jsf/html">
+<header id="header"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
-    <div id="title">
-        <ui:insert name="title">Title</ui:insert>
-    </div>
+    <b:row>
+        <b:column mediumScreen="3">
+            <div id="title">
+                <ui:insert name="title">Title</ui:insert>
+            </div>
+        </b:column>
 
-    <ui:insert name="login">
-        <div id="signIn">
-            <!--@elvariable id="loggedUser" type="cookMe.model.LoginBean"-->
-            <h:form rendered="#{empty loggedUser}">
-                <h:link outcome="subscrire.jsf" value=" Become Member">
-                    <h:graphicImage value="images/signin.png"/>
-                </h:link>
-            </h:form>
-        </div>
-        <div id="login">
-            <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
-            <h:form rendered="#{empty loggedUser}">
-                <h:inputText id="userlogin" value="#{loginBean.login}" required="true"></h:inputText>
+        <b:column mediumScreen="5">
 
-                <h:inputSecret value="#{loginBean.pwd}"/>
-
-                <h:commandButton value="OK" action="#{userControlerBean.checkUser(loginBean)}"/>
-            </h:form>
-        </div>
-
-        <div id="logged">
-            <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
-            <h:form rendered="#{not empty loggedUser}">
-
-                <h:outputText value="#{loggedUser.firstname}"/>
-                <h:outputText value="#{loggedUser.lastname}"/>
-
-                <h:commandButton value="OK" action="#{userControlerBean.logOut()}"/>
-            </h:form>
-        </div>
-    </ui:insert>
+        </b:column>
 
 
-</div>
+        <ui:insert name="login">
+
+            <div id="loginDiv">
+
+                <b:column mediumScreen="2">
+                    <div id="signIn">
+                        <!--@elvariable id="loggedUser" type="cookMe.model.LoginBean"-->
+                        <h:form rendered="#{empty loggedUser}">
+                            <h:link outcome="subscrire.jsf" value=" Become Member">
+                                <h:graphicImage value="images/signin.png"/>
+                            </h:link>
+                        </h:form>
+                    </div>
+                </b:column>
+
+                <b:column mediumScreen="2">
+
+                    <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
+                    <h:form rendered="#{empty loggedUser}">
+
+                        <h:panelGrid id="grid" columns="3" cellpadding="5">
+                            <p:outputLabel for="login" value="Login : "/>
+                            <p:inputText id="login" required="true" value="#{loginBean.login}"/>
+                            <p:message for="login"/>
+
+                            <p:outputLabel for="password" value="Password : "/>
+                            <p:password id="password" value="#{loginBean.pwd}" required="true"/>
+                            <p:message for="password"/>
+                        </h:panelGrid>
+                        <p:commandButton id="submitButton" value="GO"
+                                         action="#{userControlerBean.checkUser(loginBean)}"/>
+                    </h:form>
+                    <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
+                    <h:form id="logged" rendered="#{not empty loggedUser}">
+
+                        <h:outputText value="#{loggedUser.firstname}"/>
+                        <h:outputText value="#{loggedUser.lastname}"/>
+
+                        <h:commandButton value="DECO" action="#{userControlerBean.logOut()}"/>
+                    </h:form>
+
+                </b:column>
+
+            </div>
+
+        </ui:insert>
+
+
+    </b:row>
+
+</header>

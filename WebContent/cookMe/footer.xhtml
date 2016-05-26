@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div id="footer" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-    <p> &#xA9; Anis, Brandon, Antoine 2016 - Tous droits réservés</p>
+<footer
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:b="http://bootsfaces.net/ui">
+    <b:row>
+        <b:column colLg="9">
+            <p> &#xA9; Anis, Brandon, Antoine 2016 - Tous droits réservés</p>
+        </b:column>
 
-    <div id="imageCoinDroit">
-        <h:link outcome="home.jsf">
-            <img src="images/splash.jpg" id="splash"/>
-        </h:link>
-    </div>
+        <b:column colLg="2" offset="1" styleClass="text-center">
+            <h:link id="logoFooter" outcome="home.jsf">
+                <img src="images/splash.jpg"/>
+            </h:link>
+        </b:column>
+    </b:row>
+</footer>
 
-</div>
 

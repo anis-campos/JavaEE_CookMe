@@ -5,47 +5,27 @@
     transform: translateY(-50%);
 }
 
-html {
-    height: 100%;
+#container {
+    min-height: 200px;
 }
 
-body {
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
+footer {
+    margin-top: 20px;
 }
 
-#footer {
-
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    min-height: 70px;
-}
-
-#imageCoinDroit {
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
+#logoFooter {
+    text-align: center;
 }
 
 /* TUILES */
 /******************************/
-ul#tiles-panel {
 
+.tuile-panel {
     margin-left: auto;
     margin-right: auto;
-    width: 1000px;
 }
 
-ul#tiles-panel li {
-    display: inline-block;
-    list-style: none outside none;
-    margin: 0 20px 20px 0;
-}
-
-#tiles-panel a {
+.tuile {
     -moz-box-sizing: border-box;
     background: none repeat scroll 0 0 #F0F1F4;
     border-bottom: 3px solid #7B4F9D;
@@ -57,7 +37,15 @@ ul#tiles-panel li {
     color: black;
 }
 
-#tiles-panel h1 {
+.tuile img {
+    left: 50%;
+    margin: 5px 0 10px -25px;
+    position: relative;
+    height: 56px;
+    width: 56px;
+}
+
+.tuile h1 {
     color: #253340;
     display: block;
     font-family: "Segoe UI", Segoe, "Trebuchet MS", Tahoma, Geneva, sans-serif;
@@ -73,15 +61,7 @@ ul#tiles-panel li {
     text-align: center;
 }
 
-#tiles-panel img {
-    left: 50%;
-    margin: 5px 0 10px -25px;
-    position: relative;
-    height: 48px;
-    width: 48px;
-}
-
-#tiles-panel p {
+.tuile p {
     color: #6A747E;
     font-family: "Segoe UI", Segoe, "Trebuchet MS", Tahoma, Geneva, sans-serif;
     font-size: 13px;
@@ -97,18 +77,16 @@ ul#tiles-panel li {
 /* Entete */
 /******************************/
 #header {
-    display: inline-block;
-}
-
-#title, #signIn, #login {
+    padding-top: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
 }
 
 #header #title {
-    display: table-cell;
     background: none repeat scroll 0 0 #F0F1F4;
     height: 100px;
     min-width: 250px;
-
+    margin-top: -20px;
     vertical-align: middle;
     font-size: 3em;
     color: black;
@@ -120,10 +98,7 @@ ul#tiles-panel li {
     height: 32px;
 }
 
-#header #signIn img {
-    width: 32px;
-    height: 32px;
-}
+/******************************/
 
 #search #center {
     text-align: center;
@@ -133,7 +108,8 @@ ul#tiles-panel li {
     width: 32px;
     height: 32px;
 }
-#search .panelGrid{
+
+#search .panelGrid {
     margin-left: auto;
     margin-right: auto;
     min-width: 600px;

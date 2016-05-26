@@ -19,8 +19,6 @@ public class RecipeModelBean {
     private int id;
 
 
-
-
     public RecipeModelBean() {
     }
 
@@ -109,4 +107,5 @@ public class RecipeModelBean {
     public void setId(int id) {
         this.id = id;
     }
+
 }

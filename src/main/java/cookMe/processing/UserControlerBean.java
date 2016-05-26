@@ -3,7 +3,6 @@ package cookMe.processing;
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.UserDao;
 import cookMe.model.LoginBean;
-import cookMe.model.SearchCommentBean;
 import cookMe.model.UserModelBean;
 import cookMe.model.UserSubmissionModelBean;
 
@@ -32,19 +31,17 @@ public class UserControlerBean {
 
     public String checkUser(LoginBean loginBean) {
         UserModelBean user = this.userDao.checkUser(loginBean.getLogin(), loginBean.getPwd());
-
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         if (user != null) {
 
-            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-            HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-            String uri = request.getRequestURI();
             Map<String, Object> sessionMap = externalContext.getSessionMap();
 
             sessionMap.put("loggedUser", user);
 
 
         }
-        return "";
+        return request.getRequestURI() + "?faces-redirect=true";
     }
 
     public String checkUserAdmin(LoginBean loginBean) {
@@ -64,10 +61,10 @@ public class UserControlerBean {
             }
 
         }
-return "";
+        return "";
     }
 
-    public void toMenu(){
+    public void toMenu() {
         FacesContext fc = FacesContext.getCurrentInstance();
         NavigationHandler nh = fc.getApplication().getNavigationHandler();
         nh.handleNavigation(fc, null, "adminMenu.jsf?faces-redirect=true");

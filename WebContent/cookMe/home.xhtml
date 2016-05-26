@@ -3,40 +3,37 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:b="http://bootsfaces.net/ui"
 >
 <ui:composition template="common.xhtml">
 
     <ui:define name="title">Home</ui:define>
 
     <ui:define name="content">
-        <h:form>
-            <ul id="tiles-panel">
 
-                <li>
-                    <h:link outcome="home.jsf">
-                        <h1>Emergency</h1>
-                        <h:graphicImage value="images/emergency.png"></h:graphicImage>
-                        <p> Find help if you need </p>
-                    </h:link>
-                </li>
-                <li>
-                    <h:commandLink action="#{searchControlerBean.searchRecipe}">
-                        <h1>Recipes</h1>
-                        <h:graphicImage value="images/receipes.png"></h:graphicImage>
-                        <p> Search receipes </p>
-                    </h:commandLink>
-                </li>
-                <li>
-                    <h:link outcome="home.jsf">
-                        <h1>Shop</h1>
-                        <h:graphicImage value="images/shop.png"></h:graphicImage>
-                        <p> find ingredients </p>
-                    </h:link>
-                </li>
-
-            </ul>
-        </h:form>
+        <b:row styleClass="tuile-panel">
+            <b:column mediumScreen="4">
+                <h:link outcome="home.jsf" styleClass="tuile">
+                    <h1>Emergency</h1>
+                    <h:graphicImage value="images/emergency.png"/>
+                    <p> Find help if you need </p>
+                </h:link>
+            </b:column>
+            <b:column mediumScreen="4">
+                <h:link outcome="#{searchControlerBean.searchRecipe()}" styleClass="tuile">
+                    <h1>Recipes</h1>
+                    <h:graphicImage value="images/receipes.png"/>
+                    <p> Search receipes </p>
+                </h:link>
+            </b:column>
+            <b:column mediumScreen="4">
+                <h:link outcome="home.jsf" styleClass="tuile">
+                    <h1>Shop</h1>
+                    <h:graphicImage value="images/shop.png"/>
+                    <p> find ingredients </p>
+                </h:link>
+            </b:column>
+        </b:row>
 
 
     </ui:define>
