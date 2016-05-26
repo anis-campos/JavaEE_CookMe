@@ -3,14 +3,15 @@ package cookMe.processing;
 
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.RecipesDao;
-import cookMe.model.*;
+import cookMe.model.RecipeListModelBean;
+import cookMe.model.RecipeModelBean;
+import cookMe.model.SearchRecipeBean;
 import cookMe.view.DataGridView;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class RecipeControlerBean {
         List<RecipeModelBean> list = this.recipeDao.getAllRecipes();
         RecipeListModelBean recipeList = new RecipeListModelBean();
         for (RecipeModelBean recipe : list) {
-            recipeList.addRecipeList(recipe);
+            recipeList.add(recipe);
         }
         //récupère l'espace de mémoire de JSF
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -47,13 +48,9 @@ public class RecipeControlerBean {
     }
     
     public String searchRecipe(RecipeModelBean recipe){
-    	ArrayList<RecipeModelBean> list = (ArrayList<RecipeModelBean>) recipeDao.find(recipe);
-        RecipeListModelBean recipeList = new RecipeListModelBean();
-        for (RecipeModelBean recipeElem : list) {
-            recipeList.addRecipeList(recipeElem);
-        }
+        RecipeListModelBean recipeList = new RecipeListModelBean(recipeDao.find(recipe));
 
-        DataGridView dgv = new DataGridView(recipeList);
+        DataGridView dgv = new DataGridView<RecipeListModelBean, RecipeModelBean>(recipeList);
 
         //récupère l'espace de mémoire de JSF
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();

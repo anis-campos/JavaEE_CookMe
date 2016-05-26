@@ -12,7 +12,7 @@
         <f:view>
             <h:form id="form">
                 <!--@elvariable id="recipe" type="cookMe.model.RecipeModelBean"-->
-                <p:dataGrid var="recipe" value="#{dataGridView.listData.getRecipeList()}" columns="2" layout="grid"
+                <p:dataGrid var="recipe" value="#{dataGridView.listData.all}" columns="2" layout="grid"
                             rows="4" paginator="true" id="recipes"
                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             rowsPerPageTemplate="6,12,16">

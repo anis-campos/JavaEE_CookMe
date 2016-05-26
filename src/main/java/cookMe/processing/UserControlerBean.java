@@ -3,10 +3,11 @@ package cookMe.processing;
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.UserDao;
 import cookMe.model.LoginBean;
+import cookMe.model.UserListModelBean;
 import cookMe.model.UserModelBean;
 import cookMe.model.UserSubmissionModelBean;
+import cookMe.view.DataGridView;
 
-import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
@@ -27,6 +28,21 @@ public class UserControlerBean {
 
     public UserControlerBean() {
         this.userDao = DaoFabric.getInstance().createUserDao();
+    }
+
+    public void getUserList() {
+
+        UserListModelBean userList = new UserListModelBean(userDao.getAllUser());
+
+        DataGridView dgv = new DataGridView<UserListModelBean, UserModelBean>(userList);
+
+        //récupère l'espace de mémoire de JSF
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Map<String, Object> requestMap = externalContext.getRequestMap();
+        //place la liste de recette dans l'espace de mémoire de JSF
+        requestMap.put("dataGridView", dgv);
+
+
     }
 
     public String checkUser(LoginBean loginBean) {
@@ -57,19 +73,14 @@ public class UserControlerBean {
 
             if (user.getType() == UserModelBean.UserType.admin) {
                 sessionMap.put("loggedUser", user);
-                return "adminMenu.jsf";
+                return toMenu();
             }
 
         }
         return "";
     }
 
-    public void toMenu() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        NavigationHandler nh = fc.getApplication().getNavigationHandler();
-        nh.handleNavigation(fc, null, "adminMenu.jsf?faces-redirect=true");
 
-    }
 
     public boolean isAdmin(UserModelBean loggedUser) {
         return loggedUser != null && loggedUser.getType() == UserModelBean.UserType.admin;
@@ -121,5 +132,9 @@ public class UserControlerBean {
         }
 
 
+    }
+
+    public String toMenu() {
+        return "adminMenu.jsf?faces-redirect=true";
     }
 }

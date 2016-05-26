@@ -10,7 +10,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
-import java.util.List;
 
 /**
  * Created by Anis on 25/05/2016.
@@ -26,7 +25,7 @@ public class LoginAdminValidator implements Validator {
 
         UserModelBean user = userDao.findByLogin(submittedValue);
 
-        if(user.getType()!= UserModelBean.UserType.admin){
+         if(user == null || user.getType()!= UserModelBean.UserType.admin){
             throw new ValidatorException(new FacesMessage("Pas admin"));
         }
 

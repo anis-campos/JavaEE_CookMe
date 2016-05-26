@@ -9,7 +9,6 @@
 <ui:composition template="common.xhtml">
 
     <ui:define name="title">Administration</ui:define>
-    <ui:define name="login"><!--Vide le login--></ui:define>
 
 
     <ui:define name="content">
@@ -29,9 +28,10 @@
             <p:commandButton id="submitButton" value="GO"  action="#{userControlerBean.checkUserAdmin(loginBean)}"/>
         </h:form>
 
+        <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
         <h:form rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}">
 
-            <h:commandLink id="close" actionListener="#{userControlerBean.toMenu}"  immediate="true" />
+            <h:commandButton id="close" action="#{userControlerBean.toMenu}"/>
 
         </h:form>
     </ui:define>

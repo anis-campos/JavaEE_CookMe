@@ -1,8 +1,9 @@
 package cookMe.model;
 
+import cookMe.view.DataCollection;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,19 +11,12 @@ import java.util.List;
  */
 @ManagedBean
 @SessionScoped
-public class RecipeListModelBean {
-	
-	private List<RecipeModelBean> recipeList;
-	
-	public RecipeListModelBean(){
-		recipeList = new ArrayList<RecipeModelBean>();
+public class RecipeListModelBean extends DataCollection<RecipeModelBean> {
+	public RecipeListModelBean() {
+		super();
 	}
-	
-	public void addRecipeList(RecipeModelBean recipe){
-		this.recipeList.add(recipe);
-	}
-	
-	public List<RecipeModelBean> getRecipeList(){
-		return recipeList;
+
+	public RecipeListModelBean(List<RecipeModelBean> list) {
+		super(list);
 	}
 }

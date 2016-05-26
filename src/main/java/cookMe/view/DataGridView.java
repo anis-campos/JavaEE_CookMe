@@ -1,17 +1,15 @@
 package cookMe.view;
-import java.io.Serializable;
-import java.util.List;
-import javax.annotation.PostConstruct;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
 /**
  * Created by Antoine on 25/05/2016.
  */
 
 @ManagedBean
 @ViewScoped
-public class DataGridView<L,T> implements Serializable {
+public class DataGridView<L extends DataCollection<T>, T> implements Serializable {
 
     private L listData;
 
