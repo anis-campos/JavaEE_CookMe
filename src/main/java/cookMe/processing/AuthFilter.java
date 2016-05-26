@@ -2,15 +2,12 @@ package cookMe.processing;
 
 import cookMe.model.UserModelBean;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Created by Anis on 24/05/2016.
@@ -36,9 +33,15 @@ public class AuthFilter implements Filter {
             UserModelBean loggedUser = (UserModelBean) session.getAttribute("loggedUser");
             String reqURI = req.getRequestURI();
 
-            if (reqURI.contains("admin") && !reqURI.contains("adminLogin")) {
-                if (loggedUser == null || loggedUser.getType() != UserModelBean.UserType.admin)
-                    res.sendRedirect("adminLogin.jsf");
+            if (reqURI.contains("admin") && !reqURI.contains("adminLogin")
+                    && (loggedUser == null || loggedUser.getType() != UserModelBean.UserType.admin)) {
+
+                String message = loggedUser == null ? "Non connecté ! " : "N'est pas admin : " + loggedUser.getLastname();
+                //FacesContext context = FacesContext.getCurrentInstance();
+                //context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Second Message", "Additional Message Detail"));
+                System.out.println(message);
+                session.removeAttribute("logedUser");
+                res.sendRedirect("adminLogin.jsf");
             } else
                 chain.doFilter(request, response);
         } catch (Throwable t) {

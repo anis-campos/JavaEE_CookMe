@@ -34,6 +34,12 @@
             <h:commandButton id="close" action="#{userControlerBean.toMenu}"/>
 
         </h:form>
+
+        <h:form rendered="#{ empty loggedUser and not userControlerBean.isAdmin(loggedUser)}">
+
+            <p:growl id="growl" showDetail="true" sticky="true"/>
+
+        </h:form>
     </ui:define>
 </ui:composition>
 

@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <!--@elvariable id="user" type="cookMe.model.UserModelBean"-->
-    <p:dataTable var="user" value="#{dataGridView.listData.all}">
+    <p:dataTable id="userTable" var="user" value="#{dataGridView.listData.all}">
 
         <p:column headerText="Firstname">
             <h:outputText value="#{user.firstname}"/>

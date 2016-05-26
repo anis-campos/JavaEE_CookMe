@@ -23,6 +23,6 @@ public abstract class DataCollection<T> {
     }
 
     public List<T> getAll() {
-        return new ArrayList<T>(this.list);
+        return list;
     }
 }

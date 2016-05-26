@@ -5,8 +5,16 @@
     transform: translateY(-50%);
 }
 
-#container {
-    min-height: 200px;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* needed for container min-height */
+}
+
+.container {
+    position: relative; /* needed for footer positioning*/
+    min-height: 70%; /* real browsers */
 }
 
 footer {

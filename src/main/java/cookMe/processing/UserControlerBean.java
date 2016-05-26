@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -30,9 +31,10 @@ public class UserControlerBean {
         this.userDao = DaoFabric.getInstance().createUserDao();
     }
 
-    public void getUserList() {
+    public String getUserList() {
 
-        UserListModelBean userList = new UserListModelBean(userDao.getAllUser());
+        List<UserModelBean> allUser = userDao.getAllUser();
+        UserListModelBean userList = new UserListModelBean(allUser);
 
         DataGridView dgv = new DataGridView<UserListModelBean, UserModelBean>(userList);
 
@@ -42,6 +44,7 @@ public class UserControlerBean {
         //place la liste de recette dans l'espace de mémoire de JSF
         requestMap.put("dataGridView", dgv);
 
+        return "adminUsers.jsf";
 
     }
 

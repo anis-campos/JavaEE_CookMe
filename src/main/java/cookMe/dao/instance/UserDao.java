@@ -75,7 +75,6 @@ public class UserDao {
 
     public List<UserModelBean> getAllUser() {
         //return value
-        ArrayList<UserModelBean> userList = new ArrayList<UserModelBean>();
         List<UserModelBean> list = new ArrayList<UserModelBean>();
         Statement query;
         try {
@@ -88,12 +87,11 @@ public class UserDao {
             while (rs.next()) {
                 list.add(toObject(rs));
             }
-
             connection.close();
-            return userList;
+            return list;
         } catch (SQLException e) {
             e.printStackTrace();
-            return userList;
+            return list;
         }
     }
 

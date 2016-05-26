@@ -4,27 +4,46 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
->
+                xmlns:b="http://bootsfaces.net/ui">
 
     <ui:define name="title">Administration</ui:define>
     <ui:define name="content">
 
-        <h:graphicImage value="images/cook.png"/>
+        <h:form>
+            <p:commandButton immediate="" update=":userTable" action="#{userControlerBean.getUserList()}"
+                             value="Remplir le tableau"/>
+        </h:form>
 
-        <p:commandButton action="#{userControlerBean.getUserList()}" value="charger"/>
+        <b:column mediumScreen="6">
+            <p:dataTable id="userTable" var="user" value="#{dataGridView.listData.all}">
 
+                <p:column headerText="Firstname">
+                    <h:outputText value="#{user.firstname}"/>
+                </p:column>
+
+                <p:column headerText="Lastname">
+                    <h:outputText value="#{user.lastname}"/>
+                </p:column>
+
+                <p:column headerText="Age">
+                    <h:outputText value="#{user.age}"/>
+                </p:column>
+
+                <p:column headerText="Login">
+                    <h:outputText value="#{user.login}"/>
+                </p:column>
+
+                <p:column headerText="email">
+                    <h:outputText value="#{user.email}"/>
+                </p:column>
+
+                <p:column headerText="Type">
+                    <h:outputText value="#{user.type}"/>
+                </p:column>
+            </p:dataTable>
+        </b:column>
         <!--@elvariable id="user" type="cookMe.model.UserModelBean"-->
-        <p:dataTable var="user" value="#{dataGridView.listData.all}">
 
-            <p:column headerText="Firstname">
-                <h:outputText value="#{user.firstname}"/>
-            </p:column>
-
-            <p:column headerText="Lastname">
-                <h:outputText value="#{user.lastname}"/>
-            </p:column>
-
-        </p:dataTable>
     </ui:define>
 
 </ui:composition>
