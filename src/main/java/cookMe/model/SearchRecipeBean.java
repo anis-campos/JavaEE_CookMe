@@ -8,7 +8,7 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class SearchRecipeBean extends RecipeModelBean {
+public class SearchRecipeBean extends RecipeModelBean implements SearchCriteria {
     public static final String ALL_VALUES_STRING = null;
     public static final int ALL_VALUES_INT = 0;
 
@@ -25,9 +25,8 @@ public class SearchRecipeBean extends RecipeModelBean {
 
     }
 
-
+    @Override
     public String getSQLSearchQuery() {
-
         String sql = " SELECT * FROM recipe r WHERE 1=1 ";
 
         if (getDescription() != ALL_VALUES_STRING && getDescription() != "null")
@@ -44,7 +43,6 @@ public class SearchRecipeBean extends RecipeModelBean {
             sql += " AND duration = " + getDuration();
 
         return sql;
-
 
     }
 }

@@ -3,98 +3,68 @@ package cookMe.dao.instance;
 
 import cookMe.model.UserModelBean;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class UserDao {
-    private Connection connection;
-    private String dB_HOST;
-    private String dB_PORT;
-    private String dB_NAME;
-    private String dB_USER;
-    private String dB_PWD;
+public class UserDao extends AbstractDao<UserModelBean> {
 
-    public UserDao(String DB_HOST, String DB_PORT, String DB_NAME, String DB_USER, String
-            DB_PWD) {
-        dB_HOST = DB_HOST;
-        dB_PORT = DB_PORT;
-        dB_NAME = DB_NAME;
-        dB_USER = DB_USER;
-        dB_PWD = DB_PWD;
+    public UserDao(String dB_HOST, String dB_PORT, String dB_NAME, String dB_USER, String dB_PWD) {
+        super(dB_HOST, dB_PORT, dB_NAME, dB_USER, dB_PWD);
     }
 
-    public void addUser(UserModelBean user) {
-        try {
-            // create connection
-            connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
-            //TODO A l’image de DB.java créer une réquète permettant d’ajout l’utilisateur à la base de données, ATTENTION, utiliser cette fois–ci les PrepareStatement
-            PreparedStatement query = connection.prepareStatement("INSERT INTO users(firstname ,lastname , age , login , password , email, type ) VALUES(?,?,?,?,?,?,?)");
-            query.setString(1, user.getFirstname());
-            query.setString(2, user.getLastname());
-            query.setInt(3, user.getAge());
-            query.setString(4, user.getLogin());
-            query.setString(5, user.getPwd());
-            query.setString(6, user.getEmail());
-            query.setString(6, user.getType().name());
-
-            query.executeUpdate();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    @Override
+    protected PreparedStatement getSQLInsert(Connection con, UserModelBean newItem) throws SQLException {
+        PreparedStatement query = con.prepareStatement("INSERT INTO JAVA_ASI.users(firstname ,lastname , age , login , password , email, type ) VALUES(?,?,?,?,?,?,?)");
+        query.setString(1, newItem.getFirstname());
+        query.setString(2, newItem.getLastname());
+        query.setInt(3, newItem.getAge());
+        query.setString(4, newItem.getLogin());
+        query.setString(5, newItem.getPwd());
+        query.setString(6, newItem.getEmail());
+        query.setString(7, newItem.getType().name());
+        return query;
     }
 
-    public UserModelBean findByLogin(String login) {
-        //return value
-
-        UserModelBean user = null;
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
-            //TODO A l’image de DB.java créer une réquète permettant de récupérer
-            //l’ensemble des utilisateurs contenu dans la base et de les placer dans une liste
-            PreparedStatement query = this.connection.prepareStatement("SELECT * from users u WHERE u.login = ?;");
-            query.setString(1, login);
-
-            ResultSet rs = query.executeQuery();
-            ;
-
-            if (rs.first())
-                user = toObject(rs);
-
-            connection.close();
-
-            return user;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return user;
-
+    @Override
+    protected PreparedStatement getSQLDelete(Connection con, UserModelBean item) throws SQLException {
+        PreparedStatement query = con.prepareStatement("DELETE FROM JAVA_ASI.users u WHERE u.id = ?");
+        query.setInt(1, item.getId());
+        return query;
     }
 
-    public List<UserModelBean> getAllUser() {
-        //return value
-        List<UserModelBean> list = new ArrayList<UserModelBean>();
-        Statement query;
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
-            //TODO A l’image de DB.java créer une réquète permettant de récupérer
-            //l’ensemble des utilisateurs contenu dans la base et de les placer dans une liste
-            query = this.connection.createStatement();
-            query.execute("SELECT * from users;");
-            ResultSet rs = query.getResultSet();
-            while (rs.next()) {
-                list.add(toObject(rs));
-            }
-            connection.close();
-            return list;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return list;
-        }
+    @Override
+    protected PreparedStatement getSQLUpdate(Connection con, UserModelBean item) throws SQLException {
+        PreparedStatement query = con.prepareStatement("UPDATE JAVA_ASI.users SET firstname =  ?, lastname = ? , age = ? , login = ? , password = ? , email = ?, type = ? WHERE id = ?");
+        query.setString(1, item.getFirstname());
+        query.setString(2, item.getLastname());
+        query.setInt(3, item.getAge());
+        query.setString(4, item.getLogin());
+        query.setString(5, item.getPwd());
+        query.setString(6, item.getEmail());
+        query.setString(7, item.getType().name());
+
+        query.setInt(8, item.getId());
+
+        return query;
     }
 
+    @Override
+    protected PreparedStatement getSQLGetAll(Connection con) throws SQLException {
+        PreparedStatement query = con.prepareStatement("SELECT * FROM JAVA_ASI.users");
+        return query;
+    }
+
+    @Override
+    protected PreparedStatement getSQLGetById(Connection con, int id) throws SQLException {
+        PreparedStatement query = con.prepareStatement("SELECT * FROM JAVA_ASI.users u WHERE u.id = ?");
+        query.setInt(1, id);
+        return query;
+    }
+
+
+    @Override
     protected UserModelBean toObject(ResultSet rs) throws SQLException {
         return new UserModelBean(
                 rs.getInt("id"),
@@ -107,11 +77,33 @@ public class UserDao {
                 Enum.valueOf(UserModelBean.UserType.class, rs.getString("type")));
     }
 
+
+
+    public UserModelBean findByLogin(String login) {
+        //return value
+
+        UserModelBean user = null;
+        try (Connection connection = getConnection()) {
+            PreparedStatement query = connection.prepareStatement("SELECT * FROM users u WHERE u.login = ?;");
+            query.setString(1, login);
+
+            ResultSet rs = query.executeQuery();
+
+            if (rs.first())
+                user = toObject(rs);
+
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+
+    }
+
+
     public UserModelBean checkUser(String login, String pwd) {
-        try {
-            // create connection
-            connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
-            //TODO A l’image de DB.java créer une réquète permettant d’ajout l’utilisateur à la base de données, ATTENTION, utiliser cette fois–ci les PrepareStatement
+        try (Connection connection = getConnection()) {
             PreparedStatement query = connection.prepareStatement("SELECT * FROM users WHERE login = ? AND password = ?");
             query.setString(1, login);
             query.setString(2, pwd);
@@ -121,10 +113,11 @@ public class UserDao {
                 return toObject(rs);
             }
 
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
+
+
 }

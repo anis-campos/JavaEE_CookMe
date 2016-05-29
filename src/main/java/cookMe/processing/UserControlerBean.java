@@ -31,9 +31,9 @@ public class UserControlerBean {
         this.userDao = DaoFabric.getInstance().createUserDao();
     }
 
-    public String getUserList() {
+    public DataGridView<UserListModelBean, UserModelBean> getUserList() {
 
-        List<UserModelBean> allUser = userDao.getAllUser();
+        List<UserModelBean> allUser = userDao.getAll();
         UserListModelBean userList = new UserListModelBean(allUser);
 
         DataGridView dgv = new DataGridView<UserListModelBean, UserModelBean>(userList);
@@ -44,7 +44,7 @@ public class UserControlerBean {
         //place la liste de recette dans l'espace de mémoire de JSF
         requestMap.put("dataGridView", dgv);
 
-        return "adminUsers.jsf";
+        return dgv;
 
     }
 
@@ -52,14 +52,16 @@ public class UserControlerBean {
         UserModelBean user = this.userDao.checkUser(loginBean.getLogin(), loginBean.getPwd());
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        Map<String, Object> sessionMap = externalContext.getSessionMap();
+
         if (user != null) {
 
-            Map<String, Object> sessionMap = externalContext.getSessionMap();
 
             sessionMap.put("loggedUser", user);
 
 
         }
+
         return request.getRequestURI() + "?faces-redirect=true";
     }
 
@@ -76,23 +78,34 @@ public class UserControlerBean {
 
             if (user.getType() == UserModelBean.UserType.admin) {
                 sessionMap.put("loggedUser", user);
+                String redirectFromLogin = (String) sessionMap.get("redirectFromLogin");
+                if (redirectFromLogin != null) {
+                    sessionMap.remove("redirectFromLogin");
+                    return redirectFromLogin;
+                }
                 return toMenu();
             }
+
 
         }
         return "";
     }
 
-
+    public void remove(UserModelBean user) {
+        this.userDao.delete(user);
+    }
 
     public boolean isAdmin(UserModelBean loggedUser) {
         return loggedUser != null && loggedUser.getType() == UserModelBean.UserType.admin;
     }
 
-    public void logOut() {
+    public String logOut() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         Map<String, Object> sessionMap = externalContext.getSessionMap();
         sessionMap.remove("loggedUser");
+
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        return request.getRequestURI() + "?faces-redirect=true";
     }
 
     public void checkAndAddUser(UserSubmissionModelBean userSubmitted) {
@@ -131,7 +144,7 @@ public class UserControlerBean {
             }
 
             if (ok)
-                this.userDao.addUser(userSubmitted);
+                this.userDao.create(userSubmitted);
         }
 
 

@@ -9,13 +9,10 @@
     <ui:define name="title">Administration</ui:define>
     <ui:define name="content">
 
-        <h:form>
-            <p:commandButton immediate="" update=":userTable" action="#{userControlerBean.getUserList()}"
-                             value="Remplir le tableau"/>
-        </h:form>
+
 
         <b:column mediumScreen="6">
-            <p:dataTable id="userTable" var="user" value="#{dataGridView.listData.all}">
+            <p:dataTable id="userTable" var="user" value="#{userControlerBean.getUserList().listData.all}">
 
                 <p:column headerText="Firstname">
                     <h:outputText value="#{user.firstname}"/>
@@ -39,6 +36,13 @@
 
                 <p:column headerText="Type">
                     <h:outputText value="#{user.type}"/>
+                </p:column>
+
+                <p:column>
+                    <p:commandButton icon="ui-icon-trash"
+                                     title="Delete this actor"
+                                     action="#{userControlerBean.remove}"
+                                     ajax="false"/>
                 </p:column>
             </p:dataTable>
         </b:column>

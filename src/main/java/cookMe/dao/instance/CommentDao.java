@@ -1,73 +1,77 @@
 package cookMe.dao.instance;
 
 
-import cookMe.model.*;
+import cookMe.model.CommentModelBean;
+import cookMe.model.RecipeModelBean;
+import cookMe.model.UserModelBean;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by djbranbran on 24/05/16.
  */
-public class CommentDao {
-    private Connection connection;
-    private String dB_HOST;
-    private String dB_PORT;
-    private String dB_NAME;
-    private String dB_USER;
-    private String dB_PWD;
+public class CommentDao extends AbstractDao<CommentModelBean> {
 
-    public CommentDao(String DB_HOST, String DB_PORT, String DB_NAME, String DB_USER, String DB_PWD) {
-        dB_HOST = DB_HOST;
-        dB_PORT = DB_PORT;
-        dB_NAME = DB_NAME;
-        dB_USER = DB_USER;
-        dB_PWD = DB_PWD;
+
+    public CommentDao(String dB_HOST, String dB_PORT, String dB_NAME, String dB_USER, String dB_PWD) {
+        super(dB_HOST, dB_PORT, dB_NAME, dB_USER, dB_PWD);
     }
 
-    public void addComment(CommentModelBean comment) {
-        try {
-            // create connection
-            connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
-            PreparedStatement query = connection.prepareStatement("INSERT INTO comment(userID , recipeID, comment) VALUES(?,?,?)");
-            query.setInt(1,comment.getUserModelBean().getId());
-            query.setInt(2,comment.getRecipeModelBean().getId());
-            query.setString(3, comment.getComment());
-            query.executeUpdate();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    public List<CommentModelBean> getAllComments(){
-        List<CommentModelBean> list = new ArrayList<CommentModelBean>();
-        Statement query;
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
-            query = this.connection.createStatement();
-            query.execute("SELECT * from comment;");
-            ResultSet rs = query.getResultSet();
-            while (rs.next()) {
-                list.add(toObject(rs));
-            }
-            connection.close();
-            return list;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return list;
-        }
+    @Override
+    protected PreparedStatement getSQLInsert(Connection con, CommentModelBean newItem) throws SQLException {
+        PreparedStatement query = con.prepareStatement("INSERT INTO JAVA_ASI.comment( id_user, id_recipe, comment) VALUES(?,?,?)");
+        query.setInt(1, newItem.getUserModelBean().getId());
+        query.setInt(2, newItem.getRecipeModelBean().getId());
+        query.setString(3, newItem.getComment());
+        return query;
     }
 
+    @Override
+    protected PreparedStatement getSQLDelete(Connection con, CommentModelBean item) throws SQLException {
+        PreparedStatement query = con.prepareStatement("DELETE FROM JAVA_ASI.comment c WHERE id_user=? AND  id_recipe=? ");
+        query.setInt(1, item.getUserModelBean().getId());
+        query.setInt(2, item.getRecipeModelBean().getId());
+        return query;
+    }
+
+    @Override
+    protected PreparedStatement getSQLUpdate(Connection con, CommentModelBean item) throws SQLException {
+        PreparedStatement query = con.prepareStatement("UPDATE JAVA_ASI.comment SET comment = ? ");
+        query.setString(1, item.getComment());
+        return query;
+    }
+
+    @Override
+    protected PreparedStatement getSQLGetAll(Connection con) throws SQLException {
+        PreparedStatement query = con.prepareStatement(
+                "SELECT * FROM JAVA_ASI.comment c " +
+                        "JOIN JAVA_ASI.users u ON c.id_user = u.id " +
+                        "JOIN JAVA_ASI.recipe r ON c.id_recipe=r.id");
+
+        return query;
+
+    }
+
+    @Override
+    protected PreparedStatement getSQLGetById(Connection con, int id) throws SQLException {
+        //// TODO: 29/05/2016 Implementer cette méthode si nécessaire
+        return null;
+    }
+
+
+    @Override
     protected CommentModelBean toObject(ResultSet rs) throws SQLException {
         return new CommentModelBean(
                 new UserModelBean(rs.getInt("idUser"),
-                rs.getString("firstname"),
-                rs.getString("lastname"),
-                Integer.parseInt(rs.getString("age")),
-                rs.getString("login"),
-                rs.getString("password"),
-                rs.getString("email"),
+                        rs.getString("firstname"),
+                        rs.getString("lastname"),
+                        Integer.parseInt(rs.getString("age")),
+                        rs.getString("login"),
+                        rs.getString("password"),
+                        rs.getString("email"),
                         Enum.valueOf(UserModelBean.UserType.class, rs.getString("type"))),
                 new RecipeModelBean(rs.getString("title"),
                         rs.getString("description"),
@@ -81,22 +85,4 @@ public class CommentDao {
         );
     }
 
-	public List<CommentModelBean> find(CommentModelBean recipe) {
-		Statement query;
-		String sql = ((SearchCommentBean)recipe).getSQLSearchQuery();
-		List<CommentModelBean> listRecipe = new ArrayList<CommentModelBean>();
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
-            query = this.connection.createStatement();
-            query.execute(sql);
-            ResultSet rs = query.getResultSet();
-            while (rs.next()) {
-            	listRecipe.add(toObject(rs));
-            }
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-		return listRecipe;	
-	}
 }

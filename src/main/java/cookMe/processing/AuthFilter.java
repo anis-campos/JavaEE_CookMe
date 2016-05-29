@@ -39,8 +39,9 @@ public class AuthFilter implements Filter {
                 String message = loggedUser == null ? "Non connecté ! " : "N'est pas admin : " + loggedUser.getLastname();
                 //FacesContext context = FacesContext.getCurrentInstance();
                 //context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Second Message", "Additional Message Detail"));
-                System.out.println(message);
+                System.out.println(String.format("URL : %s - ", reqURI) + message);
                 session.removeAttribute("logedUser");
+                session.setAttribute("redirectFromLogin", req.getRequestURI());
                 res.sendRedirect("adminLogin.jsf");
             } else
                 chain.doFilter(request, response);
