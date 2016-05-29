@@ -62,7 +62,7 @@ public final class DaoFabric {
         return new RecipesDao(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PWD);
     }
 
-    public CommentDao createDao() {
+    public CommentDao createCommentDao() {
         return new CommentDao(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PWD);
     }
 }

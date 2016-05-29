@@ -2,8 +2,8 @@ package cookMe.dao.instance;
 
 
 import cookMe.model.CommentModelBean;
-import cookMe.model.RecipeModelBean;
-import cookMe.model.UserModelBean;
+import cookMe.model.recipe.RecipeModelBean;
+import cookMe.model.user.UserModelBean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

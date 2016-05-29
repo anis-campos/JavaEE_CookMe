@@ -3,9 +3,9 @@ package cookMe.processing;
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.UserDao;
 import cookMe.model.LoginBean;
-import cookMe.model.UserListModelBean;
-import cookMe.model.UserModelBean;
-import cookMe.model.UserSubmissionModelBean;
+import cookMe.model.user.UserListModelBean;
+import cookMe.model.user.UserModelBean;
+import cookMe.model.user.UserSubmissionModelBean;
 import cookMe.view.DataGridView;
 
 import javax.faces.bean.ApplicationScoped;

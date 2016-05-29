@@ -1,7 +1,7 @@
 package cookMe.dao.instance;
 
 
-import cookMe.model.RecipeModelBean;
+import cookMe.model.recipe.RecipeModelBean;
 
 import java.sql.*;
 import java.util.ArrayList;

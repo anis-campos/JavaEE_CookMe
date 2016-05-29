@@ -1,4 +1,6 @@
-package cookMe.model;
+package cookMe.model.search;
+
+import cookMe.model.recipe.RecipeModelBean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -45,4 +47,5 @@ public class SearchRecipeBean extends RecipeModelBean implements SearchCriteria 
         return sql;
 
     }
+
 }

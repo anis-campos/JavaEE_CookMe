@@ -1,14 +1,11 @@
 package cookMe.processing;
 
-import cookMe.dao.fabric.DaoFabric;
-import cookMe.dao.instance.RecipesDao;
-import cookMe.model.ListRecipeTypeBean;
+import cookMe.model.recipe.ListRecipeTypeBean;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import java.util.List;
 import java.util.Map;
 
 /**

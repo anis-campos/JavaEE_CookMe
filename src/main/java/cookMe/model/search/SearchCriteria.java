@@ -1,4 +1,4 @@
-package cookMe.model;
+package cookMe.model.search;
 
 /**
  * Created by Anis on 28/05/2016.

@@ -1,6 +1,6 @@
 package cookMe.processing;
 
-import cookMe.model.UserModelBean;
+import cookMe.model.user.UserModelBean;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

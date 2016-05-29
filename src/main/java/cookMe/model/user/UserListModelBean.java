@@ -1,4 +1,4 @@
-package cookMe.model;
+package cookMe.model.user;
 
 import cookMe.view.DataCollection;
 

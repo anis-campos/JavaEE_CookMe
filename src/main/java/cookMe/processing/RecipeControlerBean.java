@@ -3,9 +3,9 @@ package cookMe.processing;
 
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.RecipesDao;
-import cookMe.model.RecipeListModelBean;
-import cookMe.model.RecipeModelBean;
-import cookMe.model.SearchRecipeBean;
+import cookMe.model.recipe.RecipeListModelBean;
+import cookMe.model.recipe.RecipeModelBean;
+import cookMe.model.search.SearchRecipeBean;
 import cookMe.view.DataGridView;
 
 import javax.faces.bean.ApplicationScoped;
@@ -20,41 +20,40 @@ import java.util.Map;
  */
 @ManagedBean
 @ApplicationScoped
-public class RecipeControlerBean {
+public class RecipeControlerBean extends AbstractControler<RecipeModelBean, RecipesDao, SearchRecipeBean> {
 
-    private RecipesDao recipeDao;
 
     public RecipeControlerBean() {
-        this.recipeDao = DaoFabric.getInstance().createRecipesDao();
+        super(DaoFabric.getInstance().createRecipesDao());
     }
 
     public void loadAllRecipe() {
-        List<RecipeModelBean> list = this.recipeDao.getAllRecipes();
+        List<RecipeModelBean> list = this.dao.getAllRecipes();
         RecipeListModelBean recipeList = new RecipeListModelBean();
         for (RecipeModelBean recipe : list) {
             recipeList.add(recipe);
         }
-        //récupère l'espace de mémoire de JSF
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        Map<String, Object> sessionMap = externalContext.getSessionMap();
-        //place la liste de recette dans l'espace de mémoire de JSF
+        Map<String, Object> sessionMap = getSessionMap();
         sessionMap.put("recipeList", recipeList);
     }
-    
-    public String addRecipe(RecipeModelBean recipe){
-    	recipeDao.addRecipe(recipe);
-    	
-    	return "successfulRegister.xhtml";
+
+    public String addRecipe(RecipeModelBean recipe) {
+        //TODO: 29/05/2016 :  controler les valeurs de la recette.
+        dao.create(recipe);
+        return "successfulRegister.xhtml";
     }
-    
-    public String searchRecipe(RecipeModelBean recipe){
-        RecipeListModelBean recipeList = new RecipeListModelBean(recipeDao.find(recipe));
 
-        DataGridView dgv = new DataGridView<RecipeListModelBean, RecipeModelBean>(recipeList);
+    public String searchRecipe(RecipeModelBean recipe) {
+        SearchRecipeBean searchRecipeBean = new SearchRecipeBean(recipe);
+        List<RecipeModelBean> search = dao.search(searchRecipeBean);
+        RecipeListModelBean recipeList = new RecipeListModelBean(search);
 
-        //récupère l'espace de mémoire de JSF
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        Map<String, Object> requestMap = externalContext.getRequestMap();
+        DataGridView dgv = new DataGridView<>(recipeList);
+
+        Map<String, Object> requestMap = getSessionMap();
+
+        putIntoCache(searchRecipeBean, search);
+
         //place la liste de recette dans l'espace de mémoire de JSF
         requestMap.put("dataGridView", dgv);
 
@@ -62,11 +61,12 @@ public class RecipeControlerBean {
     }
 
 
-    public String displayRecipeDetail(RecipeModelBean recipe){
+    public String displayRecipeDetail(RecipeModelBean recipe) {
         SearchRecipeBean searchRecipeBean = new SearchRecipeBean(recipe);
-        List<RecipeModelBean> list =  recipeDao.find(searchRecipeBean);
 
-        if(list.size() == 1){
+        List<RecipeModelBean> list = getFromCache(searchRecipeBean);
+
+        if (list.size() == 1) {
             RecipeModelBean recipeBean = list.get(0);
             //récupère l'espace de mémoire de JSF
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -77,4 +77,6 @@ public class RecipeControlerBean {
 
         return "recipeDetail.jsf";
     }
+
+
 }

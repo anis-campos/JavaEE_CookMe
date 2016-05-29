@@ -1,6 +1,6 @@
 package cookMe.dao.instance;
 
-import cookMe.model.SearchCriteria;
+import cookMe.model.search.SearchCriteria;
 
 import java.util.List;
 

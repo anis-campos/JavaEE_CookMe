@@ -35,7 +35,7 @@
 
                     <b:column mediumScreen="2">
 
-                        <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
+                        <!--@elvariable id="loggedUser" type="cookMe.model.user.UserModelBean"-->
                         <h:form rendered="#{empty loggedUser}">
 
                             <h:panelGrid id="grid" columns="3" cellpadding="5">
@@ -50,7 +50,7 @@
                             <p:commandButton id="submitButton" value="GO"
                                              action="#{userControlerBean.checkUser(loginBean)}"/>
                         </h:form>
-                        <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
+                        <!--@elvariable id="loggedUser" type="cookMe.model.user.UserModelBean"-->
                         <h:form id="logged" rendered="#{not empty loggedUser}">
 
                             <h:outputText value="#{loggedUser.firstname}"/>

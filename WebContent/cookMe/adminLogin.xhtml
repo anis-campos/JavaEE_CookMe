@@ -28,7 +28,7 @@
             <p:commandButton id="submitButton" value="GO" action="#{userControlerBean.checkUserAdmin(loginBean)}"/>
         </h:form>
 
-        <!--@elvariable id="loggedUser" type="cookMe.model.UserModelBean"-->
+        <!--@elvariable id="loggedUser" type="cookMe.model.user.UserModelBean"-->
         <h:form rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}">
 
             <h:commandButton id="close" action="#{userControlerBean.toMenu}"/>

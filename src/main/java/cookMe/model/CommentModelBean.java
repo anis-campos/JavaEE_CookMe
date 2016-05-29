@@ -1,5 +1,8 @@
 package cookMe.model;
 
+import cookMe.model.recipe.RecipeModelBean;
+import cookMe.model.user.UserModelBean;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -26,20 +29,20 @@ public class CommentModelBean {
         return userModelBean;
     }
 
-    public RecipeModelBean getRecipeModelBean() {
-        return recipeModelBean;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
     public void setUserModelBean(UserModelBean userModelBean) {
         this.userModelBean = userModelBean;
     }
 
+    public RecipeModelBean getRecipeModelBean() {
+        return recipeModelBean;
+    }
+
     public void setRecipeModelBean(RecipeModelBean recipeModelBean) {
         this.recipeModelBean = recipeModelBean;
+    }
+
+    public String getComment() {
+        return comment;
     }
 
     public void setComment(String comment) {

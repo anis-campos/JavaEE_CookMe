@@ -10,7 +10,7 @@
     <ui:define name="title">Search result</ui:define>
     <ui:define name="content">
         <h:form id="form">
-            <!--@elvariable id="recipe" type="cookMe.model.RecipeModelBean"-->
+            <!--@elvariable id="recipe" type="cookMe.model.recipe.RecipeModelBean"-->
             <p:dataGrid var="recipe" value="#{dataGridView.listData.all}" columns="2" layout="grid"
                         rows="4" paginator="true" id="recipes"
                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

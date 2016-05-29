@@ -1,4 +1,4 @@
-package cookMe.model;
+package cookMe.model.user;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;

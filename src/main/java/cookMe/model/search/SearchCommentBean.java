@@ -1,4 +1,6 @@
-package cookMe.model;
+package cookMe.model.search;
+
+import cookMe.model.CommentModelBean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
