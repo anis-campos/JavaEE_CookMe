@@ -57,27 +57,11 @@ public class RecipesDao extends AbstractDao<RecipeModelBean> {
 
     @Override
     protected PreparedStatement getSQLGetById(Connection con, int id) throws SQLException {
-        PreparedStatement query = con.prepareStatement("SELECT * FROM JAVA_ASI.recipe WHERE id = id");
+        PreparedStatement query = con.prepareStatement("SELECT * FROM JAVA_ASI.recipe WHERE id = ?");
+        query.setInt(1,id);
         return query;
     }
 
-
-    public List<RecipeModelBean> getAllRecipes() {
-        List<RecipeModelBean> list = new ArrayList<>();
-        Statement query;
-        try (Connection connection = getConnection()) {
-            query = connection.createStatement();
-            query.execute("SELECT * FROM recipe;");
-            ResultSet rs = query.getResultSet();
-            while (rs.next()) {
-                list.add(toObject(rs));
-            }
-            return list;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return list;
-        }
-    }
 
     @Override
     protected RecipeModelBean toObject(ResultSet rs) throws SQLException {

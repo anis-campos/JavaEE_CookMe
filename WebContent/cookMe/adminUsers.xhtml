@@ -4,49 +4,63 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:b="http://bootsfaces.net/ui">
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:define name="title">Administration</ui:define>
     <ui:define name="content">
 
+        <b:row>
+            <b:column mediumScreen="6">
 
+                <p:dataTable id="userTable" var="user" value="#{userControlerBean.getUserList().listData.all}">
 
-        <b:column mediumScreen="6">
-            <p:dataTable id="userTable" var="user" value="#{userControlerBean.getUserList().listData.all}">
+                    <p:column headerText="Firstname">
+                        <h:outputText value="#{user.firstname}"/>
+                    </p:column>
 
-                <p:column headerText="Firstname">
-                    <h:outputText value="#{user.firstname}"/>
-                </p:column>
+                    <p:column headerText="Lastname">
+                        <h:outputText value="#{user.lastname}"/>
+                    </p:column>
 
-                <p:column headerText="Lastname">
-                    <h:outputText value="#{user.lastname}"/>
-                </p:column>
+                    <p:column headerText="Age">
+                        <h:outputText value="#{user.age}"/>
+                    </p:column>
 
-                <p:column headerText="Age">
-                    <h:outputText value="#{user.age}"/>
-                </p:column>
+                    <p:column headerText="Login">
+                        <h:outputText value="#{user.login}"/>
+                    </p:column>
 
-                <p:column headerText="Login">
-                    <h:outputText value="#{user.login}"/>
-                </p:column>
+                    <p:column headerText="email">
+                        <h:outputText value="#{user.email}"/>
+                    </p:column>
 
-                <p:column headerText="email">
-                    <h:outputText value="#{user.email}"/>
-                </p:column>
+                    <p:column headerText="Type">
+                        <h:outputText value="#{user.type}"/>
+                    </p:column>
 
-                <p:column headerText="Type">
-                    <h:outputText value="#{user.type}"/>
-                </p:column>
+                    <p:column>
+                        <p:commandButton icon="ui-icon-trash"
+                                         title="Delete this actor"
+                                         actionListener="#{userControlerBean.remove(user)}"
+                                         update="userTable"
+                        />
+                    </p:column>
+                </p:dataTable>
+            </b:column>
 
-                <p:column>
-                    <p:commandButton icon="ui-icon-trash"
-                                     title="Delete this actor"
-                                     action="#{userControlerBean.remove}"
-                    />
-                </p:column>
-            </p:dataTable>
-        </b:column>
-        <!--@elvariable id="user" type="cookMe.model.user.UserModelBean"-->
+        </b:row>
+
+        <b:row>
+            <b:column mediumScreen="6">
+                <h:form>
+                    <b:panel title="Ajouter un User"
+                             collapsed="true">
+                        <ui:include src="componant/userCreateForm.xhtml"/>
+                    </b:panel>
+                </h:form>
+            </b:column>
+        </b:row>
 
     </ui:define>
 

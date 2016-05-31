@@ -28,7 +28,7 @@ public class RecipeControlerBean extends AbstractControler<RecipeModelBean, Reci
     }
 
     public void loadAllRecipe() {
-        List<RecipeModelBean> list = this.dao.getAllRecipes();
+        List<RecipeModelBean> list = this.dao.getAll();
         RecipeListModelBean recipeList = new RecipeListModelBean();
         for (RecipeModelBean recipe : list) {
             recipeList.add(recipe);

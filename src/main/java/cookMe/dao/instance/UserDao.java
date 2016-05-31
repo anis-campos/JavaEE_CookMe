@@ -29,7 +29,7 @@ public class UserDao extends AbstractDao<UserModelBean> {
 
     @Override
     protected PreparedStatement getSQLDelete(Connection con, UserModelBean item) throws SQLException {
-        PreparedStatement query = con.prepareStatement("DELETE FROM JAVA_ASI.users u WHERE u.id = ?");
+        PreparedStatement query = con.prepareStatement("DELETE FROM JAVA_ASI.users WHERE id = ?");
         query.setInt(1, item.getId());
         return query;
     }
@@ -84,7 +84,7 @@ public class UserDao extends AbstractDao<UserModelBean> {
 
         UserModelBean user = null;
         try (Connection connection = getConnection()) {
-            PreparedStatement query = connection.prepareStatement("SELECT * FROM users u WHERE u.login = ?;");
+            PreparedStatement query = connection.prepareStatement("SELECT * FROM JAVA_ASI.users u WHERE u.login = ?;");
             query.setString(1, login);
 
             ResultSet rs = query.executeQuery();
@@ -104,7 +104,7 @@ public class UserDao extends AbstractDao<UserModelBean> {
 
     public UserModelBean checkUser(String login, String pwd) {
         try (Connection connection = getConnection()) {
-            PreparedStatement query = connection.prepareStatement("SELECT * FROM users WHERE login = ? AND password = ?");
+            PreparedStatement query = connection.prepareStatement("SELECT * FROM JAVA_ASI.users WHERE login = ? AND password = ?");
             query.setString(1, login);
             query.setString(2, pwd);
             query.execute();

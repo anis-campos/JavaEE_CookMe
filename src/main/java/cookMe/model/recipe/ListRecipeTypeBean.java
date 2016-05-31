@@ -42,7 +42,7 @@ public class ListRecipeTypeBean{
         Salade,
         Meal,
         Fish,
-        Dessert;
+        Dessert
 
     }
 }

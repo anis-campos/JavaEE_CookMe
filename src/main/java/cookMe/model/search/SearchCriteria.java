@@ -10,5 +10,5 @@ public interface SearchCriteria {
      *
      * @return une requèrte SQL
      */
-    public String getSQLSearchQuery();
+    String getSQLSearchQuery();
 }

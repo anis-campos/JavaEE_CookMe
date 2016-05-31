@@ -22,7 +22,7 @@ public interface DAO<T> {
      * @param newItem l'élément à insérer
      * @return L'élément depuis la base de donnée
      */
-    public T create(T newItem);
+    T create(T newItem);
 
     /***
      * Mise à jour  d'un élémént dans la base de données
@@ -30,14 +30,14 @@ public interface DAO<T> {
      * @param item l'élément à mettre à jour
      * @return L'élément depuis la base de donnée
      */
-    public T update(T item);
+    T update(T item);
 
     /***
      * Supression  d'un élémént dans la base de données
      *
      * @param item l'élément à suprimmer
      */
-    public void delete(T item);
+    void delete(T item);
 
     /***
      * Retrouve  un élémént dans la base de données avec son id
@@ -45,14 +45,14 @@ public interface DAO<T> {
      * @param id l'Id de l'élément à retrouver
      * @return L'élément depuis la base de donnée
      */
-    public T find(int id);
+    T find(int id);
 
     /***
      * Récupère tous élémént dans la base de données
      *
      * @return La liste des éléménts
      */
-    public List<T> getAll();
+    List<T> getAll();
 
     /***
      * Récupère tous élémént dans la base de données qui ont les même caleur que les critères de recherche
@@ -60,5 +60,5 @@ public interface DAO<T> {
      * @param searchCriteria le critère de recherche
      * @return La liste des éléménts
      */
-    public List<T> search(SearchCriteria searchCriteria);
+    List<T> search(SearchCriteria searchCriteria);
 }

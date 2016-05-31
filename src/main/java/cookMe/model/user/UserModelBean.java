@@ -21,7 +21,7 @@ public class UserModelBean implements Serializable{
     private int id;
 
     public UserModelBean(){
-    	
+    	type = UserType.standard;
     }
     
     public UserModelBean(int id, String firstname, String lastname, int age, String login, String password, String email, UserType type) {

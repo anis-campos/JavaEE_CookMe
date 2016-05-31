@@ -13,9 +13,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 /**
@@ -111,37 +113,12 @@ public class UserControlerBean {
     public void checkAndAddUser(UserSubmissionModelBean userSubmitted) {
         //Vérifier les propriétés de l'utilisateur
         if (userSubmitted != null) {
-            boolean ok = true;
-            if (userSubmitted.getFirstname() != null && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getFirstname()).matches()) {
-
-            } else {
-                ok = false;
-            }
-            if (userSubmitted.getLastname() != null && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getLastname()).matches()) {
-
-            } else {
-                ok = false;
-            }
-            if (userSubmitted.getAge() > 0 && userSubmitted.getAge() < 100) {
-
-            } else {
-                ok = false;
-            }
-            if (userSubmitted.getEmail() != null && Pattern.compile("[a-zA-Z0-9-._]+@[a-zA-Z0-9-._].[a-z]+").matcher(userSubmitted.getEmail()).matches()) {
-
-            } else {
-                ok = false;
-            }
-            if (userSubmitted.getLogin() != null && Pattern.compile("[a-zA-Z0-9-._]").matcher(userSubmitted.getLogin()).matches()) {
-
-            } else {
-                ok = false;
-            }
-            if (userSubmitted.getPwd() != null && userSubmitted.getPwd1() != null && userSubmitted.getPwd().equals(userSubmitted.getPwd1())) {
-
-            } else {
-                ok = false;
-            }
+            boolean ok = ((userSubmitted.getFirstname() != null) && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getFirstname()).matches())
+                    && ((userSubmitted.getLastname() != null) && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getLastname()).matches())
+                    && ((userSubmitted.getAge() > 0) && (userSubmitted.getAge() < 100))
+                    && ((userSubmitted.getEmail() != null) && Pattern.compile("[a-zA-Z0-9-._]+@[a-zA-Z0-9-._]+.[a-z]+").matcher(userSubmitted.getEmail()).matches())
+                    && ((userSubmitted.getLogin() != null) && Pattern.compile("[a-zA-Z0-9-._]").matcher(userSubmitted.getLogin()).matches())
+                    && ((userSubmitted.getPwd() != null) && (userSubmitted.getPwd1() != null) && userSubmitted.getPwd().equals(userSubmitted.getPwd1()));
 
             if (ok)
                 this.userDao.create(userSubmitted);
@@ -152,5 +129,13 @@ public class UserControlerBean {
 
     public String toMenu() {
         return "adminMenu.jsf?faces-redirect=true";
+    }
+
+    public List<String> getUserTypes() {
+
+        return Arrays.asList(UserModelBean.UserType.values())
+                .stream()
+                .map(Enum::name)
+                .collect(Collectors.toList());
     }
 }

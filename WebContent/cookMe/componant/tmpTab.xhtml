@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <b:panelGrid colSpans="2,8,2">
+
+        <h:outputLabel for="firstname" value="FirstName: "/>
+        <b:inputText id="firstname"
+                     value="#{userSubmissionModelBean.firstname}"
+                     required="true"/>
+        <b:message/>
+        <h:outputLabel for="lastname" value="Lastname"/>
+        <b:inputText id="lastname"
+                     value="#{userSubmissionModelBean.lastname}"
+                     required="true"/>
+        <b:message/>
+
+        <h:outputLabel for="age" value="Age"/>
+        <b:inputText id="age"
+                     value="#{userSubmissionModelBean.age}"
+                     required="true"/>
+        <b:message/>
+
+        <h:outputLabel for="email" value="Email"/>
+        <b:inputText id="email"
+                     value="#{userSubmissionModelBean.email}"
+                     required="true">
+            <f:validator validatorId="validators.email"/>
+        </b:inputText>
+        <h:message for="email" showDetail="true" style="color:red"/>
+
+        <h:outputLabel for="login" value="Login"/>
+        <b:inputText id="login"
+                     value="#{userSubmissionModelBean.login}"
+                     required="true"/>
+        <b:message/>
+
+        <h:outputLabel for="pwd" value="Password"/>
+        <b:inputSecret id="pwd"
+                       value="#{userSubmissionModelBean.pwd}"
+                       required="true"/>
+        <b:message/>
+
+        <h:outputLabel for="pwd1" value="Repeat password"/>
+        <b:inputSecret id="pwd1"
+                       value="#{userSubmissionModelBean.pwd1}"
+                       required="true"/>
+        <b:message/>
+
+        <p:commandButton value="Add Item"
+                         actionListener="#{userControlerBean.checkAndAddUser(userSubmissionModelBean)}"
+                         update="userTable"/>
+    </b:panelGrid>
+</ui:composition>

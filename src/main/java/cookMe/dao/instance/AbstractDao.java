@@ -83,16 +83,13 @@ public abstract class AbstractDao<T> implements DAO<T> {
 
             PreparedStatement statement = getSQLInsert(connection, newItem);
 
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.first())
-                item = toObject(rs);
+            statement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return item;
+        //TODO: 29/05/2016 : Trouver un moyer de recuperer l'element depuis la base
+        return null;
     }
 
     @Override
