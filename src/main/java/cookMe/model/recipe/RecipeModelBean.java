@@ -108,4 +108,34 @@ public class RecipeModelBean {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RecipeModelBean that = (RecipeModelBean) o;
+
+        if (expertise != that.expertise) return false;
+        if (nbpeople != that.nbpeople) return false;
+        if (duration != that.duration) return false;
+        if (id != that.id) return false;
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        return image != null ? image.equals(that.image) : that.image == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + expertise;
+        result = 31 * result + nbpeople;
+        result = 31 * result + duration;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (image != null ? image.hashCode() : 0);
+        result = 31 * result + id;
+        return result;
+    }
 }

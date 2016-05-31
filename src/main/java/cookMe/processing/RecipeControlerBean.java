@@ -64,8 +64,7 @@ public class RecipeControlerBean extends AbstractControler<RecipeModelBean, Reci
     public String displayRecipeDetail(RecipeModelBean recipe) {
         SearchRecipeBean searchRecipeBean = new SearchRecipeBean(recipe);
 
-        //List<RecipeModelBean> list = getFromCache(searchRecipeBean);
-        List<RecipeModelBean> list = dao.search(searchRecipeBean);
+        List<RecipeModelBean> list = getFromCache(lastFilter);
 
         if (list.size() == 1) {
             RecipeModelBean recipeBean = list.get(0);
@@ -75,7 +74,7 @@ public class RecipeControlerBean extends AbstractControler<RecipeModelBean, Reci
             requestMap.put("recipeModelBean", recipeBean);
         }
 
-        return "recipeDetail.jsf";
+        return "recipeDetail.jsf?faces-redirect=true";
     }
 
 
