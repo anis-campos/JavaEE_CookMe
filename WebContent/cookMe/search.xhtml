@@ -7,13 +7,13 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 
-    <ui:define name="title">Search</ui:define>
+    <ui:param name="title" value="Search a recipe"/>
     <ui:define name="content">
         <h:form id="search">
             <p:panelGrid id="panelGrid">
                 <f:facet name="header">
                     <p:row id="row">
-                        <p:column colspan="7"> <h:outputText value="Tell what do you want !"/></p:column>
+                        <p:column colspan="7"> <h:outputText value="Tell me what do you want !"/></p:column>
                     </p:row>
                 </f:facet>
                 <p:row>
@@ -21,7 +21,7 @@
                         <img src="images/time.jpg" id="time" alt="time"/>
                     </p:column>
                     <p:column>
-                        <h:outputText value="Preparation Duration"/>
+                        <h:outputText value="Preparation Duration (in minutes)"/>
                     </p:column>
                     <p:column>
                         <img src="images/expert.png" id="expert" alt="expert"/>
@@ -32,7 +32,7 @@
                 </p:row>
                 <p:row>
                     <p:column colspan="2">
-                        <p:inputMask id="date" value="#{searchRecipeBean.duration}" mask="99:00"/>
+                        <p:inputMask id="date" value="#{searchRecipeBean.duration}" mask="99"/>
                     </p:column>
                     <p:column colspan="2">
                         <p:rating value="#{searchRecipeBean.expertise}"/>
