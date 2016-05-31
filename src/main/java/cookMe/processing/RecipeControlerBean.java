@@ -69,10 +69,9 @@ public class RecipeControlerBean extends AbstractControler<RecipeModelBean, Reci
         if (list.size() == 1) {
             RecipeModelBean recipeBean = list.get(0);
             //récupère l'espace de mémoire de JSF
-            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-            Map<String, Object> resquestMap = externalContext.getRequestMap();
+            Map<String, Object> requestMap = getSessionMap();
             //place la liste de recette dans l'espace de mémoire de JSF
-            resquestMap.put("recipeModelBean", recipeBean);
+            requestMap.put("recipeModelBean", recipeBean);
         }
 
         return "recipeDetail.jsf?faces-redirect=true";

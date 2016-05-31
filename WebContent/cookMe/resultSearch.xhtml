@@ -7,7 +7,7 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:define name="title">Search result</ui:define>
+    <ui:param name="title" value="Search result"/>
     <ui:define name="content">
         <h:form id="form">
             <!--@elvariable id="recipe" type="cookMe.model.recipe.RecipeModelBean"-->
@@ -23,11 +23,11 @@
                 <p:panel header="#{recipe.title}" style="text-align:center">
                     <h:panelGrid columns="1" style="width:100%">
 
-                        <h:outputText value="#{recipe.type}"/>
-                        <h:outputText value="#{recipe.duration}"/>
-                        <h:outputText value="#{recipe.nbpeople}"/>
-                        <h:outputText value="#{recipe.expertise}"/>
-                        <h:outputText value="#{recipe.description}"/>
+                        <h:outputText value="Type : #{recipe.type}"/>
+                        <h:outputText value="#{recipe.duration} mins preparation"/>
+                        <h:outputText value="For #{recipe.nbpeople} persons"/>
+                        <h:outputText value="Expertise : #{recipe.expertise}"/>
+                        <h:outputText value="Description : #{recipe.description}"/>
 
                         <p:commandLink action="#{recipeControlerBean.displayRecipeDetail(recipe)}"
                                        title="View Detail">

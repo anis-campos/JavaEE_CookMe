@@ -61,4 +61,8 @@ public class CommentModelBean {
     public void setRecipeId(int recipeId) {
         this.recipeModelBean.setId(recipeId);
     }
+
+    public String getUserLogin(){
+        return userModelBean.getLogin();
+    }
 }

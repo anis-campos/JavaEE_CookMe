@@ -7,18 +7,30 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:param name="title" value="Recipe"/>
+   <ui:param name="title" value="Recipe Detail"/>
 
     <ui:define name="content">
-        <h:form>
-            <h:outputText value="#{recipeModelBean.title}"/>
-            <h:outputText value="#{recipeModelBean.type}"/>
-            <h:outputText value="#{recipeModelBean.duration}"/>
-            <h:outputText value="#{recipeModelBean.nbpeople}"/>
-            <h:outputText value="#{recipeModelBean.expertise}"/>
-            <h:outputText value="#{recipeModelBean.description}"/>
-            <h:graphicImage value="#{recipeModelBean.image}"/>
-        </h:form>
+        <h:form class="detail">
+             <h1><h:outputText value="#{recipeModelBean.title}"/></h1>
+             <h2>
+                 <img src="images/cook.png" id="cook" alt="cook"/>
+                 <h:outputText value="#{recipeModelBean.type}"/>
+             </h2>
+             <h4>
+                 <img src="images/time.jpg" id="time" alt="time"/>
+                 <h:outputText value="#{recipeModelBean.duration}"/>
+             </h4>
+            <h4>
+                <img src="images/people.jpg" id="people" alt="people"/>
+                <h:outputText value="#{recipeModelBean.nbpeople}"/>
+            </h4>
+            <h4>
+                <img src="images/expert.png" id="expert" alt="expert"/>
+                <h:outputText value="#{recipeModelBean.expertise}"/>
+            </h4>
 
+            <p><h:outputText value="#{recipeModelBean.description}"/></p>
+            <p><h:graphicImage class="center" value="#{recipeModelBean.image}"/></p>
+         </h:form>
     </ui:define>
 </ui:composition>
