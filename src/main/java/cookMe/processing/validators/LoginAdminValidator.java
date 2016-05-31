@@ -2,7 +2,7 @@ package cookMe.processing.validators;
 
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.UserDao;
-import cookMe.model.UserModelBean;
+import cookMe.model.user.UserModelBean;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
