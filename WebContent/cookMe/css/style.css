@@ -180,13 +180,18 @@ footer {
 /*RECIPE DETAIL*/
 /******************************/
 
-#detail #center {
-    text-align: center;
+#detail{
+    margin-left:20px;
 }
 
-#detail img {
-    width: 50px;
-    height: 50px;
+#detail img.center {
+    display: block;
+    margin:auto;
+}
+
+#detail img.icon {
+    width: 20px;
+    height: 20px;
 }
 
 #detail p{

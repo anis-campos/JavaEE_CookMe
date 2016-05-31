@@ -9,27 +9,30 @@
    <ui:param name="title" value="Recipe Detail"/>
 
     <ui:define name="content">
-        <h:form class="detail">
+        <h:form id="detail">
              <h1><h:outputText value="#{recipeModelBean.title}"/></h1>
              <h2>
-                 <img src="images/cook.png" id="cook" alt="cook"/>
-                 <h:outputText value="#{recipeModelBean.type}"/>
+                 <img src="images/cook.png" class="icon" alt="cook"/>
+                 <h:outputText value=" #{recipeModelBean.type}"/>
              </h2>
              <h4>
-                 <img src="images/time.jpg" id="time" alt="time"/>
-                 <h:outputText value="#{recipeModelBean.duration}"/>
+                 <img src="images/time.jpg" class="icon" alt="time"/>
+                 <h:outputText value=" #{recipeModelBean.duration} minutes"/>
              </h4>
             <h4>
-                <img src="images/people.jpg" id="people" alt="people"/>
-                <h:outputText value="#{recipeModelBean.nbpeople}"/>
+                <img src="images/people.jpg" class="icon" alt="people"/>
+                <h:outputText value=" for #{recipeModelBean.nbpeople} persons "/>
             </h4>
             <h4>
-                <img src="images/expert.png" id="expert" alt="expert"/>
-                <h:outputText value="#{recipeModelBean.expertise}"/>
+                <img src="images/expert.png" class="icon" alt="expert"/>
+                <h:outputText value=" Level #{recipeModelBean.expertise}"/>
             </h4>
 
             <p><h:outputText value="#{recipeModelBean.description}"/></p>
-            <p><h:graphicImage class="center" value="#{recipeModelBean.image}"/></p>
-         </h:form>
+
+
+            <h:graphicImage class="center" value="#{recipeModelBean.image}"/>
+        </h:form>
+
     </ui:define>
 </ui:composition>
