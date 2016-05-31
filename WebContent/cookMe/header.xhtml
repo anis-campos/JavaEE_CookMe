@@ -3,69 +3,81 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:b="http://bootsfaces.net/ui">
+                xmlns:b="http://bootsfaces.net/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
     <header id="header">
 
         <b:row>
-            <b:column mediumScreen="3">
-                <div id="title">
-                    <ui:insert name="title">Title</ui:insert>
+
+                <div id="title" >
+                    #{title}
+                    <c:if test="${empty title}"> Set a TITLE</c:if>
                 </div>
-            </b:column>
+            <div id="banner"></div>
 
-            <b:column mediumScreen="5">
+        </b:row>
+        <b:row>
+            <b:navBar >
+                <b:navbarLinks>
+                    <b:navLink value="Home" href="home.jsf"/>
+                    <b:navLink value="Link" href="#"/>
+                    <b:navLink value="LoginButton" href="#" styleClass="hidden-md hidden-lg"/>
+                </b:navbarLinks>
 
-            </b:column>
 
 
-            <ui:insert name="login">
+                <b:navbarLinks pull="right" styleClass="hidden-xs">
+                    <b:navLink value="Become Member" href="subscrire.jsf" iconAwesome="user-plus"
+                               rendered="#{empty loggedUser}"/>
 
-                <div id="loginDiv">
+                    <b:dropMenu value="Welcome : #{loggedUser.firstname} #{loggedUser.lastname}" iconAwesome="user"
+                                rendered="#{not empty loggedUser}">
+                        <b:row styleClass="login-dp">
+                            <h:form id="logged">
+                                <b:column mediumScreen="12">
 
-                    <b:column mediumScreen="2">
-                        <div id="signIn">
-                            <!--@elvariable id="loggedUser" type="cookMe.model.LoginBean"-->
-                            <h:form rendered="#{empty loggedUser}">
-                                <h:link outcome="subscrire.jsf" value=" Become Member">
-                                    <h:graphicImage value="images/signin.png"/>
-                                </h:link>
+                                    <b:commandButton look="primary" iconAwesome="sign-out"
+                                                     action="#{userControlerBean.logOut()}"/>
+
+
+                                </b:column>
+                                <div class="bottom text-center">
+                                    <h:link value="Log Out" action="#{userControlerBean.logOut()}">
+                                        <b:iconAwesome name="sign-out"/>
+                                    </h:link>
+                                </div>
                             </h:form>
-                        </div>
-                    </b:column>
-
-                    <b:column mediumScreen="2">
-
-                        <!--@elvariable id="loggedUser" type="cookMe.model.user.UserModelBean"-->
-                        <h:form rendered="#{empty loggedUser}">
-
-                            <h:panelGrid id="grid" columns="3" cellpadding="5">
-                                <p:outputLabel for="login" value="Login : "/>
-                                <p:inputText id="login" required="true" value="#{loginBean.login}"/>
-                                <p:message for="login"/>
-
-                                <p:outputLabel for="password" value="Password : "/>
-                                <p:password id="password" value="#{loginBean.pwd}" required="true"/>
-                                <p:message for="password"/>
-                            </h:panelGrid>
-                            <p:commandButton id="submitButton" value="GO"
-                                             action="#{userControlerBean.checkUser(loginBean)}"/>
-                        </h:form>
-                        <!--@elvariable id="loggedUser" type="cookMe.model.user.UserModelBean"-->
-                        <h:form id="logged" rendered="#{not empty loggedUser}">
-
-                            <h:outputText value="#{loggedUser.firstname}"/>
-                            <h:outputText value="#{loggedUser.lastname}"/>
-
-                            <h:commandButton value="DECO" action="#{userControlerBean.logOut()}"/>
-                        </h:form>
-
-                    </b:column>
-
-                </div>
-
-            </ui:insert>
+                        </b:row>
+                    </b:dropMenu>
+                    <!--@elvariable id="loggedUser" type="cookMe.model.user.UserModelBean"-->
+                    <b:dropMenu value="LoginMenu" rendered="#{empty loggedUser}">
+                        <b:row styleClass="login-dp">
+                            <b:column mediumScreen="12">
+                                Login via
+                                <div class="social-buttons">
+                                    <b:button look="primary" iconAwesome="facebook" value="Facebook"/>
+                                    <b:button look="info" iconAwesome="twitter" value="Twitter"/>
+                                </div>
+                                or
+                                <h:form>
 
 
+                                    <h:outputLabel for="login" value="Login : "/>
+                                    <b:inputText id="login" required="true" value="#{loginBean.login}"/>
+                                    <b:message for="login"/>
+
+                                    <h:outputLabel for="password" value="Password : "/>
+                                    <b:inputSecret id="password" value="#{loginBean.pwd}" required="true"/>
+                                    <b:message for="password"/>
+                                    <p:commandButton id="submitButton" value="GO"
+                                                     action="#{userControlerBean.checkUser(loginBean)}"/>
+                                </h:form>
+                            </b:column>
+                        </b:row>
+
+                    </b:dropMenu>
+
+                </b:navbarLinks>
+            </b:navBar>
         </b:row>
 
     </header>
