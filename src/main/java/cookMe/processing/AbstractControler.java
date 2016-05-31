@@ -14,6 +14,7 @@ import java.util.Map;
 public class AbstractControler<Model, Dao extends DAO<Model>, Filtre extends Model> {
     private final String CACHE;
     protected Dao dao;
+    protected Filtre lastFilter;
 
     protected AbstractControler(Dao dao) {
         this.dao = dao;
@@ -25,12 +26,15 @@ public class AbstractControler<Model, Dao extends DAO<Model>, Filtre extends Mod
     protected void putIntoCache(Filtre filter, List<Model> list) {
         Map<Filtre, List<Model>> tListMap = (Map<Filtre, List<Model>>) getSessionMap().get(CACHE);
         tListMap.put(filter, list);
+        lastFilter = filter;
     }
 
     protected List<Model> getFromCache(Filtre filter) {
         Map<Filtre, List<Model>> tListMap = (Map<Filtre, List<Model>>) getSessionMap().get(CACHE);
         return tListMap.get(filter);
     }
+
+
 
     protected Map<String, Object> getSessionMap() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();

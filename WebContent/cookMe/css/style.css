@@ -121,7 +121,7 @@ footer {
 
 #header {
     margin-bottom: 40px;
-    background: url("/cookMe/images/banner.jpg") no-repeat fixed 0 0;
+    background: url("../images/banner.jpg") no-repeat fixed 0 0;
     background-size: cover !important;
 }
 
