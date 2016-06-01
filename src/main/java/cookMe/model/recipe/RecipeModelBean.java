@@ -33,6 +33,10 @@ public class RecipeModelBean {
         this.id = id;
     }
 
+    public RecipeModelBean(int id) {
+        this.id = id;
+    }
+
 
     @Override
     public String toString() {

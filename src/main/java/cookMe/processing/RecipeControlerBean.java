@@ -3,6 +3,7 @@ package cookMe.processing;
 
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.RecipesDao;
+import cookMe.model.CommentModelBean;
 import cookMe.model.recipe.RecipeListModelBean;
 import cookMe.model.recipe.RecipeModelBean;
 import cookMe.model.search.SearchRecipeBean;
@@ -64,14 +65,13 @@ public class RecipeControlerBean extends AbstractControler<RecipeModelBean, Reci
     public String displayRecipeDetail(RecipeModelBean recipe) {
         SearchRecipeBean searchRecipeBean = new SearchRecipeBean(recipe);
 
-        List<RecipeModelBean> list = getFromCache(lastFilter);
+        List<RecipeModelBean> listRecipe = getFromCache(lastFilter);
         Map<String, Object> requestMap = getSessionMap();
-        for (RecipeModelBean bean : list) {
+        for (RecipeModelBean bean : listRecipe) {
             if (bean.equals(recipe)) {
                 requestMap.put("recipeModelBean", bean);
             }
         }
-
 
         return "recipeDetail.jsf?faces-redirect=true";
     }

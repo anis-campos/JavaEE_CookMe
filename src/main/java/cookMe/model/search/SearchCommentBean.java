@@ -18,13 +18,26 @@ public class SearchCommentBean extends CommentModelBean implements SearchCriteri
         this.setRecipeId(ALL_VALUES_INT);
     }
 
+    public SearchCommentBean(CommentModelBean commentModelBean) {
+        this.setComment(commentModelBean.getComment());
+        this.setRecipeModelBean(commentModelBean.getRecipeModelBean());
+        this.setUserModelBean(commentModelBean.getUserModelBean());
+    }
+
     @Override
     public String getSQLSearchQuery() {
 
-        String sql = " SELECT * FROM recipe r WHERE 1=1 ";
+        String sql = " SELECT c.id_user idUser, u.firstname firstname, u.lastname lastname," +
+                " u.age age, u.login login, u.password password, u.email email, u.type user_type," +
+                " r.title title, r.description description, r.expertise expertise, r.nbpeople nbpeople," +
+                " r.duration duration, r.type recipe_type, r.image image, r.id idRecipe, c.comment comment" +
+                " FROM comment c" +
+                " INNER JOIN recipe r ON r.id = c.id_recipe" +
+                " INNER JOIN users u ON u.id = c.id_user" +
+                " WHERE 1=1 ";
 
         if (getRecipeModelBean().getId() != ALL_VALUES_INT)
-            sql += " AND r.id = " + getRecipeModelBean().getId();
+            sql += "AND c.id_recipe =" + getRecipeModelBean().getId();
 
         return sql;
 
