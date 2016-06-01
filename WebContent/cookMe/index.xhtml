@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <meta content="text/html; charset=UTF-8" lang="en"/>
+        <link rel="stylesheet" href="css/style.css"/>
+        <title>CookMe</title>
+    </h:head>
+    <body>
+
+    <h:link outcome="home.jsf"><h:graphicImage id="splash" value="images/splash.jpg"/></h:link>
+
+    <h:form>
+        <b:row>
+            <b:column mediumScreen="6" offset="3">
+                <p:progressBar widgetVar="progressbar" id="progress"  interval="1000" ajax="true" value="#{viewTools.progression}" styleClass="animated" >
+                    <p:ajax event="complete" oncomplete="redirect();"/>
+                </p:progressBar>
+            </b:column>
+        </b:row>
+    </h:form>
+
+    <script type="application/javascript">
+        window.onload=function () {
+            PF('progressbar').start();
+        };
+
+        function redirect(){
+            setTimeout(function(){ document.location.href='home.jsf'; }, 500);
+        }
+    </script>
+    </body>
+</f:view>
+</html>

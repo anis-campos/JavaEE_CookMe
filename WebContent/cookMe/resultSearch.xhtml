@@ -9,6 +9,11 @@
 
     <ui:param name="title" value="Search result"/>
     <ui:define name="content">
+        <p:breadCrumb>
+            <p:menuitem value="Home" url="home.jsf" />
+            <p:menuitem value="Search" url="search.jsf" />
+            <p:menuitem value="Result" url="#" />
+        </p:breadCrumb>
         <h:form id="form">
             <!--@elvariable id="recipe" type="cookMe.model.recipe.RecipeModelBean"-->
             <p:dataGrid var="recipe" value="#{dataGridView.listData.all}" columns="2" layout="grid"
