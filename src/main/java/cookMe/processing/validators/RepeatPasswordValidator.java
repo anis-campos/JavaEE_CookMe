@@ -32,7 +32,7 @@ public class RepeatPasswordValidator implements Validator{
         matcher = pattern.matcher(o.toString());
 
         if(!matcher.matches()){
-            FacesMessage msg = new FacesMessage("repeat password validation failed.","Reapeat Password Validation failed please write the same password");
+            FacesMessage msg = new FacesMessage("repeat password isValid failed.", "Reapeat Password Validation failed please write the same password");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

@@ -6,8 +6,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by Anis on 24/05/2016.
@@ -23,13 +21,13 @@ public class AgeValidator implements Validator{
 
             if( i < 0 || i > 100){
                 FacesMessage msg =
-                        new FacesMessage("Age validation failed.","Age > 0 or Age > 100");
+                        new FacesMessage("Age isValid failed.", "Age > 0 or Age > 100");
                 msg.setSeverity(FacesMessage.SEVERITY_ERROR);
                 throw new ValidatorException(msg);
             }
         }catch (Exception e){
             FacesMessage msg =
-                    new FacesMessage("Age validation failed.","Age needs to be an integer !");
+                    new FacesMessage("Age isValid failed.", "Age needs to be an integer !");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

@@ -19,7 +19,9 @@
             <b:navBar >
                 <b:navbarLinks>
                     <b:navLink value="Home" href="home.jsf"/>
+                    <b:navLink value="Emergency" href=""/>
                     <b:navLink value="Search Recipe" href="search.jsf"/>
+                    <b:navLink value="Shop" href=""/>
                     <!--@elvariable id="loggedUser" type="cookMe.model.user.UserModelBean"-->
                     <b:navLink value="Menu Administration" href="adminMenu.jsf" rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}"/>
                     <b:navLink value="LoginButton" href="#" styleClass="hidden-md hidden-lg"/>

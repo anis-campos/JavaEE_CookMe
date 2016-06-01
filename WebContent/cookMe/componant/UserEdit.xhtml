@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:outputLabel>Firstname </p:outputLabel>
+    <p:inputText id="firstname"
+                 value="#{userSubmissionModelBean.firstname}"
+                 required="true">
+        <f:validator validatorId="validators.username"/>
+    </p:inputText>
+    <p:message for="firstname"/>
+
+
+    <p:outputLabel>Lastname </p:outputLabel>
+    <p:inputText id="lastname"
+                 value="#{userSubmissionModelBean.lastname}"
+                 required="true">
+        <f:validator validatorId="validators.username"/>
+    </p:inputText>
+    <p:message for="lastname"/>
+
+
+    <p:outputLabel>Age </p:outputLabel>
+    <p:inputText id="age"
+                 value="#{userSubmissionModelBean.age}"
+                 required="true" type="number">
+        <f:validator validatorId="validators.age"/>
+    </p:inputText>
+    <p:message for="age"/>
+
+
+    <p:outputLabel>Email </p:outputLabel>
+    <p:inputText id="email"
+                 value="#{userSubmissionModelBean.email}"
+                 required="true">
+        <f:validator validatorId="validators.email"/>
+    </p:inputText>
+    <p:message for="email"/>
+
+
+    <p:outputLabel>Login </p:outputLabel>
+    <p:inputText id="login"
+                 value="#{userSubmissionModelBean.login}"
+                 required="true">
+        <f:validator validatorId="validators.login"/>
+    </p:inputText>
+    <p:message for="login"/>
+
+
+    <p:outputLabel>Password </p:outputLabel>
+    <p:password id="pwd"
+                value="#{userSubmissionModelBean.pwd}"
+                required="true">
+        <f:validator validatorId="validators.pwd"/>
+    </p:password>
+    <p:message for="pwd"/>
+
+
+    <p:outputLabel>Repeat password </p:outputLabel>
+    <p:password id="pwd1"
+                value="#{userSubmissionModelBean.pwd1}"
+                required="true" ajax="true">
+        <f:validator validatorId="validators.pwd1"/>
+    </p:password>
+    <p:message for="pwd1"/>
+
+
+    <p:outputLabel for="type" value="Type: "
+                   rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}"/>
+    <p:selectOneMenu id="type" value="#{userSubmissionModelBean.type}"
+                     rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}">
+        <f:selectItems value="#{userControlerBean.userTypes}"
+                       rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}"/>
+    </p:selectOneMenu>
+    <p:message for="type"/>
+
+
+</ui:composition>

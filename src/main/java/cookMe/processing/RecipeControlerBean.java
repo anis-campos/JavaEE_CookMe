@@ -21,6 +21,8 @@ import java.util.Map;
 public class RecipeControlerBean extends AbstractControler<RecipeModelBean, RecipesDao, SearchRecipeBean> {
 
 
+    private Object recipeList;
+
     public RecipeControlerBean() {
         super(DaoFabric.getInstance().createRecipesDao());
     }
@@ -75,4 +77,7 @@ public class RecipeControlerBean extends AbstractControler<RecipeModelBean, Reci
     }
 
 
+    public RecipeListModelBean getRecipeList() {
+        return recipeList;
+    }
 }

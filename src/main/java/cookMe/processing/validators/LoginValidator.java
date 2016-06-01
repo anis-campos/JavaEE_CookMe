@@ -30,7 +30,7 @@ public class LoginValidator implements Validator{
         matcher = pattern.matcher(o.toString());
         if(!matcher.matches() || ((String) o ).length() > 15 || ((String) o ).length() < 0){
             FacesMessage msg =
-                    new FacesMessage("login validation failed.","LoginValidation failed please follow the contraint"+PATTERN+ " and < 15 caracters");
+                    new FacesMessage("login isValid failed.", "LoginValidation failed please follow the contraint" + PATTERN + " and < 15 caracters");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

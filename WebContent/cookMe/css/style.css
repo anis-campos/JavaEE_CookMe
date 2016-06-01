@@ -18,7 +18,9 @@ body {
 }
 
 footer {
-    margin-top: 20px;
+    padding-left: 20px;
+    min-height: 60px;
+    line-height: 60px;
 }
 
 #logoFooter {

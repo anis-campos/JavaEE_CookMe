@@ -29,7 +29,7 @@ public class UserNameValidator implements Validator{
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
         matcher = pattern.matcher(o.toString());
         if(!matcher.matches() || ((String) o ).length() > 30 || ((String) o ).length() < 0){
-            FacesMessage msg = new FacesMessage("user name validation failed.","Name Validation failed please follow the contraint"+PATTERN+ " and < 30 caracters");
+            FacesMessage msg = new FacesMessage("user name isValid failed.", "Name Validation failed please follow the contraint" + PATTERN + " and < 30 caracters");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

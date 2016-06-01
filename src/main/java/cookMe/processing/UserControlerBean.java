@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -83,7 +82,7 @@ public class UserControlerBean {
                 String redirectFromLogin = (String) sessionMap.get("redirectFromLogin");
                 if (redirectFromLogin != null) {
                     sessionMap.remove("redirectFromLogin");
-                    return redirectFromLogin;
+                    return redirectFromLogin + "?faces-redirect=true";
                 }
                 return toMenu();
             }
@@ -112,20 +111,11 @@ public class UserControlerBean {
 
     public void checkAndAddUser(UserSubmissionModelBean userSubmitted) {
         //Vérifier les propriétés de l'utilisateur
-        if (userSubmitted != null) {
-            boolean ok = ((userSubmitted.getFirstname() != null) && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getFirstname()).matches())
-                    && ((userSubmitted.getLastname() != null) && Pattern.compile("[a-zA-Z0-9]").matcher(userSubmitted.getLastname()).matches())
-                    && ((userSubmitted.getAge() > 0) && (userSubmitted.getAge() < 100))
-                    && ((userSubmitted.getEmail() != null) && Pattern.compile("[a-zA-Z0-9-._]+@[a-zA-Z0-9-._]+.[a-z]+").matcher(userSubmitted.getEmail()).matches())
-                    && ((userSubmitted.getLogin() != null) && Pattern.compile("[a-zA-Z0-9-._]").matcher(userSubmitted.getLogin()).matches())
-                    && ((userSubmitted.getPwd() != null) && (userSubmitted.getPwd1() != null) && userSubmitted.getPwd().equals(userSubmitted.getPwd1()));
-
-            if (ok)
-                this.userDao.create(userSubmitted);
-        }
-
+        if (userSubmitted != null && userSubmitted.isValid())
+            this.userDao.create(userSubmitted);
 
     }
+
 
     public String toMenu() {
         return "adminMenu.jsf?faces-redirect=true";
@@ -137,5 +127,11 @@ public class UserControlerBean {
                 .stream()
                 .map(Enum::name)
                 .collect(Collectors.toList());
+    }
+
+    public void update(UserSubmissionModelBean userSubmitted) {
+        if (userSubmitted != null && userSubmitted.isValid())
+            this.userDao.update(userSubmitted);
+
     }
 }

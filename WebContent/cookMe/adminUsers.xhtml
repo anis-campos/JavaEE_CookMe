@@ -5,9 +5,9 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:b="http://bootsfaces.net/ui"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="title">Administration</ui:define>
+    <ui:param name="title" value="Administration"/>
     <ui:define name="content">
 
         <b:row>
@@ -40,25 +40,74 @@
                     </p:column>
 
                     <p:column>
-                        <p:commandButton icon="ui-icon-trash"
-                                         title="Delete this actor"
-                                         actionListener="#{userControlerBean.remove(user)}"
-                                         update="userTable"
-                        />
+                        <h:form>
+                            <b:commandButton icon="trash"
+                                             title="Delete this User"
+                                             value="Delete"
+                                             actionListener="#{userControlerBean.remove(user)}"
+                                             update="userTable"
+                            />
+                            <b:commandButton icon="square-o"
+                                             title="Edit this user"
+                                             value="Edit"
+                                             action="#{viewTools.setUpdateUserMode(user)}"
+                                             update="wrapperPanel"
+                            />
+                        </h:form>
+
                     </p:column>
                 </p:dataTable>
+            </b:column>
+
+            <b:column mediumScreen="6">
+                <h:panelGroup id="wrapperPanel">
+                    <h:panelGroup id="userCreateFormPanel" rendered="#{viewTools.renderuserCreatePanel}">
+                        <h:form>
+                            <p:panelGrid columns="3" layout="grid">
+                                <f:facet name="header">
+                                    <p:row>
+                                        <p:column colspan="7">Create User</p:column>
+                                    </p:row>
+                                </f:facet>
+                                <ui:include src="componant/UserEdit.xhtml"/>
+                                <f:facet name="footer">
+                                    <p:commandButton value="Create Account"
+                                                     action="#{userControlerBean.checkAndAddUser(userSubmissionModelBean)}"
+                                                     update="userCreateFormPanel"/>
+
+                                </f:facet>
+                            </p:panelGrid>
+                        </h:form>
+
+
+                    </h:panelGroup>
+                    <h:panelGroup id="userUpdateFormPanel" rendered="#{not viewTools.renderuserCreatePanel}">
+                        <h:form>
+
+                            <p:panelGrid columns="3" layout="grid">
+                                <f:facet name="header">
+                                    <p:row>
+                                        <p:column colspan="7">Update User</p:column>
+                                    </p:row>
+                                </f:facet>
+                                <ui:include src="componant/UserEdit.xhtml"/>
+                                <f:facet name="footer">
+                                    <p:commandButton value="Update User"
+                                                     action="#{userControlerBean.update(userSubmissionModelBean)}"
+                                                     update="userUpdateFormPanel"/>
+
+                                </f:facet>
+                            </p:panelGrid>
+                        </h:form>
+                    </h:panelGroup>
+                </h:panelGroup>
             </b:column>
 
         </b:row>
 
         <b:row>
             <b:column mediumScreen="6">
-                <h:form>
-                    <b:panel title="Ajouter un User"
-                             collapsed="true">
-                        <ui:include src="componant/userCreateForm.xhtml"/>
-                    </b:panel>
-                </h:form>
+                <p:commandButton value="Add user" actionListener="#{viewTools.setAddUserMode}" update="wrapperPanel"/>
             </b:column>
         </b:row>
 

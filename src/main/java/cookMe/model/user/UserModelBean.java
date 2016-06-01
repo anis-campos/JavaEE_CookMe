@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @ManagedBean
 @SessionScoped
-public class UserModelBean implements Serializable{
+public class UserModelBean implements Serializable {
     private String lastname;
     private String firstname;
     private int age;
@@ -20,10 +20,10 @@ public class UserModelBean implements Serializable{
     private UserType type;
     private int id;
 
-    public UserModelBean(){
-    	type = UserType.standard;
+    public UserModelBean() {
+        type = UserType.standard;
     }
-    
+
     public UserModelBean(int id, String firstname, String lastname, int age, String login, String password, String email, UserType type) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -37,6 +37,10 @@ public class UserModelBean implements Serializable{
 
     public UserType getType() {
         return type;
+    }
+
+    public void setType(UserType type) {
+        this.type = type;
     }
 
     @Override
@@ -103,11 +107,10 @@ public class UserModelBean implements Serializable{
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
-
-
 
     public enum UserType {
         none,

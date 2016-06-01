@@ -29,7 +29,7 @@ public class PasswordValidator implements Validator{
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
         matcher = pattern.matcher(o.toString());
         if(!matcher.matches() || ((String) o ).length() > 25 || ((String) o ).length() < 0){
-            FacesMessage msg = new FacesMessage("password validation failed.","Password Validation failed please follow the contraint"+PATTERN+ " and < 25 caracters");
+            FacesMessage msg = new FacesMessage("password isValid failed.", "Password Validation failed please follow the contraint" + PATTERN + " and < 25 caracters");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
