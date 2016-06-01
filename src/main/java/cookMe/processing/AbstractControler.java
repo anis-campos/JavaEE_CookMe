@@ -35,7 +35,6 @@ public class AbstractControler<Model, Dao extends DAO<Model>, Filtre extends Mod
     }
 
 
-
     protected Map<String, Object> getSessionMap() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         return externalContext.getSessionMap();

@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Class-Path: rewrite-api-2.0.12.Final.jar mysql-connector-java-5.1.39.j
+ ar jsf-api-2.2.13.jar rewrite-annotations-api-2.0.12.Final.jar rewrit
+ e-servlet-2.0.12.Final.jar rewrite-addressbuilder-2.0.12.Final.jar bo
+ otsfaces-0.8.5.jar primefaces-5.3.jar common-api-1.0.5.Final.jar rewr
+ ite-config-prettyfaces-2.0.12.Final.jar javaee-api-7.0.jar javax.mail
+ -1.5.0.jar logging-api-1.0.2.Final.jar rewrite-api-servlet-2.0.12.Fin
+ al.jar rewrite-integration-faces-2.0.12.Final.jar javaee-web-api-7.0.
+ jar jsf-impl-2.2.13.jar rewrite-annotations-impl-2.0.12.Final.jar act
+ ivation-1.1.jar
+

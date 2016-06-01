@@ -10,8 +10,6 @@ import cookMe.view.DataGridView;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import java.util.List;
 import java.util.Map;
 
@@ -65,14 +63,13 @@ public class RecipeControlerBean extends AbstractControler<RecipeModelBean, Reci
         SearchRecipeBean searchRecipeBean = new SearchRecipeBean(recipe);
 
         List<RecipeModelBean> list = getFromCache(lastFilter);
-
-        if (list.size() == 1) {
-            RecipeModelBean recipeBean = list.get(0);
-            //récupère l'espace de mémoire de JSF
-            Map<String, Object> requestMap = getSessionMap();
-            //place la liste de recette dans l'espace de mémoire de JSF
-            requestMap.put("recipeModelBean", recipeBean);
+        Map<String, Object> requestMap = getSessionMap();
+        for (RecipeModelBean bean : list) {
+            if (bean.equals(recipe)) {
+                requestMap.put("recipeModelBean", bean);
+            }
         }
+
 
         return "recipeDetail.jsf?faces-redirect=true";
     }

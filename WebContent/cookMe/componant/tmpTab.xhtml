@@ -8,51 +8,82 @@
 
     <b:panelGrid colSpans="2,8,2">
 
-        <h:outputLabel for="firstname" value="FirstName: "/>
+        <h:outputLabel>Firstname </h:outputLabel>
         <b:inputText id="firstname"
                      value="#{userSubmissionModelBean.firstname}"
-                     required="true"/>
+                     required="true">
+            <f:validator validatorId="validators.username"/>
+        </b:inputText>
         <b:message/>
-        <h:outputLabel for="lastname" value="Lastname"/>
+
+
+        <h:outputLabel>Lastname </h:outputLabel>
         <b:inputText id="lastname"
                      value="#{userSubmissionModelBean.lastname}"
-                     required="true"/>
+                     required="true">
+            <f:validator validatorId="validators.username"/>
+        </b:inputText>
         <b:message/>
 
-        <h:outputLabel for="age" value="Age"/>
+
+        <h:outputLabel>Age </h:outputLabel>
         <b:inputText id="age"
                      value="#{userSubmissionModelBean.age}"
-                     required="true"/>
+                     required="true" type="number">
+            <f:validator validatorId="validators.age"/>
+        </b:inputText>
         <b:message/>
 
-        <h:outputLabel for="email" value="Email"/>
-        <b:inputText id="email"
+
+        <h:outputLabel>Email </h:outputLabel>
+        <h:inputText id="email"
                      value="#{userSubmissionModelBean.email}"
                      required="true">
             <f:validator validatorId="validators.email"/>
-        </b:inputText>
+        </h:inputText>
         <h:message for="email" showDetail="true" style="color:red"/>
 
-        <h:outputLabel for="login" value="Login"/>
+
+        <h:outputLabel>Login </h:outputLabel>
         <b:inputText id="login"
                      value="#{userSubmissionModelBean.login}"
-                     required="true"/>
+                     required="true">
+            <f:validator validatorId="validators.login"/>
+        </b:inputText>
         <b:message/>
 
-        <h:outputLabel for="pwd" value="Password"/>
+
+        <h:outputLabel>Password </h:outputLabel>
         <b:inputSecret id="pwd"
                        value="#{userSubmissionModelBean.pwd}"
-                       required="true"/>
+                       required="true">
+            <f:validator validatorId="validators.pwd"/>
+        </b:inputSecret>
         <b:message/>
 
-        <h:outputLabel for="pwd1" value="Repeat password"/>
+
+        <h:outputLabel>Repeat password </h:outputLabel>
         <b:inputSecret id="pwd1"
                        value="#{userSubmissionModelBean.pwd1}"
-                       required="true"/>
+                       required="true" ajax="true">
+            <f:validator validatorId="validators.pwd1"/>
+        </b:inputSecret>
         <b:message/>
 
+
+        <h:outputLabel for="type" value="Type: "
+                       rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}"/>
+        <b:selectOneMenu id="type" value="#{userSubmissionModelBean.type}"
+                         rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}">
+            <f:selectItems value="#{userControlerBean.userTypes}"
+                           rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}"/>
+        </b:selectOneMenu>
+        <b:message/>
+        <h:commandButton value="GO"
+                         actionListener="#{userControlerBean.checkAndAddUser(userSubmissionModelBean)}"/>
+
+
         <p:commandButton value="Add Item"
-                         actionListener="#{userControlerBean.checkAndAddUser(userSubmissionModelBean)}"
-                         update="userTable"/>
+                         actionListener="#{userControlerBean.checkAndAddUser(userSubmissionModelBean)}"/>
     </b:panelGrid>
 </ui:composition>
