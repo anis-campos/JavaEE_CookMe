@@ -10,7 +10,10 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class RecipeSubmissionModelBean extends RecipeModelBean {
 
-	public RecipeSubmissionModelBean(){
-		
-	}
+    public RecipeSubmissionModelBean() {
+    }
+
+    public RecipeSubmissionModelBean(RecipeModelBean recipe) {
+        super(recipe.getTitle(), recipe.getDescription(), recipe.getExpertise(), recipe.getNbpeople(), recipe.getDuration(), recipe.getType(), recipe.getImage(), recipe.getId());
+    }
 }

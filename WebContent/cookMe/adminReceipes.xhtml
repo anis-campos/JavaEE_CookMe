@@ -14,25 +14,25 @@
         <b:row>
             <b:column mediumScreen="6">
 
-                <p:dataTable id="userTable" var="user" value="#{recipeControlerBean.recipeList.listData.all}">
+                <p:dataTable id="recipeTable" var="recipe" value="#{recipeControlerBean.recipeList.listData.all}">
 
-                    <p:column headerText="Firstname">
-                        <h:outputText value="#{user.firstname}"/>
+                    <p:column headerText="Title">
+                        <h:outputText value="#{recipe.title}"/>
                     </p:column>
 
 
                     <p:column>
                         <h:form>
                             <b:commandButton icon="trash"
-                                             title="Delete this User"
+                                             title="Delete this Receipe"
                                              value="Delete"
-                                             actionListener="#{userControlerBean.remove(user)}"
-                                             update="userTable"
+                                             actionListener="#{recipeControlerBean.remove(recipe)}"
+                                             update="recipeTable"
                             />
                             <b:commandButton icon="square-o"
-                                             title="Edit this user"
+                                             title="Edit this recipe"
                                              value="Edit"
-                                             action="#{viewTools.setUpdateUserMode(user)}"
+                                             action="#{viewTools.setUpdateReceipeMode(recipe)}"
                                              update="wrapperPanel"
                             />
                         </h:form>
@@ -43,7 +43,7 @@
 
             <b:column mediumScreen="6">
                 <h:panelGroup id="wrapperPanel">
-                    <h:panelGroup id="userCreateFormPanel" rendered="#{viewTools.renderuserCreatePanel}">
+                    <h:panelGroup id="recipeCreateFormPanel" rendered="#{viewTools.renderrecipeCreatePanel}">
                         <h:form>
                             <p:panelGrid columns="3" layout="grid">
                                 <f:facet name="header">
@@ -54,8 +54,8 @@
                                 <ui:include src="componant/UserEdit.xhtml"/>
                                 <f:facet name="footer">
                                     <p:commandButton value="Create Account"
-                                                     action="#{userControlerBean.checkAndAddUser(userSubmissionModelBean)}"
-                                                     update="userCreateFormPanel"/>
+                                                     action="#{recipeControlerBean.checkAndAddUser(recipeSubmissionModelBean)}"
+                                                     update="recipeCreateFormPanel"/>
 
                                 </f:facet>
                             </p:panelGrid>
@@ -63,7 +63,7 @@
 
 
                     </h:panelGroup>
-                    <h:panelGroup id="userUpdateFormPanel" rendered="#{not viewTools.renderuserCreatePanel}">
+                    <h:panelGroup id="recipeUpdateFormPanel" rendered="#{not viewTools.renderrecipeCreatePanel}">
                         <h:form>
 
                             <p:panelGrid columns="3" layout="grid">
@@ -75,8 +75,8 @@
                                 <ui:include src="componant/UserEdit.xhtml"/>
                                 <f:facet name="footer">
                                     <p:commandButton value="Update User"
-                                                     action="#{userControlerBean.update(userSubmissionModelBean)}"
-                                                     update="userUpdateFormPanel"/>
+                                                     action="#{recipeControlerBean.update(recipeSubmissionModelBean)}"
+                                                     update="recipeUpdateFormPanel"/>
 
                                 </f:facet>
                             </p:panelGrid>
@@ -89,7 +89,7 @@
 
         <b:row>
             <b:column mediumScreen="6">
-                <p:commandButton value="Add user" actionListener="#{viewTools.setAddUserMode}" update="wrapperPanel"/>
+                <p:commandButton value="Add recipe" actionListener="#{viewTools.setAddUserMode}" update="wrapperPanel"/>
             </b:column>
         </b:row>
     </ui:define>

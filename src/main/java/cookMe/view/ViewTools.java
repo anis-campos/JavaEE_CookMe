@@ -1,6 +1,8 @@
 package cookMe.view;
 
 
+import cookMe.model.recipe.RecipeModelBean;
+import cookMe.model.recipe.RecipeSubmissionModelBean;
 import cookMe.model.user.UserModelBean;
 import cookMe.model.user.UserSubmissionModelBean;
 
@@ -61,4 +63,9 @@ public class ViewTools {
         renderPanel = false;
     }
 
+    public void setUpdateReceipeMode(RecipeModelBean recipe) {
+        Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getRequestMap();
+        viewMap.put("userSubmissionModelBean", new RecipeSubmissionModelBean(recipe));
+        renderPanel = false;
+    }
 }

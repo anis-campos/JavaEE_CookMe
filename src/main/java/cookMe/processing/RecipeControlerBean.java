@@ -77,7 +77,16 @@ public class RecipeControlerBean extends AbstractControler<RecipeModelBean, Reci
     }
 
 
-    public RecipeListModelBean getRecipeList() {
-        return recipeList;
+    public DataGridView<RecipeListModelBean, RecipeModelBean> getRecipeList() {
+        List<RecipeModelBean> list = this.dao.getAll();
+        RecipeListModelBean recipeList = new RecipeListModelBean();
+        for (RecipeModelBean recipe : list) {
+            recipeList.add(recipe);
+        }
+        return new DataGridView<>(recipeList);
+    }
+
+    public void remove(RecipeModelBean recipe) {
+        dao.delete(recipe);
     }
 }
