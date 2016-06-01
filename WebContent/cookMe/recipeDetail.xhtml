@@ -3,9 +3,7 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:b="http://bootsfaces.net/ui"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:p="http://primefaces.org/ui">
 
    <ui:param name="title" value="Recipe Detail"/>
 
@@ -31,8 +29,39 @@
 
             <p><h:outputText value="#{recipeModelBean.description}"/></p>
 
-
             <h:graphicImage class="center" value="#{recipeModelBean.image}"/>
+        </h:form>
+
+
+        <h:form>
+            <h1>Recipe comments:</h1>
+
+            <h3>Add a comment</h3>
+
+            <div class="commentContainer">
+                <p:inputTextarea rows="5" cols="100" value="#{commentModelBean.comment}" rendered="#{not empty loggedUser}"/>
+                <br/>
+                <p:inputTextarea rows="5" cols="100" value="#{commentModelBean.comment}" rendered="#{empty loggedUser}" disabled="true"/>
+                <br/>
+                <i><p:outputLabel value="Log in to post a comment." rendered="#{empty loggedUser}"/></i>
+                <br/>
+                <p:commandButton value="Send !"
+                                 action="#{commentControlerBean.addComment(commentModelBean, recipeModelBean)}"
+                                 rendered="#{not empty loggedUser}"/>
+                <p:commandButton value="Send !"
+                action="#{commentControlerBean.addComment(commentModelBean, recipeModelBean)}"
+                rendered="#{empty loggedUser}" disabled="true"/>
+
+            </div>
+
+            <h3>Comment List</h3>
+            <ui:repeat value="#{commentControlerBean.getListCommentWithRecipe(recipeModelBean)}" var="comment">
+                <!--@elvariable id="comment" type="cookMe.model.CommentModelBean"-->
+                <div class="commentContainer">
+                    <h:outputLabel class="login" value="#{comment.userLogin}" />
+                    <h:outputLabel class="comment" value="#{comment.comment}" />
+                </div>
+            </ui:repeat>
         </h:form>
 
     </ui:define>

@@ -25,6 +25,10 @@ public class CommentModelBean {
         this.comment = comment;
     }
 
+    public CommentModelBean(int id) {
+        this.recipeModelBean = new RecipeModelBean(id);
+    }
+
     public UserModelBean getUserModelBean() {
         return userModelBean;
     }

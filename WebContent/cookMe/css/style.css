@@ -199,3 +199,20 @@ footer {
 #detail p{
     margin-top:50px;
 }
+
+div.commentContainer{
+    width:80%;
+    margin: 10px auto;
+    padding:30px;
+    border: solid grey;
+}
+
+div.commentContainer .login{
+    font-weight:bold;
+    padding-right:20px;
+    border-right:solid grey;
+}
+
+div.commentContainer .comment{
+    padding-left: 20px;
+}

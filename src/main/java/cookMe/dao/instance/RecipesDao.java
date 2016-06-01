@@ -1,7 +1,9 @@
 package cookMe.dao.instance;
 
 
+import cookMe.model.CommentModelBean;
 import cookMe.model.recipe.RecipeModelBean;
+import cookMe.model.search.SearchRecipeBean;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -75,6 +77,4 @@ public class RecipesDao extends AbstractDao<RecipeModelBean> {
                 rs.getString("image"),
                 rs.getInt("id"));
     }
-
-
 }
