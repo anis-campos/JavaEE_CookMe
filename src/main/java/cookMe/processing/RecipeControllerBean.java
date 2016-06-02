@@ -59,7 +59,7 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
         //place la liste de recette dans l'espace de mémoire de JSF
         requestMap.put("dataGridView", dgv);
 
-        return "resultSearch.jsf";
+        return "resultSearch.jsf?faces-redirect=true";
     }
 
     public void update(RecipeSubmissionModelBean recipe) {

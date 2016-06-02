@@ -14,7 +14,7 @@ abstract class AbstractDao<T> implements DAO<T> {
     private final String connectionString;
     private Properties info;
 
-    AbstractDao(String connectionString, Properties info) {
+    AbstractDao(String connectionString) {
         this.connectionString = connectionString;
         this.info = info;
     }

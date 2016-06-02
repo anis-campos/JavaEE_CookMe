@@ -3,16 +3,18 @@ package cookMe.dao.instance;
 
 import cookMe.model.recipe.RecipeModelBean;
 
-import java.sql.*;
-import java.util.Properties;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by djbranbran on 24/05/16.
  */
 public class RecipesDao extends AbstractDao<RecipeModelBean> {
 
-    public RecipesDao(String connectionString,Properties info) {
-        super(connectionString,info );
+    public RecipesDao(String connectionString) {
+        super(connectionString);
     }
 
     @Override

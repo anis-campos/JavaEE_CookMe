@@ -9,12 +9,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 
 public class UserDao extends AbstractDao<UserModelBean> {
 
-    public UserDao(String connectionString, Properties info) {
-        super(connectionString,info );
+    public UserDao(String connectionString) {
+        super(connectionString);
+    }
+
+    public static void main(String[] argv) {
+        UserDao userDao = DaoFabric.getInstance().createUserDao();
+        List<UserModelBean> all = userDao.getAll();
+        for (UserModelBean bean : all) {
+            System.out.println(bean);
+        }
     }
 
     @Override
@@ -66,7 +73,6 @@ public class UserDao extends AbstractDao<UserModelBean> {
         return query;
     }
 
-
     @Override
     protected UserModelBean toObject(ResultSet rs) throws SQLException {
         return new UserModelBean(
@@ -79,7 +85,6 @@ public class UserDao extends AbstractDao<UserModelBean> {
                 rs.getString("email"),
                 Enum.valueOf(UserModelBean.UserType.class, rs.getString("type")));
     }
-
 
     public UserModelBean findByLogin(String login) {
         //return value
@@ -103,7 +108,6 @@ public class UserDao extends AbstractDao<UserModelBean> {
 
     }
 
-
     public UserModelBean checkUser(String login, String pwd) {
         try (Connection connection = getConnection()) {
             PreparedStatement query = connection.prepareStatement("SELECT * FROM JAVA_ASI.users WHERE login = ? AND password = ?");
@@ -119,14 +123,5 @@ public class UserDao extends AbstractDao<UserModelBean> {
             e.printStackTrace();
         }
         return null;
-    }
-
-
-    public static void main(String[] argv) {
-        UserDao userDao = DaoFabric.getInstance().createUserDao();
-        List<UserModelBean> all = userDao.getAll();
-        for (UserModelBean bean : all) {
-            System.out.println(bean);
-        }
     }
 }
