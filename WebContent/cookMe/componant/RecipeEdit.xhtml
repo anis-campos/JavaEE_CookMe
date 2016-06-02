@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <p:outputLabel>Title </p:outputLabel>
+    <p:inputText id="title"
+                 value="#{recipeSubmissionModelBean.title}"
+                 required="true">
+    </p:inputText>
+    <p:message for="title"/>
+
+
+
+    <p:outputLabel>Duration </p:outputLabel>
+    <p:inputText id="duration"
+                 value="#{recipeSubmissionModelBean.duration}"
+                 type="number"
+                 required="true">
+    </p:inputText>
+    <p:message for="duration"/>
+
+    <p:outputLabel>Duration </p:outputLabel>
+
+    <p:rating id="expertise" value="#{searchRecipeBean.expertise}"/>
+    <p:message for="expertise"/>
+
+
+    <p:outputLabel>Description </p:outputLabel>
+    <p:inputTextarea id="description"
+                 value="#{recipeSubmissionModelBean.description}"
+                 required="true">
+    </p:inputTextarea>
+    <p:message for="description"/>
+
+
+
+        <p:row>
+            <p:column>
+                <img src="images/time.jpg" id="time" alt="time"/>
+            </p:column>
+            <p:column>
+                <h:outputText value="Preparation Duration (in minutes)"/>
+            </p:column>
+            <p:column>
+                <img src="images/expert.png" id="expert" alt="expert"/>
+            </p:column>
+            <p:column>
+                <h:outputText value="Cook expertise"/>
+            </p:column>
+        </p:row>
+
+        <p:row>
+            <p:column colspan="2">
+                <p:inputMask id="date" value="#{recipeSubmissionModelBean.duration}" mask="99"/>
+            </p:column>
+            <p:column colspan="2">
+                <p:rating value="#{recipeSubmissionModelBean.expertise}"/>
+            </p:column>
+        </p:row>
+
+        <p:row>
+            <p:column>
+                <img src="images/people.jpg" id="people" alt="people"/>
+            </p:column>
+            <p:column>
+                <h:outputText value="For how many people"/>
+            </p:column>
+            <p:column>
+                <img src="images/cook.png" id="cook" alt="cook"/>
+            </p:column>
+            <p:column>
+                <h:outputText value="Cook type"/>
+            </p:column>
+        </p:row>
+
+        <p:row>
+            <p:column colspan="2">
+                <p:inputText id="nbPeople" value="#{recipeSubmissionModelBean.nbpeople}"/>
+                <p:slider for="nbPeople"/>
+            </p:column>
+            <p:column colspan="2">
+                <p:selectOneMenu id="cookType" value="#{recipeSubmissionModelBean.type}" style="width:125px">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItems scope="request" value="#{listRecipeTypeBean.list}"/>
+                </p:selectOneMenu>
+            </p:column>
+        </p:row>
+
+        <p:row>
+            <p:column colspan="4">
+                <p:commandButton value="Touch me"
+                                 action="#{recipeControllerBean.searchRecipe(searchRecipeBean)}"/>
+            </p:column>
+        </p:row>
+
+
+</ui:composition>

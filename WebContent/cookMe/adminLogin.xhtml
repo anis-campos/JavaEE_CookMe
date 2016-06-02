@@ -24,17 +24,17 @@
                 <p:password id="password" value="#{loginBean.pwd}" required="true"/>
                 <p:message for="password"/>
             </h:panelGrid>
-            <p:commandButton id="submitButton" value="GO" action="#{userControlerBean.checkUserAdmin(loginBean)}"/>
+            <p:commandButton id="submitButton" value="GO" action="#{userControllerBean.checkUserAdmin(loginBean)}"/>
         </h:form>
 
         <!--@elvariable id="loggedUser" type="cookMe.model.user.UserModelBean"-->
-        <h:form rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}">
+        <h:form rendered="#{not empty loggedUser and userControllerBean.isAdmin(loggedUser)}">
 
-            <h:commandButton id="close" action="#{userControlerBean.toMenu}"/>
+            <h:commandButton id="close" action="#{userControllerBean.toMenu}"/>
 
         </h:form>
 
-        <h:form rendered="#{ empty loggedUser and not userControlerBean.isAdmin(loggedUser)}">
+        <h:form rendered="#{ empty loggedUser and not userControllerBean.isAdmin(loggedUser)}">
 
             <p:growl id="growl" showDetail="true" sticky="true"/>
 

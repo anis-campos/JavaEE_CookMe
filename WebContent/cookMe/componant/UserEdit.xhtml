@@ -68,11 +68,11 @@
 
 
     <p:outputLabel for="type" value="Type: "
-                   rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}"/>
+                   rendered="#{not empty loggedUser and userControllerBean.isAdmin(loggedUser)}"/>
     <p:selectOneMenu id="type" value="#{userSubmissionModelBean.type}"
-                     rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}">
-        <f:selectItems value="#{userControlerBean.userTypes}"
-                       rendered="#{not empty loggedUser and userControlerBean.isAdmin(loggedUser)}"/>
+                     rendered="#{not empty loggedUser and userControllerBean.isAdmin(loggedUser)}">
+        <f:selectItems value="#{userControllerBean.userTypes}"
+                       rendered="#{not empty loggedUser and userControllerBean.isAdmin(loggedUser)}"/>
     </p:selectOneMenu>
     <p:message for="type"/>
 

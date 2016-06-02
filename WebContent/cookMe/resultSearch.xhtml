@@ -34,7 +34,7 @@
                         <h:outputText value="Expertise : #{recipe.expertise}"/>
                         <h:outputText value="Description : #{recipe.description}"/>
 
-                        <p:commandLink action="#{recipeControlerBean.displayRecipeDetail(recipe)}"
+                        <p:commandLink action="#{recipeControllerBean.displayRecipeDetail(recipe)}"
                                        title="View Detail">
                             <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;"/>
                             <f:setPropertyActionListener value="#{recipe}" target="#{dataGridView.selectedData}"/>

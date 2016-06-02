@@ -1,25 +1,35 @@
 package cookMe.processing;
 
 import cookMe.dao.instance.DAO;
+import cookMe.model.recipe.ListRecipeTypeBean;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by Anis on 29/05/2016.
  */
-public class AbstractControler<Model, Dao extends DAO<Model>, Filtre extends Model> {
+public class AbstractController<Model, Dao extends DAO<Model>, Filtre extends Model> {
     private final String CACHE;
     protected Dao dao;
     protected Filtre lastFilter;
 
-    protected AbstractControler(Dao dao) {
+    protected AbstractController(Dao dao) {
         this.dao = dao;
         CACHE = this.getClass().getSimpleName() + "Cache";
         getSessionMap().put(CACHE, new HashMap<Filtre, List<Model>>());
+    }
+
+    public static  <E extends Enum<E>> List<String> enumToList(Class<E> enumm) {
+        return Arrays.asList(enumm.getEnumConstants())
+                .stream()
+                .map(Enum::name)
+                .collect(Collectors.toList());
     }
 
 

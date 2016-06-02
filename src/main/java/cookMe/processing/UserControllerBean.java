@@ -3,6 +3,7 @@ package cookMe.processing;
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.UserDao;
 import cookMe.model.LoginBean;
+import cookMe.model.search.SearchUserBean;
 import cookMe.model.user.UserListModelBean;
 import cookMe.model.user.UserModelBean;
 import cookMe.model.user.UserSubmissionModelBean;
@@ -13,10 +14,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 /**
@@ -24,17 +23,16 @@ import java.util.stream.Collectors;
  */
 @ManagedBean
 @ApplicationScoped
-public class UserControlerBean {
+public class UserControllerBean extends AbstractController<UserModelBean, UserDao, SearchUserBean> {
 
-    private UserDao userDao;
 
-    public UserControlerBean() {
-        this.userDao = DaoFabric.getInstance().createUserDao();
+    public UserControllerBean() {
+        super(DaoFabric.getInstance().createUserDao());
     }
 
     public DataGridView<UserListModelBean, UserModelBean> getUserList() {
 
-        List<UserModelBean> allUser = userDao.getAll();
+        List<UserModelBean> allUser = dao.getAll();
         UserListModelBean userList = new UserListModelBean(allUser);
 
         DataGridView dgv = new DataGridView<UserListModelBean, UserModelBean>(userList);
@@ -50,7 +48,7 @@ public class UserControlerBean {
     }
 
     public String checkUser(LoginBean loginBean) {
-        UserModelBean user = this.userDao.checkUser(loginBean.getLogin(), loginBean.getPwd());
+        UserModelBean user = dao.checkUser(loginBean.getLogin(), loginBean.getPwd());
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         Map<String, Object> sessionMap = externalContext.getSessionMap();
@@ -67,7 +65,7 @@ public class UserControlerBean {
     }
 
     public String checkUserAdmin(LoginBean loginBean) {
-        UserModelBean user = this.userDao.checkUser(loginBean.getLogin(), loginBean.getPwd());
+        UserModelBean user = dao.checkUser(loginBean.getLogin(), loginBean.getPwd());
 
 
         if (user != null && user.getType() == UserModelBean.UserType.admin) {
@@ -93,7 +91,7 @@ public class UserControlerBean {
     }
 
     public void remove(UserModelBean user) {
-        this.userDao.delete(user);
+        this.dao.delete(user);
     }
 
     public boolean isAdmin(UserModelBean loggedUser) {
@@ -112,7 +110,7 @@ public class UserControlerBean {
     public void checkAndAddUser(UserSubmissionModelBean userSubmitted) {
         //Vérifier les propriétés de l'utilisateur
         if (userSubmitted != null && userSubmitted.isValid())
-            this.userDao.create(userSubmitted);
+            dao.create(userSubmitted);
 
     }
 
@@ -123,15 +121,12 @@ public class UserControlerBean {
 
     public List<String> getUserTypes() {
 
-        return Arrays.asList(UserModelBean.UserType.values())
-                .stream()
-                .map(Enum::name)
-                .collect(Collectors.toList());
+        return AbstractController.enumToList(UserModelBean.UserType.class);
     }
 
     public void update(UserSubmissionModelBean userSubmitted) {
         if (userSubmitted != null && userSubmitted.isValid())
-            this.userDao.update(userSubmitted);
+            dao.update(userSubmitted);
 
     }
 }

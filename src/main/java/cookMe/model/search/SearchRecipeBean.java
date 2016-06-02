@@ -11,8 +11,8 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class SearchRecipeBean extends RecipeModelBean implements SearchCriteria {
-    public static final String ALL_VALUES_STRING = null;
-    public static final int ALL_VALUES_INT = 0;
+    private static final String ALL_VALUES_STRING = null;
+    private static final int ALL_VALUES_INT = 0;
 
     public SearchRecipeBean(RecipeModelBean recipeModelBean) {
         this.setDescription(recipeModelBean.getDescription());
@@ -23,8 +23,8 @@ public class SearchRecipeBean extends RecipeModelBean implements SearchCriteria 
         this.setDuration(recipeModelBean.getDuration());
     }
 
-    public SearchRecipeBean(){
-
+    public SearchRecipeBean() {
+        super(ALL_VALUES_STRING, ALL_VALUES_STRING, ALL_VALUES_INT, ALL_VALUES_INT, ALL_VALUES_INT, ALL_VALUES_STRING, ALL_VALUES_STRING, ALL_VALUES_INT);
     }
 
     @Override
@@ -43,6 +43,8 @@ public class SearchRecipeBean extends RecipeModelBean implements SearchCriteria 
             sql += " AND nbpeople = " + getNbpeople();
         if (getDuration() != ALL_VALUES_INT)
             sql += " AND duration = " + getDuration();
+        if (getId() != ALL_VALUES_INT)
+            sql += " AND id = " + getId();
 
         return sql;
 

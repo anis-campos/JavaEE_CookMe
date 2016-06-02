@@ -20,18 +20,18 @@ import java.util.Map;
 public class ViewTools {
 
 
-    boolean renderPanel;
+    private boolean creationMode;
     private Integer progression;
 
     public ViewTools() {
     }
 
-    public boolean isRenderuserCreatePanel() {
-        return renderPanel;
+    public boolean isCreationModeEnabled() {
+        return creationMode;
     }
 
-    public void setAddUserMode() {
-        renderPanel = true;
+    public void enableCreationMode() {
+        creationMode = true;
     }
 
     public int getProgression() {
@@ -60,12 +60,12 @@ public class ViewTools {
 
         Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getRequestMap();
         viewMap.put("userSubmissionModelBean", new UserSubmissionModelBean(user));
-        renderPanel = false;
+        creationMode = false;
     }
 
     public void setUpdateReceipeMode(RecipeModelBean recipe) {
         Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getRequestMap();
         viewMap.put("userSubmissionModelBean", new RecipeSubmissionModelBean(recipe));
-        renderPanel = false;
+        creationMode = false;
     }
 }

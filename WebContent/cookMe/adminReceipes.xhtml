@@ -14,7 +14,7 @@
         <b:row>
             <b:column mediumScreen="6">
 
-                <p:dataTable id="recipeTable" var="recipe" value="#{recipeControlerBean.recipeList.listData.all}">
+                <p:dataTable id="recipeTable" var="recipe" value="#{recipeControllerBean.recipeList.listData.all}">
 
                     <p:column headerText="Title">
                         <h:outputText value="#{recipe.title}"/>
@@ -24,13 +24,13 @@
                     <p:column>
                         <h:form>
                             <b:commandButton icon="trash"
-                                             title="Delete this Receipe"
+                                             title="Delete this Recipe"
                                              value="Delete"
-                                             actionListener="#{recipeControlerBean.remove(recipe)}"
+                                             actionListener="#{recipeControllerBean.remove(recipe)}"
                                              update="recipeTable"
                             />
                             <b:commandButton icon="square-o"
-                                             title="Edit this recipe"
+                                             title="Edit this Recipe"
                                              value="Edit"
                                              action="#{viewTools.setUpdateReceipeMode(recipe)}"
                                              update="wrapperPanel"
@@ -43,18 +43,18 @@
 
             <b:column mediumScreen="6">
                 <h:panelGroup id="wrapperPanel">
-                    <h:panelGroup id="recipeCreateFormPanel" rendered="#{viewTools.renderrecipeCreatePanel}">
+                    <h:panelGroup id="recipeCreateFormPanel" rendered="#{viewTools.creationModeEnabled}">
                         <h:form>
                             <p:panelGrid columns="3" layout="grid">
                                 <f:facet name="header">
                                     <p:row>
-                                        <p:column colspan="7">Create User</p:column>
+                                        <p:column colspan="7">Create Recipe</p:column>
                                     </p:row>
                                 </f:facet>
-                                <ui:include src="componant/UserEdit.xhtml"/>
+                                <ui:include src="componant/RecipeEdit.xhtml"/>
                                 <f:facet name="footer">
-                                    <p:commandButton value="Create Account"
-                                                     action="#{recipeControlerBean.checkAndAddUser(recipeSubmissionModelBean)}"
+                                    <p:commandButton value="Create Recipe"
+                                                     action="#{recipeControllerBean.addRecipe(recipeSubmissionModelBean)}"
                                                      update="recipeCreateFormPanel"/>
 
                                 </f:facet>
@@ -63,19 +63,19 @@
 
 
                     </h:panelGroup>
-                    <h:panelGroup id="recipeUpdateFormPanel" rendered="#{not viewTools.renderrecipeCreatePanel}">
+                    <h:panelGroup id="recipeUpdateFormPanel" rendered="#{not viewTools.creationModeEnabled}">
                         <h:form>
 
                             <p:panelGrid columns="3" layout="grid">
                                 <f:facet name="header">
                                     <p:row>
-                                        <p:column colspan="7">Update User</p:column>
+                                        <p:column colspan="7">Update Recipe</p:column>
                                     </p:row>
                                 </f:facet>
-                                <ui:include src="componant/UserEdit.xhtml"/>
+                                <ui:include src="componant/RecipeEdit.xhtml"/>
                                 <f:facet name="footer">
-                                    <p:commandButton value="Update User"
-                                                     action="#{recipeControlerBean.update(recipeSubmissionModelBean)}"
+                                    <p:commandButton value="Update Recipe"
+                                                     action="#{recipeControllerBean.update(recipeSubmissionModelBean)}"
                                                      update="recipeUpdateFormPanel"/>
 
                                 </f:facet>
@@ -89,7 +89,7 @@
 
         <b:row>
             <b:column mediumScreen="6">
-                <p:commandButton value="Add recipe" actionListener="#{viewTools.setAddUserMode}" update="wrapperPanel"/>
+                <p:commandButton value="Add recipe" actionListener="#{viewTools.enableCreationMode}" update="wrapperPanel"/>
             </b:column>
         </b:row>
     </ui:define>

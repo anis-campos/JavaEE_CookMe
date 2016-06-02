@@ -13,7 +13,7 @@
         <b:row>
             <b:column mediumScreen="6">
 
-                <p:dataTable id="userTable" var="user" value="#{userControlerBean.getUserList().listData.all}">
+                <p:dataTable id="userTable" var="user" value="#{userControllerBean.getUserList().listData.all}">
 
                     <p:column headerText="Firstname">
                         <h:outputText value="#{user.firstname}"/>
@@ -44,7 +44,7 @@
                             <b:commandButton icon="trash"
                                              title="Delete this User"
                                              value="Delete"
-                                             actionListener="#{userControlerBean.remove(user)}"
+                                             actionListener="#{userControllerBean.remove(user)}"
                                              update="userTable"
                             />
                             <b:commandButton icon="square-o"
@@ -61,7 +61,7 @@
 
             <b:column mediumScreen="6">
                 <h:panelGroup id="wrapperPanel">
-                    <h:panelGroup id="userCreateFormPanel" rendered="#{viewTools.renderuserCreatePanel}">
+                    <h:panelGroup id="userCreateFormPanel" rendered="#{viewTools.creationModeEnabled}">
                         <h:form>
                             <p:panelGrid columns="3" layout="grid">
                                 <f:facet name="header">
@@ -72,7 +72,7 @@
                                 <ui:include src="componant/UserEdit.xhtml"/>
                                 <f:facet name="footer">
                                     <p:commandButton value="Create Account"
-                                                     action="#{userControlerBean.checkAndAddUser(userSubmissionModelBean)}"
+                                                     action="#{userControllerBean.checkAndAddUser(userSubmissionModelBean)}"
                                                      update="userCreateFormPanel"/>
 
                                 </f:facet>
@@ -81,7 +81,7 @@
 
 
                     </h:panelGroup>
-                    <h:panelGroup id="userUpdateFormPanel" rendered="#{not viewTools.renderuserCreatePanel}">
+                    <h:panelGroup id="userUpdateFormPanel" rendered="#{not viewTools.creationModeEnabled}">
                         <h:form>
 
                             <p:panelGrid columns="3" layout="grid">
@@ -93,7 +93,7 @@
                                 <ui:include src="componant/UserEdit.xhtml"/>
                                 <f:facet name="footer">
                                     <p:commandButton value="Update User"
-                                                     action="#{userControlerBean.update(userSubmissionModelBean)}"
+                                                     action="#{userControllerBean.update(userSubmissionModelBean)}"
                                                      update="userUpdateFormPanel"/>
 
                                 </f:facet>
@@ -107,7 +107,7 @@
 
         <b:row>
             <b:column mediumScreen="6">
-                <p:commandButton value="Add user" actionListener="#{viewTools.setAddUserMode}" update="wrapperPanel"/>
+                <p:commandButton value="Add user" actionListener="#{viewTools.enableCreationMode}" update="wrapperPanel"/>
             </b:column>
         </b:row>
 

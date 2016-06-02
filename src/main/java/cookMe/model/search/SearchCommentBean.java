@@ -11,8 +11,7 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class SearchCommentBean extends CommentModelBean implements SearchCriteria {
-    public static final String ALL_VALUES_STRING = "[ALL]";
-    public static final int ALL_VALUES_INT = -2;
+    private static final int ALL_VALUES_INT = -2;
 
     public SearchCommentBean() {
         this.setRecipeId(ALL_VALUES_INT);

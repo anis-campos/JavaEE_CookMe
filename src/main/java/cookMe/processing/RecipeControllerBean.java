@@ -3,9 +3,10 @@ package cookMe.processing;
 
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.RecipesDao;
-import cookMe.model.CommentModelBean;
+import cookMe.model.recipe.ListRecipeTypeBean;
 import cookMe.model.recipe.RecipeListModelBean;
 import cookMe.model.recipe.RecipeModelBean;
+import cookMe.model.recipe.RecipeSubmissionModelBean;
 import cookMe.model.search.SearchRecipeBean;
 import cookMe.view.DataGridView;
 
@@ -19,12 +20,12 @@ import java.util.Map;
  */
 @ManagedBean
 @ApplicationScoped
-public class RecipeControlerBean extends AbstractControler<RecipeModelBean, RecipesDao, SearchRecipeBean> {
+public class RecipeControllerBean extends AbstractController<RecipeModelBean, RecipesDao, SearchRecipeBean> {
 
 
     private Object recipeList;
 
-    public RecipeControlerBean() {
+    public RecipeControllerBean() {
         super(DaoFabric.getInstance().createRecipesDao());
     }
 
@@ -38,7 +39,7 @@ public class RecipeControlerBean extends AbstractControler<RecipeModelBean, Reci
         sessionMap.put("recipeList", recipeList);
     }
 
-    public String addRecipe(RecipeModelBean recipe) {
+    public String addRecipe(RecipeSubmissionModelBean recipe) {
         //TODO: 29/05/2016 :  controler les valeurs de la recette.
         dao.create(recipe);
         return "successfulRegister.xhtml";
@@ -61,6 +62,9 @@ public class RecipeControlerBean extends AbstractControler<RecipeModelBean, Reci
         return "resultSearch.jsf";
     }
 
+    public void update(RecipeSubmissionModelBean recipe) {
+        //// TODO: 02/06/2016 : Mettre à jour la recette
+    }
 
     public String displayRecipeDetail(RecipeModelBean recipe) {
         SearchRecipeBean searchRecipeBean = new SearchRecipeBean(recipe);
@@ -76,6 +80,9 @@ public class RecipeControlerBean extends AbstractControler<RecipeModelBean, Reci
         return "recipeDetail.jsf?faces-redirect=true";
     }
 
+    public List<String> getRecipeTypes(){
+        return enumToList(ListRecipeTypeBean.RecipeType.class);
+    }
 
     public DataGridView<RecipeListModelBean, RecipeModelBean> getRecipeList() {
         List<RecipeModelBean> list = this.dao.getAll();

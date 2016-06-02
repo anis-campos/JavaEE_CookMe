@@ -5,12 +5,10 @@ import cookMe.dao.instance.CommentDao;
 import cookMe.model.CommentModelBean;
 import cookMe.model.recipe.RecipeModelBean;
 import cookMe.model.search.SearchCommentBean;
-import cookMe.model.search.SearchRecipeBean;
 import cookMe.model.user.UserModelBean;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.xml.stream.events.Comment;
 import java.util.List;
 
 /**
@@ -18,8 +16,8 @@ import java.util.List;
  */
 @ManagedBean
 @ApplicationScoped
-public class CommentControlerBean extends AbstractControler<CommentModelBean, CommentDao, CommentModelBean>{
-    public CommentControlerBean() {
+public class CommentControllerBean extends AbstractController<CommentModelBean, CommentDao, CommentModelBean> {
+    public CommentControllerBean() {
         super(DaoFabric.getInstance().createCommentDao());
     }
 

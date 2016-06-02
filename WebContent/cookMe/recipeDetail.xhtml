@@ -46,16 +46,16 @@
                 <i><p:outputLabel value="Log in to post a comment." rendered="#{empty loggedUser}"/></i>
                 <br/>
                 <p:commandButton value="Send !"
-                                 action="#{commentControlerBean.addComment(commentModelBean, recipeModelBean)}"
+                                 action="#{commentControllerBean.addComment(commentModelBean, recipeModelBean)}"
                                  rendered="#{not empty loggedUser}"/>
                 <p:commandButton value="Send !"
-                action="#{commentControlerBean.addComment(commentModelBean, recipeModelBean)}"
+                action="#{commentControllerBean.addComment(commentModelBean, recipeModelBean)}"
                 rendered="#{empty loggedUser}" disabled="true"/>
 
             </div>
 
             <h3>Comment List</h3>
-            <ui:repeat value="#{commentControlerBean.getListCommentWithRecipe(recipeModelBean)}" var="comment">
+            <ui:repeat value="#{commentControllerBean.getListCommentWithRecipe(recipeModelBean)}" var="comment">
                 <!--@elvariable id="comment" type="cookMe.model.CommentModelBean"-->
                 <div class="commentContainer">
                     <h:outputLabel class="login" value="#{comment.userLogin}" />
