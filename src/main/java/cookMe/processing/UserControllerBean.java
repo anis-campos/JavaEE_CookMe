@@ -121,12 +121,14 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
 
     public List<String> getUserTypes() {
 
-        return AbstractController.enumToList(UserModelBean.UserType.class);
+        return enumToList(UserModelBean.UserType.class);
     }
 
-    public void update(UserSubmissionModelBean userSubmitted) {
+    public void update() {
+        UserSubmissionModelBean userSubmitted = (UserSubmissionModelBean) getSessionMap().get("userSubmissionModelBean");
         if (userSubmitted != null && userSubmitted.isValid())
             dao.update(userSubmitted);
 
+        getSessionMap().remove("userSubmissionModelBean");
     }
 }

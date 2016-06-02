@@ -27,6 +27,11 @@ footer {
     text-align: center;
 }
 
+.inputFullWidth > input,
+.inputFullWidth > textarea,
+.inputFullWidth > div {
+    width: 100%;
+}
 
 /* Login */
 /******************************/

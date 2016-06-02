@@ -3,10 +3,10 @@ package cookMe.processing;
 
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.RecipesDao;
-import cookMe.model.recipe.ListRecipeTypeBean;
 import cookMe.model.recipe.RecipeListModelBean;
 import cookMe.model.recipe.RecipeModelBean;
 import cookMe.model.recipe.RecipeSubmissionModelBean;
+import cookMe.model.recipe.RecipeType;
 import cookMe.model.search.SearchRecipeBean;
 import cookMe.view.DataGridView;
 
@@ -42,7 +42,7 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
     public String addRecipe(RecipeSubmissionModelBean recipe) {
         //TODO: 29/05/2016 :  controler les valeurs de la recette.
         dao.create(recipe);
-        return "successfulRegister.xhtml";
+        return "";
     }
 
     public String searchRecipe(RecipeModelBean recipe) {
@@ -62,8 +62,11 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
         return "resultSearch.jsf?faces-redirect=true";
     }
 
-    public void update(RecipeSubmissionModelBean recipe) {
+    public void update() {
         //// TODO: 02/06/2016 : Mettre à jour la recette
+        RecipeSubmissionModelBean bean = (RecipeSubmissionModelBean) getSessionMap().get("recipeSubmissionModelBean");
+        getSessionMap().remove("recipeSubmissionModelBean");
+        dao.update(bean);
     }
 
     public String displayRecipeDetail(RecipeModelBean recipe) {
@@ -80,8 +83,8 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
         return "recipeDetail.jsf?faces-redirect=true";
     }
 
-    public List<String> getRecipeTypes(){
-        return enumToList(ListRecipeTypeBean.RecipeType.class);
+    public List<String> getRecipeTypes() {
+        return enumToList(RecipeType.class);
     }
 
     public DataGridView<RecipeListModelBean, RecipeModelBean> getRecipeList() {
@@ -92,6 +95,7 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
         }
         return new DataGridView<>(recipeList);
     }
+
 
     public void remove(RecipeModelBean recipe) {
         dao.delete(recipe);

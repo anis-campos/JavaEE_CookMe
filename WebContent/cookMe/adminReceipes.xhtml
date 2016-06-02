@@ -26,7 +26,7 @@
                             <b:commandButton icon="trash"
                                              title="Delete this Recipe"
                                              value="Delete"
-                                             actionListener="#{recipeControllerBean.remove(recipe)}"
+                                             action="#{recipeControllerBean.remove(recipe)}"
                                              update="recipeTable"
                             />
                             <b:commandButton icon="square-o"
@@ -45,17 +45,19 @@
                 <h:panelGroup id="wrapperPanel">
                     <h:panelGroup id="recipeCreateFormPanel" rendered="#{viewTools.creationModeEnabled}">
                         <h:form>
-                            <p:panelGrid columns="3" layout="grid">
+                            <p:panelGrid columns="3" style="width: 100%;">
                                 <f:facet name="header">
                                     <p:row>
                                         <p:column colspan="7">Create Recipe</p:column>
                                     </p:row>
                                 </f:facet>
-                                <ui:include src="componant/RecipeEdit.xhtml"/>
+                                <p:row>
+                                    <ui:include src="componant/RecipeEdit.xhtml"/>
+                                </p:row>
                                 <f:facet name="footer">
-                                    <p:commandButton value="Create Recipe"
+                                    <p:commandButton id="createButton" value="Create Recipe"
                                                      action="#{recipeControllerBean.addRecipe(recipeSubmissionModelBean)}"
-                                                     update="recipeCreateFormPanel"/>
+                                                     update="recipeCreateFormPanel recipeTable"/>
 
                                 </f:facet>
                             </p:panelGrid>
@@ -66,17 +68,19 @@
                     <h:panelGroup id="recipeUpdateFormPanel" rendered="#{not viewTools.creationModeEnabled}">
                         <h:form>
 
-                            <p:panelGrid columns="3" layout="grid">
+                            <p:panelGrid columns="3" style="width: 100%;">
                                 <f:facet name="header">
                                     <p:row>
                                         <p:column colspan="7">Update Recipe</p:column>
                                     </p:row>
                                 </f:facet>
-                                <ui:include src="componant/RecipeEdit.xhtml"/>
+                                <p:row>
+                                    <ui:include src="componant/RecipeEdit.xhtml"/>
+                                </p:row>
                                 <f:facet name="footer">
-                                    <p:commandButton value="Update Recipe"
-                                                     action="#{recipeControllerBean.update(recipeSubmissionModelBean)}"
-                                                     update="recipeUpdateFormPanel"/>
+                                    <p:commandButton id="updateButton" value="Update Recipe"
+                                                     action="#{recipeControllerBean.update()}"
+                                                     update="recipeCreateFormPanel recipeTable"/>
 
                                 </f:facet>
                             </p:panelGrid>
@@ -89,7 +93,8 @@
 
         <b:row>
             <b:column mediumScreen="6">
-                <p:commandButton value="Add recipe" actionListener="#{viewTools.enableCreationMode}" update="wrapperPanel"/>
+                <p:commandButton value="Add recipe" actionListener="#{viewTools.enableCreationMode}"
+                                 update="wrapperPanel"/>
             </b:column>
         </b:row>
     </ui:define>

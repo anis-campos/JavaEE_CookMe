@@ -2,7 +2,7 @@ package cookMe.processing.validators;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
-import javax.faces.component.html.HtmlInputSecret;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
@@ -28,7 +28,8 @@ public class RepeatPasswordValidator implements Validator{
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        pattern = Pattern.compile((String) ((HtmlInputSecret) uiComponent.getParent().findComponent("pwd")).getValue());
+        UIInput pwd = (UIInput) uiComponent.getParent().findComponent("pwd");
+        pattern = Pattern.compile((String) pwd.getValue());
         matcher = pattern.matcher(o.toString());
 
         if(!matcher.matches()){

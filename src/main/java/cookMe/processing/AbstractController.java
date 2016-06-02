@@ -1,7 +1,6 @@
 package cookMe.processing;
 
 import cookMe.dao.instance.DAO;
-import cookMe.model.recipe.ListRecipeTypeBean;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -25,7 +24,7 @@ public class AbstractController<Model, Dao extends DAO<Model>, Filtre extends Mo
         getSessionMap().put(CACHE, new HashMap<Filtre, List<Model>>());
     }
 
-    public static  <E extends Enum<E>> List<String> enumToList(Class<E> enumm) {
+    protected <E extends Enum<E>> List<String> enumToList(Class<E> enumm) {
         return Arrays.asList(enumm.getEnumConstants())
                 .stream()
                 .map(Enum::name)

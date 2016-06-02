@@ -36,14 +36,5 @@ public class ListRecipeTypeBean{
     public List<String> getList(){
         return list;
     }
-
-
-    public enum RecipeType {
-        Salade,
-        Meal,
-        Fish,
-        Dessert
-
-    }
 }
 

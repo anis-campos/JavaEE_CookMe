@@ -1,14 +1,20 @@
 package cookMe.model.recipe;
 
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import java.util.Base64;
 
 /**
  * Created by Anis on 24/05/2016.
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class RecipeSubmissionModelBean extends RecipeModelBean {
+
+    private UploadedFile file;
 
     public RecipeSubmissionModelBean() {
     }
@@ -16,4 +22,21 @@ public class RecipeSubmissionModelBean extends RecipeModelBean {
     public RecipeSubmissionModelBean(RecipeModelBean recipe) {
         super(recipe.getTitle(), recipe.getDescription(), recipe.getExpertise(), recipe.getNbpeople(), recipe.getDuration(), recipe.getType(), recipe.getImage(), recipe.getId());
     }
+
+    public void fileUploadListener(FileUploadEvent e) {
+        file = e.getFile();
+        String encodedImage = Base64.getEncoder().encodeToString(file.getContents());
+        encodedImage = "data:image/jpeg;base64," + encodedImage;
+        setImage(encodedImage);
+    }
+
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
+
+
 }

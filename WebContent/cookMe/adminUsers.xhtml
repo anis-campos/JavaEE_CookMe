@@ -73,7 +73,7 @@
                                 <f:facet name="footer">
                                     <p:commandButton value="Create Account"
                                                      action="#{userControllerBean.checkAndAddUser(userSubmissionModelBean)}"
-                                                     update="userCreateFormPanel"/>
+                                                     update="userCreateFormPanel userTable"/>
 
                                 </f:facet>
                             </p:panelGrid>
@@ -93,8 +93,8 @@
                                 <ui:include src="componant/UserEdit.xhtml"/>
                                 <f:facet name="footer">
                                     <p:commandButton value="Update User"
-                                                     action="#{userControllerBean.update(userSubmissionModelBean)}"
-                                                     update="userUpdateFormPanel"/>
+                                                     action="#{userControllerBean.update()}"
+                                                     update="userUpdateFormPanel userTable"/>
 
                                 </f:facet>
                             </p:panelGrid>

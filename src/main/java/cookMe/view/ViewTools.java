@@ -32,6 +32,9 @@ public class ViewTools {
 
     public void enableCreationMode() {
         creationMode = true;
+        Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        viewMap.remove("userSubmissionModelBean");
+        viewMap.remove("recipeSubmissionModelBean");
     }
 
     public int getProgression() {
@@ -58,14 +61,14 @@ public class ViewTools {
 
     public void setUpdateUserMode(UserModelBean user) {
 
-        Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getRequestMap();
+        Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         viewMap.put("userSubmissionModelBean", new UserSubmissionModelBean(user));
         creationMode = false;
     }
 
     public void setUpdateReceipeMode(RecipeModelBean recipe) {
-        Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getRequestMap();
-        viewMap.put("userSubmissionModelBean", new RecipeSubmissionModelBean(recipe));
+        Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        viewMap.put("recipeSubmissionModelBean", new RecipeSubmissionModelBean(recipe));
         creationMode = false;
     }
 }
