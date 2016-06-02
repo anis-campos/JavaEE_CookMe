@@ -5,23 +5,18 @@ import cookMe.model.search.SearchCriteria;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by Anis on 28/05/2016.
  */
-public abstract class AbstractDao<T> implements DAO<T> {
-    private String dB_HOST;
-    private String dB_PORT;
-    private String dB_NAME;
-    private String dB_USER;
-    private String dB_PWD;
+abstract class AbstractDao<T> implements DAO<T> {
+    private final String connectionString;
+    private Properties info;
 
-    protected AbstractDao(String dB_HOST, String dB_PORT, String dB_NAME, String dB_USER, String dB_PWD) {
-        this.dB_HOST = dB_HOST;
-        this.dB_PORT = dB_PORT;
-        this.dB_NAME = dB_NAME;
-        this.dB_USER = dB_USER;
-        this.dB_PWD = dB_PWD;
+    AbstractDao(String connectionString, Properties info) {
+        this.connectionString = connectionString;
+        this.info = info;
     }
 
     @Override
@@ -130,8 +125,8 @@ public abstract class AbstractDao<T> implements DAO<T> {
         return rep;
     }
 
-    protected Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://" + dB_HOST + ":" + dB_PORT + "/" + dB_NAME, dB_USER, dB_PWD);
+    Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(connectionString,info);
     }
 
     protected abstract PreparedStatement getSQLInsert(Connection con, T newItem) throws SQLException;

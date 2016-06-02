@@ -1,21 +1,18 @@
 package cookMe.dao.instance;
 
 
-import cookMe.model.CommentModelBean;
 import cookMe.model.recipe.RecipeModelBean;
-import cookMe.model.search.SearchRecipeBean;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by djbranbran on 24/05/16.
  */
 public class RecipesDao extends AbstractDao<RecipeModelBean> {
 
-    public RecipesDao(String dB_HOST, String dB_PORT, String dB_NAME, String dB_USER, String dB_PWD) {
-        super(dB_HOST, dB_PORT, dB_NAME, dB_USER, dB_PWD);
+    public RecipesDao(String connectionString,Properties info) {
+        super(connectionString,info );
     }
 
     @Override

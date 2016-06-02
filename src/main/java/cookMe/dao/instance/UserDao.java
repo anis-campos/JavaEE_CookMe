@@ -1,17 +1,20 @@
 package cookMe.dao.instance;
 
 
+import cookMe.dao.fabric.DaoFabric;
 import cookMe.model.user.UserModelBean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Properties;
 
 public class UserDao extends AbstractDao<UserModelBean> {
 
-    public UserDao(String dB_HOST, String dB_PORT, String dB_NAME, String dB_USER, String dB_PWD) {
-        super(dB_HOST, dB_PORT, dB_NAME, dB_USER, dB_PWD);
+    public UserDao(String connectionString, Properties info) {
+        super(connectionString,info );
     }
 
     @Override
@@ -78,7 +81,6 @@ public class UserDao extends AbstractDao<UserModelBean> {
     }
 
 
-
     public UserModelBean findByLogin(String login) {
         //return value
 
@@ -120,4 +122,11 @@ public class UserDao extends AbstractDao<UserModelBean> {
     }
 
 
+    public static void main(String[] argv) {
+        UserDao userDao = DaoFabric.getInstance().createUserDao();
+        List<UserModelBean> all = userDao.getAll();
+        for (UserModelBean bean : all) {
+            System.out.println(bean);
+        }
+    }
 }

@@ -4,34 +4,30 @@ import cookMe.dao.instance.CommentDao;
 import cookMe.dao.instance.RecipesDao;
 import cookMe.dao.instance.UserDao;
 
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Properties;
 
 /**
  * Created by djbranbran on 24/05/16.
  */
 public final class DaoFabric {
-    // L'utilisation du mot clé volatile permet, en Java version 5 et supérieur,
-    // permet d'éviter le cas où "Singleton.instance" est non-nul,
 
-    // mais pas encore "réellement" instancié.
-    // De Java version 1.2 à 1.4, il est possible d'utiliser la classe
-    // ThreadLocal.
-    private static volatile DaoFabric instance = null;
+    private static final DaoFabric instance = new DaoFabric();
     private final String DB_HOST = "dasilvacamposanis.fr";
     private final String DB_PORT = "8080";
     private final String DB_NAME = "JAVA_ASI";
     private final String DB_USER = "java";
     private final String DB_PWD = "TpJavaAsi2016";
+    private final String mySQLPattern = "jdbc:mysql://%s:%s/%s";
+
+    private final String connectionString;
+    private final Properties info;
 
     private DaoFabric() {
-        super();
-        try {
-            // Chargement du Driver, puis établissement de la connexion Class.forName("com.mysql.jdbc.Driver");
-            Class.forName("com.mysql.jdbc.Driver");
-            java.sql.DriverManager.getConnection("jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME, DB_USER, DB_PWD);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
+        connectionString = String.format(mySQLPattern, DB_HOST, DB_PORT, DB_NAME);
+        info = new Properties();
+        info.put( "user", DB_USER );
+        info.put( "password", DB_PWD );
     }
 
     /**
@@ -40,29 +36,49 @@ public final class DaoFabric {
      * @return Retourne l'instance du singleton.
      */
     public static DaoFabric getInstance() {
-        // Le "Double-Checked Singleton"/"Singleton doublement vérifié" permet // d'éviter un appel coûteux à synchronized,
-        // une fois que l'instanciation est faite.
-        if (DaoFabric.instance == null) {
-            // Le mot-clé synchronized sur ce bloc empêche toute instanciation // multiple même par différents "threads".
-            synchronized (DaoFabric.class) {
-                if (DaoFabric.instance == null) {
-                    DaoFabric.instance = new DaoFabric();
-                }
-            }
-        }
         return DaoFabric.instance;
     }
 
     public UserDao createUserDao() {
-        return new UserDao(
-                DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PWD);
+        return new UserDao(connectionString,info);
     }
 
     public RecipesDao createRecipesDao() {
-        return new RecipesDao(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PWD);
+        return new RecipesDao(connectionString,info);
     }
 
     public CommentDao createCommentDao() {
-        return new CommentDao(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PWD);
+        return new CommentDao(connectionString,info);
+    }
+
+    public static void main(String[] args) {
+        DaoFabric instance = getInstance();
+
+        String connectionString = instance.connectionString;
+
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            System.out.println("Connexion reussi !");
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM  JAVA_ASI.users;");
+            int columnsNumber = rs.getMetaData().getColumnCount();
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1) System.out.print("\t\t");
+                System.out.print( rs.getMetaData().getColumnName(i));
+            }
+            System.out.println("");
+            while (rs.next()) {
+                for (int i = 1; i <= columnsNumber; i++) {
+                    if (i > 1) System.out.print("\t\t");
+                    String columnValue = rs.getString(i);
+                    System.out.print(columnValue);
+                }
+                System.out.println("");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

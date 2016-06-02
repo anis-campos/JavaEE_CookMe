@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Created by djbranbran on 24/05/16.
@@ -16,8 +17,8 @@ import java.sql.SQLException;
 public class CommentDao extends AbstractDao<CommentModelBean> {
 
 
-    public CommentDao(String dB_HOST, String dB_PORT, String dB_NAME, String dB_USER, String dB_PWD) {
-        super(dB_HOST, dB_PORT, dB_NAME, dB_USER, dB_PWD);
+    public CommentDao(String connectionString, Properties info) {
+        super(connectionString, info);
     }
 
     @Override
