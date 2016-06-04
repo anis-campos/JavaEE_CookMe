@@ -40,7 +40,7 @@ public class AbstractController<Model, Dao extends DAO<Model>, Filtre extends Mo
 
     protected List<Model> getFromCache(Filtre filter) {
         Map<Filtre, List<Model>> tListMap = (Map<Filtre, List<Model>>) getSessionMap().get(CACHE);
-        return tListMap.get(filter);
+        return tListMap.containsKey(filter) ? tListMap.get(filter) : null;
     }
 
 

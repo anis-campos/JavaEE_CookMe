@@ -3,14 +3,23 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui">
 
    <ui:param name="title" value="Recipe Detail"/>
 
     <ui:define name="content">
         <h:form id="detail">
-             <h1><h:outputText value="#{recipeModelBean.title}"/></h1>
-             <h2>
+            <b:row>
+                <b:column mediumScreen="8">
+                    <h1><h:outputText value="#{recipeModelBean.title}"/></h1>
+                </b:column>
+                <b:column mediumScreen="4">
+                    <p:commandButton value="Go Back" action="#{recipeControllerBean.goBack()}"/>
+                </b:column>
+            </b:row>
+
+            <h2>
                  <img src="images/cook.png" class="icon" alt="cook"/>
                  <h:outputText value=" #{recipeModelBean.type}"/>
              </h2>

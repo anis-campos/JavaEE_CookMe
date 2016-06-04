@@ -4,14 +4,14 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import java.util.Base64;
 
 /**
  * Created by Anis on 24/05/2016.
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class RecipeSubmissionModelBean extends RecipeModelBean {
 
     private UploadedFile file;

@@ -1,5 +1,7 @@
 package cookMe.model.user;
 
+import cookMe.model.ISubmissionModel;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.util.regex.Pattern;
@@ -9,7 +11,7 @@ import java.util.regex.Pattern;
  */
 @ManagedBean
 @RequestScoped
-public class UserSubmissionModelBean extends UserModelBean {
+public class UserSubmissionModelBean extends UserModelBean implements ISubmissionModel {
 
     private String pwd1;
 
@@ -34,6 +36,7 @@ public class UserSubmissionModelBean extends UserModelBean {
         this.pwd1 = pwd1;
     }
 
+    @Override
     public boolean isValid() {
         boolean ok;
         ok = this.getFirstname() != null && Pattern.compile("[a-zA-Z0-9 ]+").matcher(this.getFirstname()).matches();

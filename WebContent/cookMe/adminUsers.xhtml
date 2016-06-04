@@ -11,7 +11,7 @@
     <ui:define name="content">
 
         <b:row>
-            <b:column mediumScreen="6">
+            <b:column mediumScreen="8">
 
                 <p:dataTable id="userTable" var="user" value="#{userControllerBean.getUserList().listData.all}">
 
@@ -59,7 +59,7 @@
                 </p:dataTable>
             </b:column>
 
-            <b:column mediumScreen="6">
+            <b:column mediumScreen="4">
                 <h:panelGroup id="wrapperPanel">
                     <h:panelGroup id="userCreateFormPanel" rendered="#{viewTools.creationModeEnabled}">
                         <h:form>

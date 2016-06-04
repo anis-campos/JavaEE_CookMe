@@ -46,15 +46,24 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
     }
 
     public String searchRecipe(RecipeModelBean recipe) {
+
+
         SearchRecipeBean searchRecipeBean = new SearchRecipeBean(recipe);
-        List<RecipeModelBean> search = dao.search(searchRecipeBean);
-        RecipeListModelBean recipeList = new RecipeListModelBean(search);
+
+        List<RecipeModelBean> fromCache = getFromCache(searchRecipeBean);
+
+        RecipeListModelBean recipeList;
+        if (fromCache != null) {
+            recipeList = new RecipeListModelBean(fromCache);
+        } else {
+            List<RecipeModelBean> search = dao.search(searchRecipeBean);
+            recipeList = new RecipeListModelBean(dao.search(searchRecipeBean));
+            putIntoCache(searchRecipeBean, search);
+        }
 
         DataGridView dgv = new DataGridView<>(recipeList);
 
         Map<String, Object> requestMap = getSessionMap();
-
-        putIntoCache(searchRecipeBean, search);
 
         //place la liste de recette dans l'espace de mémoire de JSF
         requestMap.put("dataGridView", dgv);
@@ -70,7 +79,6 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
     }
 
     public String displayRecipeDetail(RecipeModelBean recipe) {
-        SearchRecipeBean searchRecipeBean = new SearchRecipeBean(recipe);
 
         List<RecipeModelBean> listRecipe = getFromCache(lastFilter);
         Map<String, Object> requestMap = getSessionMap();
@@ -96,6 +104,9 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
         return new DataGridView<>(recipeList);
     }
 
+    public String goBack() {
+        return searchRecipe(lastFilter);
+    }
 
     public void remove(RecipeModelBean recipe) {
         dao.delete(recipe);
