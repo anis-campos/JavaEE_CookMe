@@ -23,7 +23,7 @@ import java.util.Map;
 public class RecipeControllerBean extends AbstractController<RecipeModelBean, RecipesDao, SearchRecipeBean> {
 
 
-    private Object recipeList;
+    private RecipeListModelBean recipeList;
 
     public RecipeControllerBean() {
         super(DaoFabric.getInstance().createRecipesDao());

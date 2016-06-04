@@ -26,7 +26,7 @@ public class CommentControllerBean extends AbstractController<CommentModelBean, 
         return comments;
     }
 
-    public void addComment(CommentModelBean comment, RecipeModelBean recipe){
+    public String addComment(CommentModelBean comment, RecipeModelBean recipe){
         //TODO : vérifier les injections !!!
         if(!comment.getComment().isEmpty()) {
             CommentModelBean commentToAdd = comment;
@@ -34,6 +34,8 @@ public class CommentControllerBean extends AbstractController<CommentModelBean, 
             commentToAdd.setRecipeModelBean(recipe);
             dao.create(comment);
         }
+
+        return "recipeDetail.jsf?faces-redirect=true";
     }
 }
 
