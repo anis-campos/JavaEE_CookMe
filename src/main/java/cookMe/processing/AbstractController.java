@@ -4,6 +4,7 @@ import cookMe.dao.instance.DAO;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +53,13 @@ public class AbstractController<Model, Dao extends DAO<Model>, Filtre extends Mo
     protected Map<String, Object> getRequestMap() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         return externalContext.getRequestMap();
+    }
+
+    protected String getRequestUri() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        String uri = request.getRequestURI();
+        return uri;
     }
 
 }

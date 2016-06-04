@@ -9,13 +9,14 @@ import cookMe.model.user.UserModelBean;
 import cookMe.model.user.UserSubmissionModelBean;
 import cookMe.view.DataGridView;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
+
+import static javax.faces.application.FacesMessage.SEVERITY_FATAL;
 
 
 /**
@@ -37,31 +38,27 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
 
         DataGridView dgv = new DataGridView<UserListModelBean, UserModelBean>(userList);
 
-        //récupère l'espace de mémoire de JSF
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        Map<String, Object> requestMap = externalContext.getRequestMap();
-        //place la liste de recette dans l'espace de mémoire de JSF
-        requestMap.put("dataGridView", dgv);
+        getRequestMap().put("dataGridView", dgv);
 
         return dgv;
 
     }
 
     public String checkUser(LoginBean loginBean) {
-        UserModelBean user = dao.checkUser(loginBean.getLogin(), loginBean.getPwd());
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-        Map<String, Object> sessionMap = externalContext.getSessionMap();
 
+        UserModelBean user = dao.checkUser(loginBean.getLogin(), loginBean.getPwd());
         if (user != null) {
 
+            getSessionMap().put("loggedUser", user);
 
-            sessionMap.put("loggedUser", user);
-
-
+            return getRequestUri() + "?faces-redirect=true";
+        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(SEVERITY_FATAL, "Authenfication Failded", "Wrong Login and//or Password !"));
+            return "";
         }
 
-        return request.getRequestURI() + "?faces-redirect=true";
+
     }
 
     public String checkUserAdmin(LoginBean loginBean) {
@@ -70,10 +67,8 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
 
         if (user != null && user.getType() == UserModelBean.UserType.admin) {
 
-            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-            HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-            String uri = request.getRequestURI();
-            Map<String, Object> sessionMap = externalContext.getSessionMap();
+
+            Map<String, Object> sessionMap = getSessionMap();
 
             if (user.getType() == UserModelBean.UserType.admin) {
                 sessionMap.put("loggedUser", user);
@@ -99,12 +94,8 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
     }
 
     public String logOut() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        Map<String, Object> sessionMap = externalContext.getSessionMap();
-        sessionMap.remove("loggedUser");
-
-        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-        return request.getRequestURI() + "?faces-redirect=true";
+        getSessionMap().remove("loggedUser");
+        return getRequestUri() + "?faces-redirect=true";
     }
 
     public void checkAndAddUser(UserSubmissionModelBean userSubmitted) {

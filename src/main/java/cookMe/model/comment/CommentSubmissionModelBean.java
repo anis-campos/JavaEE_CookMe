@@ -1,5 +1,7 @@
 package cookMe.model.comment;
 
+import cookMe.model.ISubmissionModel;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.util.regex.Pattern;
@@ -9,12 +11,13 @@ import java.util.regex.Pattern;
  */
 @ManagedBean
 @RequestScoped
-public class CommentSubmissionModelBean extends CommentModelBean {
-    public CommentSubmissionModelBean(){
+public class CommentSubmissionModelBean extends CommentModelBean implements ISubmissionModel {
+    public CommentSubmissionModelBean() {
 
     }
 
-    public boolean isValid(){
+    @Override
+    public boolean isValid() {
         return getComment() != null && getComment().length() < 255 && !Pattern.compile("[<>]+").matcher(this.getComment()).matches();
     }
 

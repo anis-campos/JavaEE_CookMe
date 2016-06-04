@@ -1,5 +1,6 @@
 package cookMe.model.recipe;
 
+import cookMe.model.ISubmissionModel;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -12,7 +13,7 @@ import java.util.Base64;
  */
 @ManagedBean
 @RequestScoped
-public class RecipeSubmissionModelBean extends RecipeModelBean {
+public class RecipeSubmissionModelBean extends RecipeModelBean implements ISubmissionModel {
 
     private UploadedFile file;
 
@@ -39,4 +40,8 @@ public class RecipeSubmissionModelBean extends RecipeModelBean {
     }
 
 
+    @Override
+    public boolean isValid() {
+        return true;
+    }
 }
