@@ -24,6 +24,7 @@ public class ViewTools {
     private Integer progression;
 
     public ViewTools() {
+        creationMode = true;
     }
 
     public boolean isCreationModeEnabled() {
@@ -67,7 +68,7 @@ public class ViewTools {
     }
 
     public void setUpdateReceipeMode(RecipeModelBean recipe) {
-        Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getRequestMap();
         viewMap.put("recipeSubmissionModelBean", new RecipeSubmissionModelBean(recipe));
         creationMode = false;
     }

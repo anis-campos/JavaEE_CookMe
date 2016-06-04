@@ -31,7 +31,7 @@ public class RecipesDao extends AbstractDao<RecipeModelBean> {
 
     @Override
     protected PreparedStatement getSQLDelete(Connection con, RecipeModelBean item) throws SQLException {
-        PreparedStatement query = con.prepareStatement("DELETE FROM JAVA_ASI.recipe r WHERE r.id = ?");
+        PreparedStatement query = con.prepareStatement("DELETE FROM JAVA_ASI.recipe WHERE id = ?");
         query.setInt(1, item.getId());
         return query;
     }
