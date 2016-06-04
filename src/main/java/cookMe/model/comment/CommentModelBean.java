@@ -1,4 +1,4 @@
-package cookMe.model;
+package cookMe.model.comment;
 
 import cookMe.model.recipe.RecipeModelBean;
 import cookMe.model.user.UserModelBean;
@@ -15,14 +15,16 @@ public class CommentModelBean {
     private UserModelBean userModelBean;
     private RecipeModelBean recipeModelBean;
     private String comment;
+    private String date;
 
     public CommentModelBean() {
     }
 
-    public CommentModelBean(UserModelBean userModelBean, RecipeModelBean recipeModelBean, String comment) {
+    public CommentModelBean(UserModelBean userModelBean, RecipeModelBean recipeModelBean, String comment, String date) {
         this.userModelBean = userModelBean;
         this.recipeModelBean = recipeModelBean;
         this.comment = comment;
+        this.date = date;
     }
 
     public CommentModelBean(int id) {
@@ -68,5 +70,9 @@ public class CommentModelBean {
 
     public String getUserLogin(){
         return userModelBean.getLogin();
+    }
+
+    public String getDate(){
+        return date;
     }
 }

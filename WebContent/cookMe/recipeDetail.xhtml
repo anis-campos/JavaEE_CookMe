@@ -39,27 +39,28 @@
             <h3>Add a comment</h3>
 
             <div class="commentContainer">
-                <p:inputTextarea rows="5" cols="100" value="#{commentModelBean.comment}" rendered="#{not empty loggedUser}"/>
+                <p:inputTextarea rows="5" cols="100" value="#{commentSubmissionModelBean.comment}" rendered="#{not empty loggedUser}"/>
                 <br/>
-                <p:inputTextarea rows="5" cols="100" value="#{commentModelBean.comment}" rendered="#{empty loggedUser}" disabled="true"/>
+                <p:inputTextarea rows="5" cols="100" value="#{commentSubmissionModelBean.comment}" rendered="#{empty loggedUser}" disabled="true"/>
                 <br/>
                 <i><p:outputLabel value="Log in to post a comment." rendered="#{empty loggedUser}"/></i>
                 <br/>
                 <p:commandButton value="Send !"
-                                 action="#{commentControllerBean.addComment(commentModelBean, recipeModelBean)}"
+                                 action="#{commentControllerBean.addComment(commentSubmissionModelBean, recipeModelBean)}"
                                  rendered="#{not empty loggedUser}"/>
                 <p:commandButton value="Send !"
-                action="#{commentControllerBean.addComment(commentModelBean, recipeModelBean)}"
+                action="#{commentControllerBean.addComment(commentSubmissionModelBean, recipeModelBean)}"
                 rendered="#{empty loggedUser}" disabled="true"/>
 
             </div>
 
-            <h3>Comment List</h3>
             <ui:repeat value="#{commentControllerBean.getListCommentWithRecipe(recipeModelBean)}" var="comment">
-                <!--@elvariable id="comment" type="cookMe.model.CommentModelBean"-->
+                <!--@elvariable id="comment" type="cookMe.model.comment.CommentModelBean"-->
                 <div class="commentContainer">
                     <h:outputLabel class="login" value="#{comment.userLogin}" />
                     <h:outputLabel class="comment" value="#{comment.comment}" />
+                    <br/>
+                    <i><h:outputLabel class="comment" value="#{comment.date}" /></i>
                 </div>
             </ui:repeat>
         </h:form>

@@ -2,7 +2,8 @@ package cookMe.processing;
 
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.CommentDao;
-import cookMe.model.CommentModelBean;
+import cookMe.model.comment.CommentModelBean;
+import cookMe.model.comment.CommentSubmissionModelBean;
 import cookMe.model.recipe.RecipeModelBean;
 import cookMe.model.search.SearchCommentBean;
 import cookMe.model.user.UserModelBean;
@@ -26,9 +27,8 @@ public class CommentControllerBean extends AbstractController<CommentModelBean, 
         return comments;
     }
 
-    public String addComment(CommentModelBean comment, RecipeModelBean recipe){
-        //TODO : vérifier les injections !!!
-        if(!comment.getComment().isEmpty()) {
+    public String addComment(CommentSubmissionModelBean comment, RecipeModelBean recipe){
+        if(comment.isValid()) {
             CommentModelBean commentToAdd = comment;
             commentToAdd.setUserModelBean((UserModelBean) getSessionMap().get("loggedUser"));
             commentToAdd.setRecipeModelBean(recipe);

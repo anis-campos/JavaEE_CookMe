@@ -1,14 +1,12 @@
 package cookMe.dao.instance;
 
 
-import cookMe.model.CommentModelBean;
+import cookMe.model.comment.CommentModelBean;
 import cookMe.model.recipe.RecipeModelBean;
 import cookMe.model.user.UserModelBean;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by djbranbran on 24/05/16.
@@ -81,7 +79,8 @@ public class CommentDao extends AbstractDao<CommentModelBean> {
                         rs.getString("recipe_type"),
                         rs.getString("image"),
                         rs.getInt("idRecipe")),
-                rs.getString("comment")
+                rs.getString("comment"),
+                new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(rs.getTimestamp("record_date"))
         );
     }
 

@@ -1,6 +1,6 @@
 package cookMe.model.search;
 
-import cookMe.model.CommentModelBean;
+import cookMe.model.comment.CommentModelBean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -29,7 +29,8 @@ public class SearchCommentBean extends CommentModelBean implements SearchCriteri
         String sql = " SELECT c.id_user idUser, u.firstname firstname, u.lastname lastname," +
                 " u.age age, u.login login, u.password password, u.email email, u.type user_type," +
                 " r.title title, r.description description, r.expertise expertise, r.nbpeople nbpeople," +
-                " r.duration duration, r.type recipe_type, r.image image, r.id idRecipe, c.comment comment" +
+                " r.duration duration, r.type recipe_type, r.image image, r.id idRecipe, c.comment comment," +
+                " CONVERT_TZ(c.record_date,'+00:00','+02:00') record_date" +
                 " FROM comment c" +
                 " INNER JOIN recipe r ON r.id = c.id_recipe" +
                 " INNER JOIN users u ON u.id = c.id_user" +
@@ -38,6 +39,7 @@ public class SearchCommentBean extends CommentModelBean implements SearchCriteri
         if (getRecipeModelBean().getId() != ALL_VALUES_INT)
             sql += "AND c.id_recipe =" + getRecipeModelBean().getId();
 
+        sql += " ORDER BY record_date DESC";
         return sql;
 
 
