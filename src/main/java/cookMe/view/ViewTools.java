@@ -68,7 +68,7 @@ public class ViewTools {
     }
 
     public void setUpdateReceipeMode(RecipeModelBean recipe) {
-        Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getRequestMap();
+        Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         viewMap.put("recipeSubmissionModelBean", new RecipeSubmissionModelBean(recipe));
         creationMode = false;
     }

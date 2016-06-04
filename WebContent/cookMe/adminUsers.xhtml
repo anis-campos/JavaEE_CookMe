@@ -10,6 +10,13 @@
     <ui:param name="title" value="Administration"/>
     <ui:define name="content">
 
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false"
+                  showHeader="false">
+            <p:graphicImage value="images/ajaxloadingbar.gif"/>
+        </p:dialog>
+
         <b:row>
             <b:column mediumScreen="8">
 
@@ -50,8 +57,9 @@
                             <b:commandButton icon="square-o"
                                              title="Edit this user"
                                              value="Edit"
-                                             action="#{viewTools.setUpdateUserMode(user)}"
+                                             actionListener="#{viewTools.setUpdateUserMode(user)}"
                                              update="wrapperPanel"
+                                             ajax="true"
                             />
                         </h:form>
 

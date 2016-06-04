@@ -44,6 +44,7 @@
         <h:outputLabel for="image" value="Select Image"/>
         <p:fileUpload id="image" value="#{recipeSubmissionModelBean.file}" mode="simple"
                       allowTypes="/(\.|\/)(gif|jpe?g|png)$/" auto="true"/>
+        <p:message for="image"/>
 
         <h:graphicImage value="#{recipeSubmissionModelBean.image}"/>
 
