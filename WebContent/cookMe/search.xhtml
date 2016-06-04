@@ -62,8 +62,8 @@
                     <p:column colspan="2">
                         <p:selectOneMenu id="cookType" value="#{searchRecipeBean.type}" style="width:125px">
                             <f:selectItem itemLabel="Select One" itemValue=""/>
-                            <f:selectItems scope="request" value="#{listRecipeTypeBean.list}"/>
-                        </p:selectOneMenu>
+                            <f:selectItems scope="request" value="#{recipeControllerBean.recipeTypes}"/>
+                        </p:selectOneMenu>k
                     </p:column>
                 </p:row>
 
