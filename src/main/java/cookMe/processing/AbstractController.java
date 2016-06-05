@@ -1,6 +1,7 @@
 package cookMe.processing;
 
 import cookMe.dao.instance.DAO;
+import cookMe.model.search.SearchCriteria;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -14,15 +15,15 @@ import java.util.stream.Collectors;
 /**
  * Created by Anis on 29/05/2016.
  */
-public class AbstractController<Model, Dao extends DAO<Model>, Filtre extends Model> {
+public class AbstractController<Model, Dao extends DAO<Model>, Filter extends SearchCriteria<Model>> {
     private final String CACHE;
     protected Dao dao;
-    protected Filtre lastFilter;
+    protected Filter lastFilter;
 
     protected AbstractController(Dao dao) {
         this.dao = dao;
         CACHE = this.getClass().getSimpleName() + "Cache";
-        getSessionMap().put(CACHE, new HashMap<Filtre, List<Model>>());
+        getSessionMap().put(CACHE, new HashMap<Filter, List<Model>>());
     }
 
     protected <E extends Enum<E>> List<String> enumToList(Class<E> enumm) {
@@ -33,14 +34,14 @@ public class AbstractController<Model, Dao extends DAO<Model>, Filtre extends Mo
     }
 
 
-    protected void putIntoCache(Filtre filter, List<Model> list) {
-        Map<Filtre, List<Model>> tListMap = (Map<Filtre, List<Model>>) getSessionMap().get(CACHE);
+    protected void putIntoCache(Filter filter, List<Model> list) {
+        Map<Filter, List<Model>> tListMap = (Map<Filter, List<Model>>) getSessionMap().get(CACHE);
         tListMap.put(filter, list);
         lastFilter = filter;
     }
 
-    protected List<Model> getFromCache(Filtre filter) {
-        Map<Filtre, List<Model>> tListMap = (Map<Filtre, List<Model>>) getSessionMap().get(CACHE);
+    protected List<Model> getFromCache(Filter filter) {
+        Map<Filter, List<Model>> tListMap = (Map<Filter, List<Model>>) getSessionMap().get(CACHE);
         return tListMap.containsKey(filter) ? tListMap.get(filter) : null;
     }
 
@@ -62,4 +63,7 @@ public class AbstractController<Model, Dao extends DAO<Model>, Filtre extends Mo
         return uri;
     }
 
+    protected Map<String, Object> getViewMap() {
+        return FacesContext.getCurrentInstance().getViewRoot().getViewMap();
+    }
 }

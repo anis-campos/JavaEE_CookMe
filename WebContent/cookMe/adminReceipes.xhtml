@@ -10,12 +10,6 @@
 
     <ui:param name="title" value="Administration"/>
     <ui:define name="content">
-        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
-
-        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false"
-                  showHeader="false">
-            <p:graphicImage value="images/ajaxloadingbar.gif"/>
-        </p:dialog>
         <b:row>
             <b:column mediumScreen="6">
 

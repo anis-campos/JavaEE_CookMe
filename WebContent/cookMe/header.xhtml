@@ -13,12 +13,7 @@
                 <c:if test="${empty title}"> Set a TITLE</c:if>
             </div>
             <div id="banner">
-                <b:growl id="growlLogin" placementFrom="top"
-                         global-only="false"
-                         show-summary="true" allow-dismiss="true"
-                         animation-enter="animated bounceInDown"
-                         animation-exit="animated flipOutX"
-                         escape="true"/>
+
             </div>
 
         </b:row>
@@ -30,8 +25,11 @@
                     <b:navLink value="Search Recipe" href="search.jsf"/>
                     <b:navLink value="Shop" href=""/>
                     <!--@elvariable id="loggedUser" type="cookMe.model.user.UserModelBean"-->
-                    <b:navLink value="Menu Administration" href="adminMenu.jsf"
-                               rendered="#{not empty loggedUser and userControllerBean.isAdmin(loggedUser)}"/>
+                    <b:dropMenu value="Administration" href="adminMenu.jsf"
+                                rendered="#{not empty loggedUser and userControllerBean.isAdmin(loggedUser)}">
+                        <b:navLink value="Managing Users" href="adminUsers.jsf"/>
+                        <b:navLink value="Managing Recipes" href="adminReceipes.jsf"/>
+                    </b:dropMenu>
                     <b:navLink value="LoginButton" href="#" styleClass="hidden-md hidden-lg"/>
                 </b:navbarLinks>
 
@@ -75,9 +73,16 @@
                                     <b:inputSecret id="password" value="#{loginBean.pwd}" required="true"
                                                    requiredMessage="Please enter a password"/>
 
-                                    <p:commandButton id="submitButton" value="GO"
+                                    <p:commandButton id="submitButtonLogin" value="GO"
                                                      action="#{userControllerBean.checkUser(loginBean)}"
                                                      update="growlLogin"/>
+                                    <b:growl
+                                            id="growlLogin" placementFrom="top"
+                                            global-only="false"
+                                            show-summary="true" allow-dismiss="true"
+                                            animation-enter="animated bounceInDown"
+                                            animation-exit="animated flipOutX"
+                                    />
                                 </h:form>
                             </b:column>
                         </b:row>

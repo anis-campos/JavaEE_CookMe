@@ -45,20 +45,18 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
         return "";
     }
 
-    public String searchRecipe(RecipeModelBean recipe) {
+    public String searchRecipe(SearchRecipeBean recipe) {
 
 
-        SearchRecipeBean searchRecipeBean = new SearchRecipeBean(recipe);
-
-        List<RecipeModelBean> fromCache = getFromCache(searchRecipeBean);
+        List<RecipeModelBean> fromCache = getFromCache(recipe);
 
         RecipeListModelBean recipeList;
         if (fromCache != null) {
             recipeList = new RecipeListModelBean(fromCache);
         } else {
-            List<RecipeModelBean> search = dao.search(searchRecipeBean);
-            recipeList = new RecipeListModelBean(dao.search(searchRecipeBean));
-            putIntoCache(searchRecipeBean, search);
+            List<RecipeModelBean> search = dao.search(recipe);
+            recipeList = new RecipeListModelBean(dao.search(recipe));
+            putIntoCache(recipe, search);
         }
 
         DataGridView dgv = new DataGridView<>(recipeList);

@@ -4,24 +4,22 @@ import cookMe.model.comment.CommentModelBean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Anis on 24/05/2016.
  */
 @ManagedBean
 @RequestScoped
-public class SearchCommentBean extends CommentModelBean implements SearchCriteria {
-    private static final int ALL_VALUES_INT = -2;
+public class SearchCommentBean extends CommentModelBean implements SearchCriteria<CommentModelBean> {
 
     public SearchCommentBean() {
-        this.setRecipeId(ALL_VALUES_INT);
+        super(ALL_VALUES_INT, ALL_VALUES_INT, ALL_VALUES_STRING, ALL_VALUES_STRING);
     }
 
-    public SearchCommentBean(CommentModelBean commentModelBean) {
-        this.setComment(commentModelBean.getComment());
-        this.setRecipeModelBean(commentModelBean.getRecipeModelBean());
-        this.setUserModelBean(commentModelBean.getUserModelBean());
-    }
+
 
     @Override
     public String getSQLSearchQuery() {
@@ -37,8 +35,19 @@ public class SearchCommentBean extends CommentModelBean implements SearchCriteri
                 " WHERE 1=1 ";
 
         if (getRecipeModelBean().getId() != ALL_VALUES_INT)
-            sql += "AND c.id_recipe =" + getRecipeModelBean().getId();
-
+            sql += " AND c.id_recipe =" + getRecipeModelBean().getId();
+        if (getUserModelBean().getId() != ALL_VALUES_INT)
+            sql += " AND c.id_user =" + getUserModelBean().getId();
+        if (getComment() != ALL_VALUES_STRING)
+            sql += " AND c.comment LIKE '" + getComment() + "'";
+        try {
+            Date parse = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(getDate());
+            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(parse);
+            if (getDate() != ALL_VALUES_STRING)
+                sql += " HAVING record_date = '" + parse + "'";
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         sql += " ORDER BY record_date DESC";
         return sql;
 

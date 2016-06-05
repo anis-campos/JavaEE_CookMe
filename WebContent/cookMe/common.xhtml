@@ -5,7 +5,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+>
 <f:view>
     <h:head>
         <title>#{title}</title>
@@ -20,6 +21,12 @@
 
         <b:container>
             <h1 id="subTitle">#{subTitle}</h1>
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
+
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false"
+                      showHeader="false">
+                <p:graphicImage value="images/ajaxloadingbar.gif"/>
+            </p:dialog>
             <ui:insert name="content">
                 CONTENUE A REMPLACER
             </ui:insert>

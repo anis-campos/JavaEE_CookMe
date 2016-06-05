@@ -10,9 +10,8 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class SearchUserBean extends UserModelBean implements SearchCriteria {
-    private static final String ALL_VALUES_STRING = null;
-    private static final int ALL_VALUES_INT = 0;
+public class SearchUserBean extends UserModelBean implements SearchCriteria<UserModelBean> {
+
     public SearchUserBean() {
         super(ALL_VALUES_INT, ALL_VALUES_STRING, ALL_VALUES_STRING, ALL_VALUES_INT, ALL_VALUES_STRING, ALL_VALUES_STRING, ALL_VALUES_STRING, UserType.none);
     }

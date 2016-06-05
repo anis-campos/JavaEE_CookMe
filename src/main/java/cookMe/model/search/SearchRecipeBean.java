@@ -10,18 +10,7 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class SearchRecipeBean extends RecipeModelBean implements SearchCriteria {
-    private static final String ALL_VALUES_STRING = null;
-    private static final int ALL_VALUES_INT = 0;
-
-    public SearchRecipeBean(RecipeModelBean recipeModelBean) {
-        this.setDescription(recipeModelBean.getDescription());
-        this.setTitle(recipeModelBean.getTitle());
-        this.setType(recipeModelBean.getType());
-        this.setExpertise(recipeModelBean.getExpertise());
-        this.setNbpeople(recipeModelBean.getNbpeople());
-        this.setDuration(recipeModelBean.getDuration());
-    }
+public class SearchRecipeBean extends RecipeModelBean implements SearchCriteria<RecipeModelBean> {
 
     public SearchRecipeBean() {
         super(ALL_VALUES_STRING, ALL_VALUES_STRING, ALL_VALUES_INT, ALL_VALUES_INT, ALL_VALUES_INT, ALL_VALUES_STRING, ALL_VALUES_STRING, ALL_VALUES_INT);

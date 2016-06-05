@@ -5,7 +5,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
->
+                xmlns:b="http://bootsfaces.net/ui">
 
 
     <ui:param name="title" value="Administration"/>
@@ -28,16 +28,13 @@
         </h:form>
 
         <!--@elvariable id="loggedUser" type="cookMe.model.user.UserModelBean"-->
-        <h:form rendered="#{not empty loggedUser and userControllerBean.isAdmin(loggedUser)}">
+        <h:form id="checkTest" rendered="#{not empty loggedUser}">
 
-            <h:commandButton id="close" action="#{userControllerBean.toMenu}"/>
+            <f:event id="test" listener="#{userControllerBean.isLoggedUserAdmin}" type="preRenderView"/>
 
-        </h:form>
+            <b:growl id="growl" showDetail="true" sticky="true" placementFrom="top" placement-align="center"/>
 
-        <h:form rendered="#{ empty loggedUser and not userControllerBean.isAdmin(loggedUser)}">
-
-            <p:growl id="growl" showDetail="true" sticky="true"/>
-
+            <b:commandButton value="Administration Menu" action="adminMenu.jsf"/>
         </h:form>
     </ui:define>
 </ui:composition>

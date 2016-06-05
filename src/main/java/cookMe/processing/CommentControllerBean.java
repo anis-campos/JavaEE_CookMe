@@ -17,13 +17,16 @@ import java.util.List;
  */
 @ManagedBean
 @ApplicationScoped
-public class CommentControllerBean extends AbstractController<CommentModelBean, CommentDao, CommentModelBean> {
+public class CommentControllerBean extends AbstractController<CommentModelBean, CommentDao, SearchCommentBean> {
     public CommentControllerBean() {
         super(DaoFabric.getInstance().createCommentDao());
     }
 
+
     public List<CommentModelBean> getListCommentWithRecipe(RecipeModelBean recipe){
-        List<CommentModelBean> comments = dao.search(new SearchCommentBean(new CommentModelBean(recipe.getId())));
+        SearchCommentBean searchCommentBean = new SearchCommentBean();
+        searchCommentBean.setRecipeId(recipe.getId());
+        List<CommentModelBean> comments = dao.search(searchCommentBean);
         return comments;
     }
 

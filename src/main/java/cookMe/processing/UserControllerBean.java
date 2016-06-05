@@ -8,15 +8,18 @@ import cookMe.model.user.UserListModelBean;
 import cookMe.model.user.UserModelBean;
 import cookMe.model.user.UserSubmissionModelBean;
 import cookMe.view.DataGridView;
+import cookMe.view.ViewTools;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import java.util.List;
 import java.util.Map;
 
 import static javax.faces.application.FacesMessage.SEVERITY_FATAL;
+import static javax.faces.application.FacesMessage.SEVERITY_INFO;
 
 
 /**
@@ -93,6 +96,22 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
         return loggedUser != null && loggedUser.getType() == UserModelBean.UserType.admin;
     }
 
+    public boolean isLoggedUserAdmin(ComponentSystemEvent event) {
+
+        UserModelBean user = (UserModelBean) getSessionMap().get("loggedUser");
+        if (user == null) return false;
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        boolean rep = user.getType() == UserModelBean.UserType.admin;
+        if (rep) {
+            context.addMessage(event.getComponent().getClientId(), new FacesMessage(SEVERITY_INFO, "You can go", "You are already logged ^^"));
+        } else {
+            context.addMessage(event.getComponent().getClientId(), new FacesMessage(SEVERITY_FATAL, "Authenfication Failded", "Wrong Login and//or Password !"));
+
+        }
+        return rep;
+    }
+
     public String logOut() {
         getSessionMap().remove("loggedUser");
         return getRequestUri() + "?faces-redirect=true";
@@ -105,6 +124,14 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
 
     }
 
+    public void adminForm(UserSubmissionModelBean user) {
+        ViewTools viewTools = (ViewTools) getViewMap().get("viewTools");
+        if (viewTools.isCreationModeEnabled()) {
+            checkAndAddUser(user);
+        } else {
+            update();
+        }
+    }
 
     public String toMenu() {
         return "adminMenu.jsf?faces-redirect=true";
