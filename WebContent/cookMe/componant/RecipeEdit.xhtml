@@ -46,7 +46,7 @@
                   allowTypes="/(\.|\/)(gif|jpe?g|png)$/" auto="true"/>
     <p:message for="image"/>
 
-    <h:graphicImage value="#{recipeSubmissionModelBean.image}"/>
+    <h:graphicImage rendered="#{not empty recipeSubmissionModelBean.image}" value="#{recipeSubmissionModelBean.image}"/>
 
 
 </ui:composition>

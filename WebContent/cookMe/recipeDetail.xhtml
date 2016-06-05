@@ -38,7 +38,7 @@
 
             <p><h:outputText value="#{recipeModelBean.description}"/></p>
 
-            <h:graphicImage class="center" value="#{recipeModelBean.image}"/>
+            <h:graphicImage rendered="#{not empty recipeModelBean.image}" class="center" value="#{recipeModelBean.image}"/>
         </h:form>
 
 
