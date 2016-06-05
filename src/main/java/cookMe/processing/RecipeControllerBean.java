@@ -29,7 +29,6 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
 
 
     public void addRecipe(RecipeSubmissionModelBean recipe) {
-        //TODO: 29/05/2016 :  controler les valeurs de la recette.
         if (recipe.isValid()) {
             dao.create(recipe);
         }
