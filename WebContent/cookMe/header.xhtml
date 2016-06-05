@@ -28,7 +28,7 @@
                     <b:dropMenu value="Administration" href="adminMenu.jsf"
                                 rendered="#{not empty loggedUser and userControllerBean.isAdmin(loggedUser)}">
                         <b:navLink value="Managing Users" href="adminUsers.jsf"/>
-                        <b:navLink value="Managing Recipes" href="adminReceipes.jsf"/>
+                        <b:navLink value="Managing Recipes" href="adminRecipes.jsf"/>
                     </b:dropMenu>
                     <b:navLink value="LoginButton" href="#" styleClass="hidden-md hidden-lg"/>
                 </b:navbarLinks>
@@ -53,7 +53,7 @@
                         </b:row>
                     </b:dropMenu>
                     <!--@elvariable id="loggedUser" type="cookMe.model.user.UserModelBean"-->
-                    <b:dropMenu value="LoginMenu" rendered="#{empty loggedUser}">
+                    <b:dropMenu value="Log in" rendered="#{empty loggedUser}">
                         <b:row styleClass="login-dp">
                             <b:column mediumScreen="12">
                                 Login via
