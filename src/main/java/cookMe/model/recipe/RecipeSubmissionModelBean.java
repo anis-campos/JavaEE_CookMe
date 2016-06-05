@@ -7,6 +7,7 @@ import org.primefaces.model.UploadedFile;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.util.Base64;
+import java.util.regex.Pattern;
 
 /**
  * Created by Anis on 24/05/2016.
@@ -42,6 +43,10 @@ public class RecipeSubmissionModelBean extends RecipeModelBean implements ISubmi
 
     @Override
     public boolean isValid() {
-        return true;
+        boolean valid;
+        valid = getTitle() != null && getTitle().length() < 50 && Pattern.compile("[A-Za-z]+").matcher(this.getTitle()).matches();
+        valid &= getDescription() != null && getDescription().length() < 4000 && Pattern.compile("[A-Za-z]*").matcher(this.getDescription()).matches();
+        valid &= getType() != null;
+        return valid;
     }
 }
