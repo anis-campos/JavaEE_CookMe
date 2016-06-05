@@ -23,10 +23,12 @@ public abstract class AbstractAdminView<Model, Submission extends Model> {
     }
 
 
-    public void setCreationMode() {
+    public String setCreationMode() {
         this.creationMode = true;
         Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        viewMap.remove(beanName);
+        if (viewMap.containsKey(beanName))
+            viewMap.remove(beanName);
+        return "?faces-redirect=true";
     }
 
     public void updateMode(Model model) {
@@ -35,17 +37,20 @@ public abstract class AbstractAdminView<Model, Submission extends Model> {
     }
 
 
-    public void formSubmit(Submission submission) {
+    public String formSubmit(Submission submission) {
         if (isCreationMode()) {
             create(submission);
         } else {
             update();
         }
+
+        return "?faces-redirect=true";
     }
 
     public abstract String getTitle();
 
     public abstract String getButtonFormSubmit();
+
     protected abstract void putIntoSession(Model model);
 
     public abstract void update();

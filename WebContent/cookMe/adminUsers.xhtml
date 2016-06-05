@@ -66,8 +66,9 @@
                 </b:row>
                 <b:row>
                     <b:column mediumScreen="6">
-                        <p:commandButton value="Add user" actionListener="#{adminUserView.setCreationMode}"
-                                         update="creationForm"/>
+                        <h:form>
+                            <b:commandButton value="Add user" actionListener="#{adminUserView.setCreationMode}"/>
+                        </h:form>
                     </b:column>
                 </b:row>
 

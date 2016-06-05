@@ -48,9 +48,10 @@ public class AdminUserView extends AbstractAdminView<UserModelBean, UserSubmissi
     @Override
     public void update() {
 
-        Map<String, Object> viewMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        UserSubmissionModelBean recipeSubmissionModelBean = (UserSubmissionModelBean) viewMap.get(beanName);
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        UserSubmissionModelBean recipeSubmissionModelBean = (UserSubmissionModelBean) sessionMap.get(beanName);
         controler.update(recipeSubmissionModelBean);
+        sessionMap.remove(beanName);
     }
 
     @Override
