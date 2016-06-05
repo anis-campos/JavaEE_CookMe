@@ -43,6 +43,8 @@ public abstract class AbstractAdminView<Model, Submission extends Model> {
         }
     }
 
+    public abstract String getTitle();
+
     protected abstract void putIntoSession(Model model);
 
     public abstract void update();

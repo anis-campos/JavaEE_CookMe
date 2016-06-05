@@ -5,7 +5,7 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
     <ui:param name="title" value="Administration"/>
@@ -13,80 +13,66 @@
         <b:row>
             <b:column mediumScreen="4">
 
-                <p:dataTable id="recipeTable" var="recipe" value="#{recipeControllerBean.recipeList.listData.all}">
+                <b:row>
+                    <p:dataTable id="recipeTable" var="recipe" value="#{recipeControllerBean.recipeList.listData.all}">
 
-                    <p:column headerText="Title">
-                        <h:outputText value="#{recipe.title}"/>
-                    </p:column>
+                        <p:column headerText="Title">
+                            <h:outputText value="#{recipe.title}"/>
+                        </p:column>
 
 
-                    <p:column>
-                        <h:form>
-                            <b:commandButton icon="trash"
-                                             title="Delete this Recipe"
-                                             value="Delete"
-                                             action="#{recipeControllerBean.remove(recipe)}"
-                                             update="recipeTable"
-                            />
-                            <b:commandButton icon="square-o"
-                                             title="Edit this Recipe"
-                                             value="Edit"
-                                             actionListener="#{adminRecipeView.updateMode(recipe)}"
-                                             update="creationForm"
-                                             ajax="true"
-                            />
-                        </h:form>
+                        <p:column>
+                            <h:form>
+                                <b:commandButton icon="trash"
+                                                 title="Delete this Recipe"
+                                                 value="Delete"
+                                                 action="#{recipeControllerBean.remove(recipe)}"
+                                                 update="recipeTable"
+                                />
+                                <b:commandButton icon="square-o"
+                                                 title="Edit this Recipe"
+                                                 value="Edit"
+                                                 actionListener="#{adminRecipeView.updateMode(recipe)}"
+                                                 update="creationForm"
+                                                 ajax="true"
+                                />
+                            </h:form>
 
-                    </p:column>
-                </p:dataTable>
+                        </p:column>
+                    </p:dataTable>
+                </b:row>
+
+
+                <b:row>
+                    <b:column mediumScreen="6">
+                        <p:commandButton value="Add user" actionListener="#{adminRecipeView.setCreationMode}"
+                                         update="creationForm"/>
+                    </b:column>
+                </b:row>
             </b:column>
 
 
             <b:column mediumScreen="8">
                 <h:form id="creationForm">
-                    <h:panelGroup id="wrapperPanel">
-                        <h:panelGroup id="recipeCreateFormPanel">
+                    <b:panel id="wrapperPanel" title="#{adminRecipeView.title}">
 
-                            <p:panelGrid id="creationGrid" columns="3" layout="grid">
-                                <f:facet name="header">
-                                    <p:row>
-                                        <p:column colspan="7">
-                                            <c:choose>
-                                                <c:when test="#{adminRecipeView.creationMode}">
-                                                    Create
-                                                </c:when>
-                                                <c:otherwise>
-                                                    Update
-                                                </c:otherwise>
-                                            </c:choose>
-                                            Recipe
-                                        </p:column>
-                                    </p:row>
-                                </f:facet>
-                                <ui:include src="componant/RecipeEdit.xhtml"/>
-                                <f:facet name="footer">
+                        <b:panelGrid id="creationGrid" colSpans="3,7,2" columnClasses="inputFullWidth">
 
+                            <ui:include src="componant/RecipeEdit.xhtml"/>
 
-                                    <h:commandButton id="actionUserForm"
-                                                     value="Go"
-                                                     action="#{adminRecipeView.formSubmit(recipeSubmissionModelBean)}"
-                                    />
+                        </b:panelGrid>
 
-                                </f:facet>
-                            </p:panelGrid>
-                        </h:panelGroup>
-                    </h:panelGroup>
+                        <f:facet name="footer">
+                            <b:commandButton
+                                    value="Go"
+                                    action="#{adminRecipeView.formSubmit(recipeSubmissionModelBean)}"/>
+                        </f:facet>
+                    </b:panel>
                 </h:form>
             </b:column>
 
         </b:row>
 
-        <b:row>
-            <b:column mediumScreen="6">
-                <p:commandButton value="Add user" actionListener="#{adminRecipeView.setCreationMode}"
-                                 update="creationForm"/>
-            </b:column>
-        </b:row>
 
     </ui:define>
 

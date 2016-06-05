@@ -73,10 +73,10 @@
                    rendered="#{not empty loggedUser and userControllerBean.isAdmin(loggedUser)}"/>
     <p:selectOneMenu id="type" value="#{userSubmissionModelBean.type}"
                      rendered="#{not empty loggedUser and userControllerBean.isAdmin(loggedUser)}">
-        <f:selectItems value="#{userControllerBean.userTypes}"
-                       rendered="#{not empty loggedUser and userControllerBean.isAdmin(loggedUser)}"/>
+        <f:selectItems value="#{userControllerBean.userTypes}"/>
     </p:selectOneMenu>
-    <p:message for="type"/>
+    <p:message for="type"
+               rendered="#{not empty loggedUser and userControllerBean.isAdmin(loggedUser)}"/>
 
 
 </ui:composition>

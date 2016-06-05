@@ -24,6 +24,11 @@ public class AdminUserView extends AbstractAdminView<UserModelBean, UserSubmissi
         super("userSubmissionModelBean");
     }
 
+    @Override
+    public String getTitle() {
+        return isCreationMode() ? "Create User" : "Update User";
+    }
+
     public void setControler(UserControllerBean controler) {
         this.controler = controler;
     }
@@ -45,7 +50,7 @@ public class AdminUserView extends AbstractAdminView<UserModelBean, UserSubmissi
 
     @Override
     public void create(UserSubmissionModelBean bean) {
-
+        controler.checkAndAddUser(bean);
     }
 
 }
