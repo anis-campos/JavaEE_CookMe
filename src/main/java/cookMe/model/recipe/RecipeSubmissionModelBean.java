@@ -1,13 +1,10 @@
 package cookMe.model.recipe;
 
 import cookMe.model.ISubmissionModel;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import java.util.Base64;
-import java.util.regex.Pattern;
 
 /**
  * Created by Anis on 24/05/2016.
@@ -25,12 +22,6 @@ public class RecipeSubmissionModelBean extends RecipeModelBean implements ISubmi
         super(recipe.getTitle(), recipe.getDescription(), recipe.getExpertise(), recipe.getNbPeople(), recipe.getDuration(), recipe.getType().name(), recipe.getImage(), recipe.getId());
     }
 
-    public void fileUploadListener(FileUploadEvent e) {
-        file = e.getFile();
-        String encodedImage = Base64.getEncoder().encodeToString(file.getContents());
-        encodedImage = "data:image/jpeg;base64," + encodedImage;
-        setImage(encodedImage);
-    }
 
     public UploadedFile getFile() {
         return file;
@@ -41,12 +32,15 @@ public class RecipeSubmissionModelBean extends RecipeModelBean implements ISubmi
     }
 
 
+
     @Override
     public boolean isValid() {
+
+        return true;/*
         boolean valid;
         valid = getTitle() != null && getTitle().length() < 50 && Pattern.compile("[A-Za-z]+").matcher(this.getTitle()).matches();
-        valid &= getDescription() != null && getDescription().length() < 4000 && Pattern.compile("[A-Za-z]*").matcher(this.getDescription()).matches();
+        valid &= getDescription() != null && getDescription().length() < 4000 && Pattern.compile("^(?!\\s*$).+").matcher(this.getDescription()).matches();
         valid &= getType() != null;
-        return valid;
+        return valid;*/
     }
 }

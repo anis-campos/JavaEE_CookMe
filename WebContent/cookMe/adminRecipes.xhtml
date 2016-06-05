@@ -61,23 +61,42 @@
 
 
             <b:column mediumScreen="8">
+
                 <h:form id="creationForm">
-                    <b:panel id="wrapperPanel" title="#{adminRecipeView.title}">
+                    <b:row>
+                        <b:panel id="wrapperPanel" title="#{adminRecipeView.title}">
 
-                        <b:panelGrid id="creationGrid" colSpans="3,7,2" columnClasses="inputFullWidth">
+                            <b:panelGrid id="creationGrid" colSpans="3,7,2" columnClasses="inputFullWidth">
 
-                            <ui:include src="componant/RecipeEdit.xhtml"/>
+                                <ui:include src="componant/RecipeEdit.xhtml"/>
 
-                        </b:panelGrid>
+                            </b:panelGrid>
 
-                        <f:facet name="footer">
-                            <b:commandButton
-                                    value="#{adminRecipeView.buttonFormSubmit}"
-                                    actionListener="#{adminRecipeView.formSubmit(recipeSubmissionModelBean)}"
-                                    ajax="true"
-                                    update="recipeTableForm"/>
-                        </f:facet>
-                    </b:panel>
+                            <f:facet name="footer">
+                                <b:commandButton
+                                        value="#{adminRecipeView.buttonFormSubmit}"
+                                        actionListener="#{adminRecipeView.formSubmit(recipeSubmissionModelBean)}"
+                                        ajax="true"
+                                        update="recipeTableForm"/>
+                            </f:facet>
+                        </b:panel>
+                    </b:row>
+                    <b:row>
+                        <b:panel>
+                            <p:outputLabel for="recipeImageUplaoder" value="Select Image"/>
+                            <p:fileUpload id="recipeImageUplaoder"
+                                          fileUploadListener="#{adminRecipeView.handleFileUpload}"
+                                          mode="advanced"
+                                          update="creationForm"
+                                          fileLimit="1"
+                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                            <p:message for="recipeImageUplaoder"/>
+
+                            <h:graphicImage id="recipeImage" rendered="#{not empty recipeSubmissionModelBean.image}"
+                                            value="#{recipeSubmissionModelBean.image}"/>
+                        </b:panel>
+                    </b:row>
+
                 </h:form>
             </b:column>
 

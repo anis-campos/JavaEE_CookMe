@@ -3,11 +3,14 @@ package cookMe.view;
 import cookMe.model.recipe.RecipeModelBean;
 import cookMe.model.recipe.RecipeSubmissionModelBean;
 import cookMe.processing.RecipeControllerBean;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import java.util.Base64;
 import java.util.Map;
 
 /**
@@ -59,5 +62,14 @@ public class AdminRecipeView extends AbstractAdminView<RecipeModelBean, RecipeSu
         controler.addRecipe(recipeSubmissionModelBean);
     }
 
+
+    public void handleFileUpload(FileUploadEvent e) {
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        RecipeSubmissionModelBean recipeSubmissionModelBean = (RecipeSubmissionModelBean) sessionMap.get(beanName);
+        UploadedFile file = e.getFile();
+        String encodedImage = Base64.getEncoder().encodeToString(file.getContents());
+        encodedImage = "data:image/jpeg;base64," + encodedImage;
+        recipeSubmissionModelBean.setImage(encodedImage);
+    }
 
 }

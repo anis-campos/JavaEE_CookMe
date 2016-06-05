@@ -16,13 +16,14 @@ public class RecipesDao extends AbstractDao<RecipeModelBean> {
 
     @Override
     protected PreparedStatement getSQLInsert(Connection con, RecipeModelBean newItem) throws SQLException {
-        PreparedStatement query = con.prepareStatement("INSERT INTO JAVA_ASI.recipe(title ,description , expertise, nbpeople, duration, type) VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement query = con.prepareStatement("INSERT INTO JAVA_ASI.recipe(title ,description , expertise, nbpeople, duration, type,image) VALUES(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
         query.setString(1, newItem.getTitle());
         query.setString(2, newItem.getDescription());
         query.setInt(3, newItem.getExpertise());
         query.setInt(4, newItem.getNbPeople());
         query.setInt(5, newItem.getDuration());
         query.setString(6, newItem.getType().name());
+        query.setString(7, newItem.getImage());
         return query;
     }
 
@@ -35,15 +36,15 @@ public class RecipesDao extends AbstractDao<RecipeModelBean> {
 
     @Override
     protected PreparedStatement getSQLUpdate(Connection con, RecipeModelBean item) throws SQLException {
-        PreparedStatement query = con.prepareStatement("UPDATE JAVA_ASI.recipe SET title = ? ,description = ? , expertise = ?, nbpeople = ?, duration = ?, type = ? WHERE id = ?");
+        PreparedStatement query = con.prepareStatement("UPDATE JAVA_ASI.recipe SET title = ? ,description = ? , expertise = ?, nbpeople = ?, duration = ?, type = ?, image= ? WHERE id = ?");
         query.setString(1, item.getTitle());
         query.setString(2, item.getDescription());
         query.setInt(3, item.getExpertise());
         query.setInt(4, item.getNbPeople());
         query.setInt(5, item.getDuration());
         query.setString(6, item.getType().name());
-
-        query.setInt(7, item.getId());
+        query.setString(7, item.getImage());
+        query.setInt(8, item.getId());
         return query;
     }
 
