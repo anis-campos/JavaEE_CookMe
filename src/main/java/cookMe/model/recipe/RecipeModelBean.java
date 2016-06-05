@@ -1,5 +1,7 @@
 package cookMe.model.recipe;
 
+import cookMe.model.EnumParser;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -12,23 +14,24 @@ public class RecipeModelBean {
     private String title;
     private String description;
     private int expertise;
-    private int nbpeople;
+    private int nbPeople;
     private int duration;
-    private String type;
+    private RecipeType type;
     private String image;
     private int id;
 
 
     public RecipeModelBean() {
+        type = RecipeType.None;
     }
 
-    public RecipeModelBean(String title, String description, int expertise, int nbpeople, int duration, String type, String image, int id) {
+    public RecipeModelBean(String title, String description, int expertise, int nbPeople, int duration, String type, String image, int id) {
         this.title = title;
         this.description = description;
         this.expertise = expertise;
-        this.nbpeople = nbpeople;
+        this.nbPeople = nbPeople;
         this.duration = duration;
-        this.type = type;
+        this.type = EnumParser.ParseWithDefault(RecipeType.class, type);
         this.image = image;
         this.id = id;
     }
@@ -39,7 +42,7 @@ public class RecipeModelBean {
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", expertise=" + expertise +
-                ", nbpeople=" + nbpeople +
+                ", nbPeople=" + nbPeople +
                 ", duration=" + duration +
                 ", type='" + type + '\'' +
                 '}';
@@ -69,12 +72,12 @@ public class RecipeModelBean {
         this.expertise = expertise;
     }
 
-    public int getNbpeople() {
-        return nbpeople;
+    public int getNbPeople() {
+        return nbPeople;
     }
 
-    public void setNbpeople(int nbpeople) {
-        this.nbpeople = nbpeople;
+    public void setNbPeople(int nbPeople) {
+        this.nbPeople = nbPeople;
     }
 
     public int getDuration() {
@@ -85,13 +88,6 @@ public class RecipeModelBean {
         this.duration = duration;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getImage(){ return image; }
 
@@ -107,6 +103,14 @@ public class RecipeModelBean {
         this.id = id;
     }
 
+    public RecipeType getType() {
+        return type;
+    }
+
+    public void setType(RecipeType type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -115,7 +119,7 @@ public class RecipeModelBean {
         RecipeModelBean that = (RecipeModelBean) o;
 
         if (expertise != that.expertise) return false;
-        if (nbpeople != that.nbpeople) return false;
+        if (nbPeople != that.nbPeople) return false;
         if (duration != that.duration) return false;
         if (id != that.id) return false;
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
@@ -130,7 +134,7 @@ public class RecipeModelBean {
         int result = title != null ? title.hashCode() : 0;
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + expertise;
-        result = 31 * result + nbpeople;
+        result = 31 * result + nbPeople;
         result = 31 * result + duration;
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);

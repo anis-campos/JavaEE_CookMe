@@ -5,18 +5,15 @@ import cookMe.model.search.SearchCriteria;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Created by Anis on 28/05/2016.
  */
 abstract class AbstractDao<T> implements DAO<T> {
     private final String connectionString;
-    private Properties info;
 
     AbstractDao(String connectionString) {
         this.connectionString = connectionString;
-        this.info = info;
     }
 
     @Override
@@ -126,7 +123,7 @@ abstract class AbstractDao<T> implements DAO<T> {
     }
 
     Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(connectionString,info);
+        return DriverManager.getConnection(connectionString);
     }
 
     protected abstract PreparedStatement getSQLInsert(Connection con, T newItem) throws SQLException;

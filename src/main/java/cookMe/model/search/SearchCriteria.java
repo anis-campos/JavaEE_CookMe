@@ -8,7 +8,7 @@ public interface SearchCriteria<Model> {
     /***
      * Valeur par defaut des champs entiers
      */
-    int ALL_VALUES_INT = Integer.MIN_VALUE;
+    int ALL_VALUES_INT = -1;
     /***
      * Valeur par defaut des champs string
      */

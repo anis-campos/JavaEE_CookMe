@@ -3,6 +3,7 @@ package cookMe.processing.validators;
 import cookMe.dao.fabric.DaoFabric;
 import cookMe.dao.instance.UserDao;
 import cookMe.model.user.UserModelBean;
+import cookMe.model.user.UserType;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -25,7 +26,7 @@ public class LoginAdminValidator implements Validator {
 
         UserModelBean user = userDao.findByLogin(submittedValue);
 
-         if(user == null || user.getType()!= UserModelBean.UserType.admin){
+        if (user == null || user.getType() != UserType.admin) {
             throw new ValidatorException(new FacesMessage("Pas admin"));
         }
 

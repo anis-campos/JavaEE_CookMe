@@ -23,26 +23,16 @@ import java.util.Map;
 public class RecipeControllerBean extends AbstractController<RecipeModelBean, RecipesDao, SearchRecipeBean> {
 
 
-    private RecipeListModelBean recipeList;
-
     public RecipeControllerBean() {
         super(DaoFabric.getInstance().createRecipesDao());
     }
 
-    public void loadAllRecipe() {
-        List<RecipeModelBean> list = this.dao.getAll();
-        RecipeListModelBean recipeList = new RecipeListModelBean();
-        for (RecipeModelBean recipe : list) {
-            recipeList.add(recipe);
-        }
-        Map<String, Object> sessionMap = getSessionMap();
-        sessionMap.put("recipeList", recipeList);
-    }
 
-    public String addRecipe(RecipeSubmissionModelBean recipe) {
+    public void addRecipe(RecipeSubmissionModelBean recipe) {
         //TODO: 29/05/2016 :  controler les valeurs de la recette.
-        dao.create(recipe);
-        return "";
+        if (recipe.isValid()) {
+            dao.create(recipe);
+        }
     }
 
     public String searchRecipe(SearchRecipeBean recipe) {
@@ -55,7 +45,7 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
             recipeList = new RecipeListModelBean(fromCache);
         } else {
             List<RecipeModelBean> search = dao.search(recipe);
-            recipeList = new RecipeListModelBean(dao.search(recipe));
+            recipeList = new RecipeListModelBean(search);
             putIntoCache(recipe, search);
         }
 
@@ -69,11 +59,9 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
         return "resultSearch.jsf?faces-redirect=true";
     }
 
-    public void update() {
-        //// TODO: 02/06/2016 : Mettre à jour la recette
-        RecipeSubmissionModelBean bean = (RecipeSubmissionModelBean) getSessionMap().get("recipeSubmissionModelBean");
-        getSessionMap().remove("recipeSubmissionModelBean");
-        dao.update(bean);
+    public void update(RecipeSubmissionModelBean recipeSubmissionModelBean) {
+        if (recipeSubmissionModelBean != null && recipeSubmissionModelBean.isValid())
+            dao.update(recipeSubmissionModelBean);
     }
 
     public String displayRecipeDetail(RecipeModelBean recipe) {
@@ -90,7 +78,7 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
     }
 
     public List<String> getRecipeTypes() {
-        return enumToList(RecipeType.class);
+        return ParsableEnumToList(RecipeType.class);
     }
 
     public DataGridView<RecipeListModelBean, RecipeModelBean> getRecipeList() {
@@ -109,4 +97,6 @@ public class RecipeControllerBean extends AbstractController<RecipeModelBean, Re
     public void remove(RecipeModelBean recipe) {
         dao.delete(recipe);
     }
+
+
 }

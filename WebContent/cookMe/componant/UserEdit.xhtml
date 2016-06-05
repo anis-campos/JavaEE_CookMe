@@ -50,23 +50,23 @@
 
 
     <p:outputLabel>Password </p:outputLabel>
-    <p:password id="pwd"
-                value="#{userSubmissionModelBean.pwd}"
+    <p:password id="password"
+                value="#{userSubmissionModelBean.password}"
                 required="true"
                 redisplay="true">
-        <f:validator validatorId="validators.pwd"/>
+        <f:validator validatorId="validators.password"/>
     </p:password>
-    <p:message for="pwd"/>
+    <p:message for="password"/>
 
 
     <p:outputLabel>Repeat password </p:outputLabel>
-    <p:password id="pwd1"
-                value="#{userSubmissionModelBean.pwd1}"
+    <p:password id="repeatedPassword"
+                value="#{userSubmissionModelBean.repeatedPassword}"
                 required="true"
                 redisplay="true">
-        <f:validator validatorId="validators.pwd1"/>
+        <f:validator validatorId="validators.repeatedPassword"/>
     </p:password>
-    <p:message for="pwd1"/>
+    <p:message for="repeatedPassword"/>
 
 
     <p:outputLabel for="type" value="Type: "

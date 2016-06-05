@@ -13,27 +13,27 @@ import java.util.regex.Pattern;
 @RequestScoped
 public class UserSubmissionModelBean extends UserModelBean implements ISubmissionModel {
 
-    private String pwd1;
+    private String repeatedPassword;
 
     public UserSubmissionModelBean() {
-
+        super();
     }
 
-    public UserSubmissionModelBean(int id, String firstname, String lastname, int age, String login, String password, String email, UserType userType, String pwd1) {
+    public UserSubmissionModelBean(int id, String firstname, String lastname, int age, String login, String password, String email, UserType userType, String repeatedPassword) {
         super(id, firstname, lastname, age, login, password, email, userType);
-        this.pwd1 = pwd1;
+        this.repeatedPassword = repeatedPassword;
     }
 
     public UserSubmissionModelBean(UserModelBean user) {
-        this(user.getId(), user.getFirstname(), user.getLastname(), user.getAge(), user.getLogin(), user.getPwd(), user.getEmail(), user.getType(), user.getPwd());
+        this(user.getId(), user.getFirstname(), user.getLastname(), user.getAge(), user.getLogin(), user.getPassword(), user.getEmail(), user.getType(), user.getPassword());
     }
 
-    public String getPwd1() {
-        return pwd1;
+    public String getRepeatedPassword() {
+        return repeatedPassword;
     }
 
-    public void setPwd1(String pwd1) {
-        this.pwd1 = pwd1;
+    public void setRepeatedPassword(String repeatedPassword) {
+        this.repeatedPassword = repeatedPassword;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class UserSubmissionModelBean extends UserModelBean implements ISubmissio
         ok &= this.getAge() > 0 && this.getAge() < 100;
         ok &= this.getEmail() != null && Pattern.compile("[a-zA-Z0-9-._]+@[a-zA-Z0-9-._]+.[a-z]+").matcher(this.getEmail()).matches();
         ok &= this.getLogin() != null && Pattern.compile("[a-zA-Z0-9-._]+").matcher(this.getLogin()).matches();
-        ok &= this.getPwd() != null && this.getPwd1() != null && this.getPwd().equals(this.getPwd1());
+        ok &= this.getPassword() != null && this.getRepeatedPassword() != null && this.getPassword().equals(this.getRepeatedPassword());
         return ok;
     }
 }

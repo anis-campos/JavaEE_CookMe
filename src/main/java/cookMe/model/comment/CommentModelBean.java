@@ -84,4 +84,28 @@ public class CommentModelBean {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CommentModelBean)) return false;
+
+        CommentModelBean that = (CommentModelBean) o;
+
+        if (userModelBean != null ? !userModelBean.equals(that.userModelBean) : that.userModelBean != null)
+            return false;
+        if (recipeModelBean != null ? !recipeModelBean.equals(that.recipeModelBean) : that.recipeModelBean != null)
+            return false;
+        if (comment != null ? !comment.equals(that.comment) : that.comment != null) return false;
+        return date != null ? date.equals(that.date) : that.date == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userModelBean != null ? userModelBean.hashCode() : 0;
+        result = 31 * result + (recipeModelBean != null ? recipeModelBean.hashCode() : 0);
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        return result;
+    }
 }

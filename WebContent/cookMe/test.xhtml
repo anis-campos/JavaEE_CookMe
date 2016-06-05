@@ -22,7 +22,10 @@
                         <ui:include src="componant/UserEdit.xhtml"/>
                         <f:facet name="footer">
                             <p:commandButton value="Update User"
-                                             action="#{userControllerBean.update()}"/>
+                                             action="#{userControllerBean.adminForm(userSubmissionModelBean)}"
+                                             update="wrapperPanel">
+                                <f:actionListener binding="#{adminUserView.setCreationMode()}"/>
+                            </p:commandButton>
                         </f:facet>
                     </p:panelGrid>
                 </h:form>

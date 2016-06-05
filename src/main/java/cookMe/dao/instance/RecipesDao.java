@@ -23,9 +23,9 @@ public class RecipesDao extends AbstractDao<RecipeModelBean> {
         query.setString(1, newItem.getTitle());
         query.setString(2, newItem.getDescription());
         query.setInt(3, newItem.getExpertise());
-        query.setInt(4, newItem.getNbpeople());
+        query.setInt(4, newItem.getNbPeople());
         query.setInt(5, newItem.getDuration());
-        query.setString(6, newItem.getType());
+        query.setString(6, newItem.getType().name());
         return query;
     }
 
@@ -42,9 +42,9 @@ public class RecipesDao extends AbstractDao<RecipeModelBean> {
         query.setString(1, item.getTitle());
         query.setString(2, item.getDescription());
         query.setInt(3, item.getExpertise());
-        query.setInt(4, item.getNbpeople());
+        query.setInt(4, item.getNbPeople());
         query.setInt(5, item.getDuration());
-        query.setString(6, item.getType());
+        query.setString(6, item.getType().name());
 
         query.setInt(7, item.getId());
         return query;
@@ -59,7 +59,7 @@ public class RecipesDao extends AbstractDao<RecipeModelBean> {
     @Override
     protected PreparedStatement getSQLGetById(Connection con, int id) throws SQLException {
         PreparedStatement query = con.prepareStatement("SELECT * FROM JAVA_ASI.recipe WHERE id = ?");
-        query.setInt(1,id);
+        query.setInt(1, id);
         return query;
     }
 

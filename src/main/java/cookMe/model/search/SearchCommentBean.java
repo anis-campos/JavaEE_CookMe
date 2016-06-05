@@ -20,7 +20,6 @@ public class SearchCommentBean extends CommentModelBean implements SearchCriteri
     }
 
 
-
     @Override
     public String getSQLSearchQuery() {
 
@@ -38,16 +37,19 @@ public class SearchCommentBean extends CommentModelBean implements SearchCriteri
             sql += " AND c.id_recipe =" + getRecipeModelBean().getId();
         if (getUserModelBean().getId() != ALL_VALUES_INT)
             sql += " AND c.id_user =" + getUserModelBean().getId();
-        if (getComment() != ALL_VALUES_STRING)
+        if (!getComment().equals(ALL_VALUES_STRING))
             sql += " AND c.comment LIKE '" + getComment() + "'";
-        try {
-            Date parse = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(getDate());
-            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(parse);
-            if (getDate() != ALL_VALUES_STRING)
+        if (!getDate().equals(ALL_VALUES_STRING)) {
+            try {
+                Date parse = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(getDate());
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(parse);
+
                 sql += " HAVING record_date = '" + parse + "'";
-        } catch (ParseException e) {
-            e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
+
         sql += " ORDER BY record_date DESC";
         return sql;
 

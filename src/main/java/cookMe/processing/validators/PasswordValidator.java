@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Anis on 24/05/2016.
  */
-@FacesValidator(value ="validators.pwd")
+@FacesValidator(value = "validators.password")
 public class PasswordValidator implements Validator{
 
 

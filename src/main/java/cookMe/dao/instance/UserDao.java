@@ -2,7 +2,9 @@ package cookMe.dao.instance;
 
 
 import cookMe.dao.fabric.DaoFabric;
+import cookMe.model.EnumParser;
 import cookMe.model.user.UserModelBean;
+import cookMe.model.user.UserType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,7 +33,7 @@ public class UserDao extends AbstractDao<UserModelBean> {
         query.setString(2, newItem.getLastname());
         query.setInt(3, newItem.getAge());
         query.setString(4, newItem.getLogin());
-        query.setString(5, newItem.getPwd());
+        query.setString(5, newItem.getPassword());
         query.setString(6, newItem.getEmail());
         query.setString(7, newItem.getType().name());
         return query;
@@ -51,7 +53,7 @@ public class UserDao extends AbstractDao<UserModelBean> {
         query.setString(2, item.getLastname());
         query.setInt(3, item.getAge());
         query.setString(4, item.getLogin());
-        query.setString(5, item.getPwd());
+        query.setString(5, item.getPassword());
         query.setString(6, item.getEmail());
         query.setString(7, item.getType().name());
 
@@ -83,7 +85,7 @@ public class UserDao extends AbstractDao<UserModelBean> {
                 rs.getString("login"),
                 rs.getString("password"),
                 rs.getString("email"),
-                Enum.valueOf(UserModelBean.UserType.class, rs.getString("type")));
+                EnumParser.ParseWithDefault(UserType.class, rs.getString("type")));
     }
 
     public UserModelBean findByLogin(String login) {

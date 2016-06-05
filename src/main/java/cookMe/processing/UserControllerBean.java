@@ -7,8 +7,8 @@ import cookMe.model.search.SearchUserBean;
 import cookMe.model.user.UserListModelBean;
 import cookMe.model.user.UserModelBean;
 import cookMe.model.user.UserSubmissionModelBean;
+import cookMe.model.user.UserType;
 import cookMe.view.DataGridView;
-import cookMe.view.ViewTools;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
@@ -39,7 +39,7 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
         List<UserModelBean> allUser = dao.getAll();
         UserListModelBean userList = new UserListModelBean(allUser);
 
-        DataGridView dgv = new DataGridView<UserListModelBean, UserModelBean>(userList);
+        DataGridView dgv = new DataGridView<>(userList);
 
         getRequestMap().put("dataGridView", dgv);
 
@@ -49,7 +49,7 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
 
     public String checkUser(LoginBean loginBean) {
 
-        UserModelBean user = dao.checkUser(loginBean.getLogin(), loginBean.getPwd());
+        UserModelBean user = dao.checkUser(loginBean.getLogin(), loginBean.getPassword());
         if (user != null) {
 
             getSessionMap().put("loggedUser", user);
@@ -65,15 +65,15 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
     }
 
     public String checkUserAdmin(LoginBean loginBean) {
-        UserModelBean user = dao.checkUser(loginBean.getLogin(), loginBean.getPwd());
+        UserModelBean user = dao.checkUser(loginBean.getLogin(), loginBean.getPassword());
 
 
-        if (user != null && user.getType() == UserModelBean.UserType.admin) {
+        if (user != null && user.getType() == UserType.admin) {
 
 
             Map<String, Object> sessionMap = getSessionMap();
 
-            if (user.getType() == UserModelBean.UserType.admin) {
+            if (user.getType() == UserType.admin) {
                 sessionMap.put("loggedUser", user);
                 String redirectFromLogin = (String) sessionMap.get("redirectFromLogin");
                 if (redirectFromLogin != null) {
@@ -93,7 +93,7 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
     }
 
     public boolean isAdmin(UserModelBean loggedUser) {
-        return loggedUser != null && loggedUser.getType() == UserModelBean.UserType.admin;
+        return loggedUser != null && loggedUser.getType() == UserType.admin;
     }
 
     public boolean isLoggedUserAdmin(ComponentSystemEvent event) {
@@ -102,7 +102,7 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
         if (user == null) return false;
 
         FacesContext context = FacesContext.getCurrentInstance();
-        boolean rep = user.getType() == UserModelBean.UserType.admin;
+        boolean rep = user.getType() == UserType.admin;
         if (rep) {
             context.addMessage(event.getComponent().getClientId(), new FacesMessage(SEVERITY_INFO, "You can go", "You are already logged ^^"));
         } else {
@@ -124,14 +124,7 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
 
     }
 
-    public void adminForm(UserSubmissionModelBean user) {
-        ViewTools viewTools = (ViewTools) getViewMap().get("viewTools");
-        if (viewTools.isCreationModeEnabled()) {
-            checkAndAddUser(user);
-        } else {
-            update();
-        }
-    }
+
 
     public String toMenu() {
         return "adminMenu.jsf?faces-redirect=true";
@@ -139,14 +132,11 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
 
     public List<String> getUserTypes() {
 
-        return enumToList(UserModelBean.UserType.class);
+        return ParsableEnumToList(UserType.class);
     }
 
-    public void update() {
-        UserSubmissionModelBean userSubmitted = (UserSubmissionModelBean) getSessionMap().get("userSubmissionModelBean");
-        if (userSubmitted != null && userSubmitted.isValid())
-            dao.update(userSubmitted);
-
-        getSessionMap().remove("userSubmissionModelBean");
+    public void update(UserSubmissionModelBean userSubmissionModelBean) {
+        if (userSubmissionModelBean != null && userSubmissionModelBean.isValid())
+            dao.update(userSubmissionModelBean);
     }
 }

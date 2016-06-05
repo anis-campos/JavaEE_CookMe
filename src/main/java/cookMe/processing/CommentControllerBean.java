@@ -26,19 +26,16 @@ public class CommentControllerBean extends AbstractController<CommentModelBean, 
     public List<CommentModelBean> getListCommentWithRecipe(RecipeModelBean recipe){
         SearchCommentBean searchCommentBean = new SearchCommentBean();
         searchCommentBean.setRecipeId(recipe.getId());
-        List<CommentModelBean> comments = dao.search(searchCommentBean);
-        return comments;
+        return dao.search(searchCommentBean);
     }
 
-    public String addComment(CommentSubmissionModelBean comment, RecipeModelBean recipe){
+    public void addComment(CommentSubmissionModelBean comment, RecipeModelBean recipe) {
         if(comment.isValid()) {
-            CommentModelBean commentToAdd = comment;
-            commentToAdd.setUserModelBean((UserModelBean) getSessionMap().get("loggedUser"));
-            commentToAdd.setRecipeModelBean(recipe);
+            comment.setUserModelBean((UserModelBean) getSessionMap().get("loggedUser"));
+            comment.setRecipeModelBean(recipe);
             dao.create(comment);
         }
 
-        return "recipeDetail.jsf?faces-redirect=true";
     }
 }
 

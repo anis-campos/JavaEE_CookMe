@@ -1,6 +1,7 @@
 package cookMe.processing;
 
 import cookMe.model.user.UserModelBean;
+import cookMe.model.user.UserType;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -34,7 +35,7 @@ public class AuthFilter implements Filter {
             String reqURI = req.getRequestURI();
 
             if (reqURI.contains("admin") && !reqURI.contains("adminLogin")
-                    && (loggedUser == null || loggedUser.getType() != UserModelBean.UserType.admin)) {
+                    && (loggedUser == null || loggedUser.getType() != UserType.admin)) {
 
                 String message = loggedUser == null ? "Non connecté ! " : "N'est pas admin : " + loggedUser.getLastname();
                 //FacesContext context = FacesContext.getCurrentInstance();

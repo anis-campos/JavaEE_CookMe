@@ -15,7 +15,7 @@ public class UserModelBean implements Serializable {
     private String firstname;
     private int age;
     private String login;
-    private String pwd;
+    private String password;
     private String email;
     private UserType type;
     private int id;
@@ -29,19 +29,12 @@ public class UserModelBean implements Serializable {
         this.lastname = lastname;
         this.age = age;
         this.login = login;
-        this.pwd = pwd;
+        this.password = password;
         this.email = email;
         this.type = type;
         this.id = id;
     }
 
-    public UserType getType() {
-        return type;
-    }
-
-    public void setType(UserType type) {
-        this.type = type;
-    }
 
     @Override
     public String toString() {
@@ -50,7 +43,7 @@ public class UserModelBean implements Serializable {
                 ", firstname='" + firstname + '\'' +
                 ", age=" + age +
                 ", login='" + login + '\'' +
-                ", pwd='" + pwd + '\'' +
+                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", type=" + type +
                 '}';
@@ -88,12 +81,12 @@ public class UserModelBean implements Serializable {
         this.login = login;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -112,9 +105,13 @@ public class UserModelBean implements Serializable {
         this.id = id;
     }
 
-    public enum UserType {
-        none,
-        standard,
-        admin
+    public UserType getType() {
+        return type;
     }
+
+    public void setType(UserType type) {
+        this.type = type;
+    }
+
+
 }

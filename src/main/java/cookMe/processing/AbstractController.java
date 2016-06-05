@@ -1,6 +1,7 @@
 package cookMe.processing;
 
 import cookMe.dao.instance.DAO;
+import cookMe.model.ParsableEnum;
 import cookMe.model.search.SearchCriteria;
 
 import javax.faces.context.ExternalContext;
@@ -26,23 +27,28 @@ public class AbstractController<Model, Dao extends DAO<Model>, Filter extends Se
         getSessionMap().put(CACHE, new HashMap<Filter, List<Model>>());
     }
 
-    protected <E extends Enum<E>> List<String> enumToList(Class<E> enumm) {
+    protected <E extends Enum<E> & ParsableEnum> List<String> ParsableEnumToList(Class<E> enumm) {
         return Arrays.asList(enumm.getEnumConstants())
                 .stream()
                 .map(Enum::name)
+                .filter(e -> !e.contains(ParsableEnum.DEFAULT))
                 .collect(Collectors.toList());
     }
 
 
     protected void putIntoCache(Filter filter, List<Model> list) {
         Map<Filter, List<Model>> tListMap = (Map<Filter, List<Model>>) getSessionMap().get(CACHE);
-        tListMap.put(filter, list);
-        lastFilter = filter;
+        if (tListMap != null) {
+            tListMap.put(filter, list);
+            lastFilter = filter;
+        }
     }
 
     protected List<Model> getFromCache(Filter filter) {
         Map<Filter, List<Model>> tListMap = (Map<Filter, List<Model>>) getSessionMap().get(CACHE);
-        return tListMap.containsKey(filter) ? tListMap.get(filter) : null;
+        if (tListMap != null)
+            return tListMap.containsKey(filter) ? tListMap.get(filter) : null;
+        return null;
     }
 
 

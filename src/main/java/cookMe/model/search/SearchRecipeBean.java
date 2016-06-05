@@ -20,16 +20,16 @@ public class SearchRecipeBean extends RecipeModelBean implements SearchCriteria<
     public String getSQLSearchQuery() {
         String sql = " SELECT * FROM recipe r WHERE 1=1 ";
 
-        if (getDescription() != ALL_VALUES_STRING && getDescription() != "null")
+        if (getDescription() != ALL_VALUES_STRING)
             sql += " AND description = '" + getDescription() + "'";
-        if (getTitle() != ALL_VALUES_STRING && getTitle() != "null")
+        if (getTitle() != ALL_VALUES_STRING)
             sql += " AND title = '" + getTitle() + "'";
-        if (getType() != ALL_VALUES_STRING && getType() != "")
-            sql += " AND type = '" + getType() + "'";
+        if (getType() != null)
+            sql += " AND type = '" + getType().name() + "'";
         if (getExpertise() != ALL_VALUES_INT)
             sql += " AND expertise = " + getExpertise();
-        if (getNbpeople() != ALL_VALUES_INT)
-            sql += " AND nbpeople = " + getNbpeople();
+        if (getNbPeople() != ALL_VALUES_INT)
+            sql += " AND nbpeople = " + getNbPeople();
         if (getDuration() != ALL_VALUES_INT)
             sql += " AND duration = " + getDuration();
         if (getId() != ALL_VALUES_INT)

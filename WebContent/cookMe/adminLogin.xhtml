@@ -21,7 +21,7 @@
                 <p:message for="login"/>
 
                 <p:outputLabel for="password" value="Password : "/>
-                <p:password id="password" value="#{loginBean.pwd}" required="true"/>
+                <p:password id="password" value="#{loginBean.password}" required="true"/>
                 <p:message for="password"/>
             </h:panelGrid>
             <p:commandButton id="submitButton" value="GO" action="#{userControllerBean.checkUserAdmin(loginBean)}"/>

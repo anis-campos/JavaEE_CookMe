@@ -1,6 +1,7 @@
 package cookMe.model.search;
 
 import cookMe.model.user.UserModelBean;
+import cookMe.model.user.UserType;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -13,7 +14,7 @@ import javax.faces.bean.RequestScoped;
 public class SearchUserBean extends UserModelBean implements SearchCriteria<UserModelBean> {
 
     public SearchUserBean() {
-        super(ALL_VALUES_INT, ALL_VALUES_STRING, ALL_VALUES_STRING, ALL_VALUES_INT, ALL_VALUES_STRING, ALL_VALUES_STRING, ALL_VALUES_STRING, UserType.none);
+        super(ALL_VALUES_INT, ALL_VALUES_STRING, ALL_VALUES_STRING, ALL_VALUES_INT, ALL_VALUES_STRING, ALL_VALUES_STRING, ALL_VALUES_STRING, UserType.None);
     }
 
     @Override

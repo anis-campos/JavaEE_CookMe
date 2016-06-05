@@ -21,7 +21,7 @@ public class RecipeSubmissionModelBean extends RecipeModelBean implements ISubmi
     }
 
     public RecipeSubmissionModelBean(RecipeModelBean recipe) {
-        super(recipe.getTitle(), recipe.getDescription(), recipe.getExpertise(), recipe.getNbpeople(), recipe.getDuration(), recipe.getType(), recipe.getImage(), recipe.getId());
+        super(recipe.getTitle(), recipe.getDescription(), recipe.getExpertise(), recipe.getNbPeople(), recipe.getDuration(), recipe.getType().name(), recipe.getImage(), recipe.getId());
     }
 
     public void fileUploadListener(FileUploadEvent e) {

@@ -6,7 +6,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:b="http://bootsfaces.net/ui">
 
-   <ui:param name="title" value="Recipe Detail"/>
+    <ui:param name="title" value="Recipe Detail"/>
 
     <ui:define name="content">
         <h:form id="detail">
@@ -20,16 +20,16 @@
             </b:row>
 
             <h2>
-                 <img src="images/cook.png" class="icon" alt="cook"/>
-                 <h:outputText value=" #{recipeModelBean.type}"/>
-             </h2>
-             <h4>
-                 <img src="images/time.jpg" class="icon" alt="time"/>
-                 <h:outputText value=" #{recipeModelBean.duration} minutes"/>
-             </h4>
+                <img src="images/cook.png" class="icon" alt="cook"/>
+                <h:outputText value=" #{recipeModelBean.type}"/>
+            </h2>
+            <h4>
+                <img src="images/time.jpg" class="icon" alt="time"/>
+                <h:outputText value=" #{recipeModelBean.duration} minutes"/>
+            </h4>
             <h4>
                 <img src="images/people.jpg" class="icon" alt="people"/>
-                <h:outputText value=" for #{recipeModelBean.nbpeople} persons "/>
+                <h:outputText value=" for #{recipeModelBean.nbPeople} persons "/>
             </h4>
             <h4>
                 <img src="images/expert.png" class="icon" alt="expert"/>
@@ -48,31 +48,36 @@
             <h3>Add a comment</h3>
 
             <div class="commentContainer">
-                <p:inputTextarea rows="5" cols="100" value="#{commentSubmissionModelBean.comment}" rendered="#{not empty loggedUser}"/>
+                <!--@elvariable id="loggedUser" type="cookMe.model.user.UserModelBean"-->
+                <p:inputTextarea rows="5" cols="100" value="#{commentSubmissionModelBean.comment}"
+                                 rendered="#{not empty loggedUser}"/>
                 <br/>
-                <p:inputTextarea rows="5" cols="100" value="#{commentSubmissionModelBean.comment}" rendered="#{empty loggedUser}" disabled="true"/>
+                <p:inputTextarea rows="5" cols="100" value="#{commentSubmissionModelBean.comment}"
+                                 rendered="#{empty loggedUser}" disabled="true"/>
                 <br/>
                 <i><p:outputLabel value="Log in to post a comment." rendered="#{empty loggedUser}"/></i>
                 <br/>
                 <p:commandButton value="Send !"
-                                 action="#{commentControllerBean.addComment(commentSubmissionModelBean, recipeModelBean)}"
-                                 rendered="#{not empty loggedUser}"/>
-                <p:commandButton value="Send !"
-                action="#{commentControllerBean.addComment(commentSubmissionModelBean, recipeModelBean)}"
-                rendered="#{empty loggedUser}" disabled="true"/>
+                                 actionListener="#{commentControllerBean.addComment(commentSubmissionModelBean, recipeModelBean)}"
+                                 ajax="true"
+                                 disabled="#{empty loggedUser}"
+                                 update="commenPanel"/>
 
             </div>
+        </h:form>
 
+        <h:panelGroup id="commenPanel">
             <ui:repeat value="#{commentControllerBean.getListCommentWithRecipe(recipeModelBean)}" var="comment">
                 <!--@elvariable id="comment" type="cookMe.model.comment.CommentModelBean"-->
                 <div class="commentContainer">
-                    <h:outputLabel class="login" value="#{comment.userLogin}" />
-                    <h:outputLabel class="comment" value="#{comment.comment}" />
+                    <h:outputLabel class="login" value="#{comment.userLogin}"/>
+                    <h:outputLabel class="comment" value="#{comment.comment}"/>
                     <br/>
-                    <i><h:outputLabel class="comment" value="#{comment.date}" /></i>
+                    <i><h:outputLabel class="comment" value="#{comment.date}"/></i>
                 </div>
             </ui:repeat>
-        </h:form>
+        </h:panelGroup>
+
 
     </ui:define>
 </ui:composition>

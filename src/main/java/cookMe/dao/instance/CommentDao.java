@@ -1,11 +1,16 @@
 package cookMe.dao.instance;
 
 
+import cookMe.model.EnumParser;
 import cookMe.model.comment.CommentModelBean;
 import cookMe.model.recipe.RecipeModelBean;
 import cookMe.model.user.UserModelBean;
+import cookMe.model.user.UserType;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 /**
@@ -70,7 +75,7 @@ public class CommentDao extends AbstractDao<CommentModelBean> {
                         rs.getString("login"),
                         rs.getString("password"),
                         rs.getString("email"),
-                        Enum.valueOf(UserModelBean.UserType.class, rs.getString("user_type"))),
+                        EnumParser.ParseWithDefault(UserType.class, rs.getString("user_type"))),
                 new RecipeModelBean(rs.getString("title"),
                         rs.getString("description"),
                         Integer.parseInt(rs.getString("expertise")),

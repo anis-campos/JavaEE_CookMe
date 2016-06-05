@@ -5,7 +5,8 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:b="http://bootsfaces.net/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:param name="title" value="Administration"/>
     <ui:define name="content">
@@ -51,7 +52,7 @@
                             <b:commandButton icon="square-o"
                                              title="Edit this user"
                                              value="Edit"
-                                             actionListener="#{viewTools.setUpdateUserMode(user)}"
+                                             actionListener="#{adminUserView.updateMode(user)}"
                                              update="creationForm"
                                              ajax="true"
                             />
@@ -72,7 +73,7 @@
                                     <p:row>
                                         <p:column colspan="7">
                                             <c:choose>
-                                                <c:when test="#{viewTools.creationModeEnabled}">
+                                                <c:when test="#{adminUserView.creationMode}">
                                                     Create User
                                                 </c:when>
                                                 <c:otherwise>
@@ -88,7 +89,7 @@
 
                                     <h:commandButton id="actionUserForm"
                                                      value="Go"
-                                                     actionListener="#{userControllerBean.adminForm(userSubmissionModelBean)}"
+                                                     actionListener="#{adminUserView.formSubmit(userSubmissionModelBean)}"
                                                      update="userTable"
                                                      ajax="true"/>
 
@@ -103,7 +104,7 @@
 
         <b:row>
             <b:column mediumScreen="6">
-                <p:commandButton value="Add user" actionListener="#{viewTools.enableCreationMode}"
+                <p:commandButton value="Add user" actionListener="#{adminUserView.setCreationMode}"
                                  update="creationForm"/>
             </b:column>
         </b:row>

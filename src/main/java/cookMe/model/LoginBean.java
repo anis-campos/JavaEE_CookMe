@@ -15,8 +15,8 @@ public class LoginBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String login;
-	private String pwd;
-	
+	private String password;
+
 	public LoginBean(){
 	
 	}
@@ -28,13 +28,13 @@ public class LoginBean implements Serializable{
 	public void setLogin(String login){
 		this.login = login;
 	}
-	
-	public String getPwd(){
-		return pwd;
+
+
+	public String getPassword() {
+		return password;
 	}
-	
-	public void setPwd(String pwd){
-		this.pwd = pwd;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	
 }

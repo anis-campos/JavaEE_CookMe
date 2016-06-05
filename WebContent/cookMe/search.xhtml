@@ -32,7 +32,7 @@
                 </p:row>
                 <p:row>
                     <p:column colspan="2">
-                        <p:inputMask id="date" value="#{searchRecipeBean.duration}" mask="99"/>
+                        <p:spinner id="date" value="#{searchRecipeBean.duration}" min="-1" max="99"/>
                     </p:column>
                     <p:column colspan="2">
                         <p:rating value="#{searchRecipeBean.expertise}"/>
@@ -56,8 +56,8 @@
 
                 <p:row>
                     <p:column colspan="2">
-                        <p:inputText id="nbPeople" value="#{searchRecipeBean.nbpeople}"/>
-                        <p:slider for="nbPeople"/>
+                        <p:inputText id="nbPeople" value="#{searchRecipeBean.nbPeople}"/>
+                        <p:slider for="nbPeople" minValue="-1" maxValue="10"/>
                     </p:column>
                     <p:column colspan="2">
                         <p:selectOneMenu id="cookType" value="#{searchRecipeBean.type}" style="width:125px">

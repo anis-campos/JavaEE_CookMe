@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Anis on 24/05/2016.
  */
-@FacesValidator(value ="validators.pwd1")
+@FacesValidator(value = "validators.repeatedPassword")
 public class RepeatPasswordValidator implements Validator{
 
 
@@ -28,7 +28,7 @@ public class RepeatPasswordValidator implements Validator{
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        UIInput pwd = (UIInput) uiComponent.getParent().findComponent("pwd");
+        UIInput pwd = (UIInput) uiComponent.getParent().findComponent("password");
         pattern = Pattern.compile((String) pwd.getValue());
         matcher = pattern.matcher(o.toString());
 
