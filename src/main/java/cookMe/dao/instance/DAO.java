@@ -1,5 +1,6 @@
 package cookMe.dao.instance;
 
+import cookMe.model.IModel;
 import cookMe.model.search.SearchCriteria;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @param <T> Le type de donnée
  */
-public interface DAO<T> {
+public interface DAO<T extends IModel> {
 
 
     /***

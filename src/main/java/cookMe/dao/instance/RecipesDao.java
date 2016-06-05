@@ -3,10 +3,7 @@ package cookMe.dao.instance;
 
 import cookMe.model.recipe.RecipeModelBean;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by djbranbran on 24/05/16.
@@ -19,7 +16,7 @@ public class RecipesDao extends AbstractDao<RecipeModelBean> {
 
     @Override
     protected PreparedStatement getSQLInsert(Connection con, RecipeModelBean newItem) throws SQLException {
-        PreparedStatement query = con.prepareStatement("INSERT INTO JAVA_ASI.recipe(title ,description , expertise, nbpeople, duration, type) VALUES(?,?,?,?,?,?)");
+        PreparedStatement query = con.prepareStatement("INSERT INTO JAVA_ASI.recipe(title ,description , expertise, nbpeople, duration, type) VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
         query.setString(1, newItem.getTitle());
         query.setString(2, newItem.getDescription());
         query.setInt(3, newItem.getExpertise());

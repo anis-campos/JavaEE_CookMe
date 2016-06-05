@@ -3,28 +3,31 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:b="http://bootsfaces.net/ui">
 
     <ui:param name="title" value="Subscription"/>
 
     <ui:define name="content">
 
-        <p:panelGrid id="panelGrid" columns="3" layout="grid">
-            <f:facet name="header">
-                <p:row>
-                    <p:column colspan="7">Subscription</p:column>
-                </p:row>
-            </f:facet>
-            <ui:include src="componant/UserEdit.xhtml"/>
-            <f:facet name="footer">
-                <h:form>
-                    <p:commandButton value="Create Account"
-                                     action="#{userControllerBean.checkAndAddUser(userSubmissionModelBean)}"
-                                     update="panelGrid"/>
-                </h:form>
+        <h:form id="creationForm" rendered="#{empty loggedUser}">
 
-            </f:facet>
-        </p:panelGrid>
+            <b:panel id="wrapperPanel" title="Subscription">
+
+                <b:panelGrid id="creationGrid" colSpans="3,7,2" columnClasses="inputFullWidth">
+
+                    <ui:include src="componant/UserEdit.xhtml"/>
+
+                </b:panelGrid>
+
+                <f:facet name="footer">
+                    <b:commandButton value="Create Account and log In"
+                                     action="#{userControllerBean.checkAndAddUser(userSubmissionModelBean)}"
+                    />
+                </f:facet>
+            </b:panel>
+        </h:form>
+
     </ui:define>
 </ui:composition>
 

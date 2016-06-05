@@ -7,10 +7,7 @@ import cookMe.model.recipe.RecipeModelBean;
 import cookMe.model.user.UserModelBean;
 import cookMe.model.user.UserType;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 
 /**
@@ -25,7 +22,7 @@ public class CommentDao extends AbstractDao<CommentModelBean> {
 
     @Override
     protected PreparedStatement getSQLInsert(Connection con, CommentModelBean newItem) throws SQLException {
-        PreparedStatement query = con.prepareStatement("INSERT INTO JAVA_ASI.comment( id_user, id_recipe, comment) VALUES(?,?,?)");
+        PreparedStatement query = con.prepareStatement("INSERT INTO JAVA_ASI.comment( id_user, id_recipe, comment) VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
         query.setInt(1, newItem.getUserModelBean().getId());
         query.setInt(2, newItem.getRecipeModelBean().getId());
         query.setString(3, newItem.getComment());

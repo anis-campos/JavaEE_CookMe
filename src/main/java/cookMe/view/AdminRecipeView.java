@@ -30,6 +30,12 @@ public class AdminRecipeView extends AbstractAdminView<RecipeModelBean, RecipeSu
         return isCreationMode() ? "Create Recipe" : "Update Recipe";
     }
 
+    @Override
+    public String getButtonFormSubmit() {
+        return isCreationMode() ? "Submit New Recipe" : "Update Recipe";
+
+    }
+
     public void setControler(RecipeControllerBean controler) {
         this.controler = controler;
     }

@@ -117,10 +117,19 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
         return getRequestUri() + "?faces-redirect=true";
     }
 
-    public void checkAndAddUser(UserSubmissionModelBean userSubmitted) {
+    public String checkAndAddUser(UserSubmissionModelBean userSubmitted) {
         //Vérifier les propriétés de l'utilisateur
-        if (userSubmitted != null && userSubmitted.isValid())
-            dao.create(userSubmitted);
+        if (userSubmitted != null && userSubmitted.isValid()) {
+            UserModelBean user = dao.create(userSubmitted);
+
+            getSessionMap().put("loggedUser", user);
+
+            return getRequestUri() + "?faces-redirect=true";
+
+        }
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(SEVERITY_FATAL, "Inscription Failded", "Wrong Login and//or Password !"));
+        return "";
 
     }
 

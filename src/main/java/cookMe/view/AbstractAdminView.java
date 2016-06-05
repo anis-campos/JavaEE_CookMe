@@ -45,6 +45,7 @@ public abstract class AbstractAdminView<Model, Submission extends Model> {
 
     public abstract String getTitle();
 
+    public abstract String getButtonFormSubmit();
     protected abstract void putIntoSession(Model model);
 
     public abstract void update();

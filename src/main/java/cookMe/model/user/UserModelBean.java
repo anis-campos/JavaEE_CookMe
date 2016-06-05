@@ -1,8 +1,9 @@
 package cookMe.model.user;
 
+import cookMe.model.IModel;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.io.Serializable;
 
 /**
  * Created by djbranbran on 24/05/16.
@@ -10,7 +11,7 @@ import java.io.Serializable;
 
 @ManagedBean
 @SessionScoped
-public class UserModelBean implements Serializable {
+public class UserModelBean implements IModel {
     private String lastname;
     private String firstname;
     private int age;

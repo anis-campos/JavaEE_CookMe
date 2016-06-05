@@ -1,5 +1,6 @@
 package cookMe.dao.instance;
 
+import cookMe.model.IModel;
 import cookMe.model.search.SearchCriteria;
 
 import java.sql.*;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Created by Anis on 28/05/2016.
  */
-abstract class AbstractDao<T> implements DAO<T> {
+abstract class AbstractDao<T extends IModel> implements DAO<T> {
     private final String connectionString;
 
     AbstractDao(String connectionString) {
@@ -71,16 +72,23 @@ abstract class AbstractDao<T> implements DAO<T> {
     @Override
     public T create(T newItem) {
         T item = null;
+        int key;
         try (Connection connection = getConnection()) {
 
             PreparedStatement statement = getSQLInsert(connection, newItem);
 
             statement.executeUpdate();
-
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    key = generatedKeys.getInt(1);
+                    return find(key);
+                } else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //TODO: 29/05/2016 : Trouver un moyer de recuperer l'element depuis la base
         return null;
     }
 

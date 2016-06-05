@@ -1,6 +1,7 @@
 package cookMe.model.recipe;
 
 import cookMe.model.EnumParser;
+import cookMe.model.IModel;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -10,7 +11,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class RecipeModelBean {
+public class RecipeModelBean implements IModel {
     private String title;
     private String description;
     private int expertise;

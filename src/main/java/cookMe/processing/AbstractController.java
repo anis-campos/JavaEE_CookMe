@@ -1,6 +1,7 @@
 package cookMe.processing;
 
 import cookMe.dao.instance.DAO;
+import cookMe.model.IModel;
 import cookMe.model.ParsableEnum;
 import cookMe.model.search.SearchCriteria;
 
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Anis on 29/05/2016.
  */
-public class AbstractController<Model, Dao extends DAO<Model>, Filter extends SearchCriteria<Model>> {
+public class AbstractController<Model extends IModel, Dao extends DAO<Model>, Filter extends SearchCriteria<Model>> {
     private final String CACHE;
     protected Dao dao;
     protected Filter lastFilter;

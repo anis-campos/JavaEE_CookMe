@@ -1,5 +1,6 @@
 package cookMe.model.comment;
 
+import cookMe.model.IModel;
 import cookMe.model.recipe.RecipeModelBean;
 import cookMe.model.user.UserModelBean;
 
@@ -11,7 +12,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class CommentModelBean {
+public class CommentModelBean implements IModel {
     private UserModelBean userModelBean;
     private RecipeModelBean recipeModelBean;
     private String comment;
@@ -119,4 +120,5 @@ public class CommentModelBean {
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
     }
+
 }

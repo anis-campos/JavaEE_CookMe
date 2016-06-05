@@ -6,10 +6,7 @@ import cookMe.model.EnumParser;
 import cookMe.model.user.UserModelBean;
 import cookMe.model.user.UserType;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class UserDao extends AbstractDao<UserModelBean> {
@@ -28,7 +25,7 @@ public class UserDao extends AbstractDao<UserModelBean> {
 
     @Override
     protected PreparedStatement getSQLInsert(Connection con, UserModelBean newItem) throws SQLException {
-        PreparedStatement query = con.prepareStatement("INSERT INTO JAVA_ASI.users(firstname ,lastname , age , login , password , email, type ) VALUES(?,?,?,?,?,?,?)");
+        PreparedStatement query = con.prepareStatement("INSERT INTO JAVA_ASI.users(firstname ,lastname , age , login , password , email, type ) VALUES(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
         query.setString(1, newItem.getFirstname());
         query.setString(2, newItem.getLastname());
         query.setInt(3, newItem.getAge());
