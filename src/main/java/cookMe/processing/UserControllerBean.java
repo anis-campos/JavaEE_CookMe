@@ -113,7 +113,7 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
     }
 
     public String logOut() {
-        getSessionMap().remove("loggedUser");
+        getSessionMap().clear();
         return getRequestUri() + "?faces-redirect=true";
     }
 

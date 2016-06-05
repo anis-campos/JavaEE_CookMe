@@ -12,9 +12,11 @@ public abstract class AbstractAdminView<Model, Submission extends Model> {
     private boolean creationMode;
 
     public AbstractAdminView() {
+        creationMode = false;
     }
 
     public AbstractAdminView(String beanName) {
+        this();
         this.beanName = beanName;
     }
 

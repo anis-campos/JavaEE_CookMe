@@ -10,10 +10,7 @@
 
     <ui:param name="title" value="Administration"/>
     <ui:define name="content">
-
-
         <b:row>
-
             <b:column mediumScreen="8">
                 <b:row>
                     <h:form id="userTableForm">
@@ -50,8 +47,9 @@
                                                  value="Delete"
                                                  actionListener="#{userControllerBean.remove(user)}"
                                                  update="userTable"
+                                                 ajax="true"
                                 />
-                                <b:commandButton icon="square-o"
+                                <b:commandButton iconAwesome="pencil-square-o"
                                                  title="Edit this user"
                                                  value="Edit"
                                                  actionListener="#{adminUserView.updateMode(user)}"
@@ -67,7 +65,10 @@
                 <b:row>
                     <b:column mediumScreen="6">
                         <h:form>
-                            <b:commandButton value="Add user" actionListener="#{adminUserView.setCreationMode}"/>
+                            <b:commandButton value="Add user"
+                                             ajax="true"
+                                             update="creationForm"
+                                             actionListener="#{adminUserView.setCreationMode}"/>
                         </h:form>
                     </b:column>
                 </b:row>
