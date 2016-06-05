@@ -44,7 +44,7 @@ public abstract class AbstractAdminView<Model, Submission extends Model> {
             update();
         }
 
-        return "?faces-redirect=true";
+        return "";
     }
 
     public abstract String getTitle();

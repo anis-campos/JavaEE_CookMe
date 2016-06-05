@@ -14,7 +14,7 @@
             <b:column mediumScreen="4">
 
                 <b:row>
-                    <h:form>
+                    <h:form id="recipeTableForm">
                         <p:dataTable id="recipeTable" var="recipe"
                                      value="#{recipeControllerBean.recipeList.listData.all}">
 
@@ -63,55 +63,16 @@
 
                         <b:panelGrid id="creationGrid" colSpans="3,7,2" columnClasses="inputFullWidth">
 
-                            <p:outputLabel>Title </p:outputLabel>
-                            <p:inputText id="title"
-                                         value="#{recipeSubmissionModelBean.title}"
-                                         required="true">
-                            </p:inputText>
-                            <p:message for="title"/>
-
-
-                            <p:outputLabel>Duration </p:outputLabel>
-                            <p:inputText id="duration"
-                                         value="#{recipeSubmissionModelBean.duration}"
-                                         type="number"
-                                         required="true">
-                            </p:inputText>
-                            <p:message for="duration"/>
-
-                            <p:outputLabel>Expertise</p:outputLabel>
-                            <p:rating id="expertise" value="#{searchRecipeBean.expertise}"/>
-                            <p:message for="expertise"/>
-
-                            <p:outputLabel>Type</p:outputLabel>
-                            <p:selectOneMenu id="cookType" value="#{recipeSubmissionModelBean.type}" rendered="true">
-                                <f:selectItem itemLabel="Select One" itemValue=""/>
-                                <f:selectItems scope="request" value="#{recipeControllerBean.recipeTypes}"/>
-                            </p:selectOneMenu>
-                            <p:message for="cookType"/>
-
-
-                            <p:outputLabel>Description </p:outputLabel>
-                            <p:inputTextarea id="description"
-                                             value="#{recipeSubmissionModelBean.description}"
-                                             required="true">
-                            </p:inputTextarea>
-                            <p:message for="description"/>
-
-                            <h:outputLabel for="image" value="Select Image"/>
-                            <p:fileUpload id="image" value="#{recipeSubmissionModelBean.file}" mode="simple"
-                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" auto="true"/>
-                            <p:message for="image"/>
-
-                            <h:graphicImage rendered="#{not empty recipeSubmissionModelBean.image}"
-                                            value="#{recipeSubmissionModelBean.image}"/>
+                            <ui:include src="componant/RecipeEdit.xhtml"/>
 
                         </b:panelGrid>
 
                         <f:facet name="footer">
                             <b:commandButton
                                     value="#{adminRecipeView.buttonFormSubmit}"
-                                    action="#{adminRecipeView.formSubmit(recipeSubmissionModelBean)}"/>
+                                    actionListener="#{adminRecipeView.formSubmit(recipeSubmissionModelBean)}"
+                                    ajax="true"
+                                    update="recipeTableForm"/>
                         </f:facet>
                     </b:panel>
                 </h:form>

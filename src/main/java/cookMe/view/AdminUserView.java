@@ -56,7 +56,7 @@ public class AdminUserView extends AbstractAdminView<UserModelBean, UserSubmissi
 
     @Override
     public void create(UserSubmissionModelBean bean) {
-        controler.checkAndAddUser(bean);
+        controler.addUser(bean);
     }
 
 }

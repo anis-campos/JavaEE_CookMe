@@ -87,7 +87,9 @@
                         <f:facet name="footer">
                             <b:commandButton
                                     value="#{adminUserView.buttonFormSubmit}"
-                                    action="#{adminUserView.formSubmit(recipeSubmissionModelBean)}"/>
+                                    actionListener="#{adminUserView.formSubmit(userSubmissionModelBean)}"
+                                    ajax="true"
+                                    update="userTableForm"/>
                         </f:facet>
                     </b:panel>
                 </h:form>

@@ -133,6 +133,11 @@ public class UserControllerBean extends AbstractController<UserModelBean, UserDa
 
     }
 
+    public void addUser(UserSubmissionModelBean userSubmitted) {
+        if (userSubmitted != null && userSubmitted.isValid()) {
+            UserModelBean user = dao.create(userSubmitted);
+        }
+    }
 
 
     public String toMenu() {
