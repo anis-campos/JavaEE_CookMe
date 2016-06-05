@@ -16,24 +16,27 @@ public class CommentModelBean {
     private RecipeModelBean recipeModelBean;
     private String comment;
     private String date;
+    private int id;
 
     public CommentModelBean() {
     }
 
-    public CommentModelBean(int userModelId, int recipeModelBeanId, String comment, String date) {
+    public CommentModelBean(int userModelId, int recipeModelBeanId, String comment, String date, int id) {
         userModelBean = new UserModelBean();
         userModelBean.setId(userModelId);
         recipeModelBean = new RecipeModelBean();
         recipeModelBean.setId(recipeModelBeanId);
         this.comment = comment;
         this.date = date;
+        this.id = id;
     }
 
-    public CommentModelBean(UserModelBean userModelBean, RecipeModelBean recipeModelBean, String comment, String date) {
+    public CommentModelBean(UserModelBean userModelBean, RecipeModelBean recipeModelBean, String comment, String date, int id) {
         this.userModelBean = userModelBean;
         this.recipeModelBean = recipeModelBean;
         this.comment = comment;
         this.date = date;
+        this.id = id;
     }
 
 
@@ -81,6 +84,14 @@ public class CommentModelBean {
 
     public String getDate(){
         return date;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
 

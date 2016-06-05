@@ -85,7 +85,8 @@ public class CommentDao extends AbstractDao<CommentModelBean> {
                         rs.getString("image"),
                         rs.getInt("idRecipe")),
                 rs.getString("comment"),
-                new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(rs.getTimestamp("record_date"))
+                new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(rs.getTimestamp("record_date")),
+                rs.getInt("idComment")
         );
     }
 

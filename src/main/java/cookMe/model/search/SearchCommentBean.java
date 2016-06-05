@@ -16,7 +16,7 @@ import java.util.Date;
 public class SearchCommentBean extends CommentModelBean implements SearchCriteria<CommentModelBean> {
 
     public SearchCommentBean() {
-        super(ALL_VALUES_INT, ALL_VALUES_INT, ALL_VALUES_STRING, ALL_VALUES_STRING);
+        super(ALL_VALUES_INT, ALL_VALUES_INT, ALL_VALUES_STRING, ALL_VALUES_STRING, ALL_VALUES_INT);
     }
 
 
@@ -27,7 +27,8 @@ public class SearchCommentBean extends CommentModelBean implements SearchCriteri
                 " u.age age, u.login login, u.password password, u.email email, u.type user_type," +
                 " r.title title, r.description description, r.expertise expertise, r.nbpeople nbpeople," +
                 " r.duration duration, r.type recipe_type, r.image image, r.id idRecipe, c.comment comment," +
-                " CONVERT_TZ(c.record_date,'+00:00','+02:00') record_date" +
+                " CONVERT_TZ(c.record_date,'+00:00','+02:00') record_date, " +
+                "c.id idComment" +
                 " FROM comment c" +
                 " INNER JOIN recipe r ON r.id = c.id_recipe" +
                 " INNER JOIN users u ON u.id = c.id_user" +
