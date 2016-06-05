@@ -18,7 +18,7 @@ public class CommentSubmissionModelBean extends CommentModelBean implements ISub
 
     @Override
     public boolean isValid() {
-        return getComment() != null && getComment().length() < 255 && !Pattern.compile("[<>]+").matcher(this.getComment()).matches();
+        return getComment() != null && getComment().length() < 255 && Pattern.compile("[^<>]+").matcher(this.getComment()).matches();
     }
 
 }
